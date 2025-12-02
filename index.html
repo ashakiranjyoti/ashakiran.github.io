@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashakiran Jyoti | Backend Developer | ERP Systems</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Ashakiran Jyoti - Backend Developer specializing in ERP modules, Inventory Management, and Asset Tracking systems. 1.5 years PHP/MySQL experience.">
+    <meta name="keywords" content="Backend Developer, ERP Developer, PHP Developer, MySQL, Inventory Management, Asset Management">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            margin: 0 0.5rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0 80px;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+            animation: fadeInUp 1.2s ease;
+        }
+        
+        .hero .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.4s ease;
+        }
+        
+        .hero .btn-group {
+            animation: fadeInUp 1.6s ease;
+        }
+        
+        .btn-custom {
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+        
+        .btn-primary-custom {
+            background: white;
+            color: #667eea;
+            border: 2px solid white;
+        }
+        
+        .btn-primary-custom:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline-custom {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-outline-custom:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            color: #718096;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        /* Skills Section */
+        .skill-category {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .skill-category h4 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .skill-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            color: #667eea;
+            padding: 8px 18px;
+            margin: 5px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .skill-tag:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: 45%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            margin-left: 0;
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            margin-left: 55%;
+            text-align: left;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .timeline-content:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            top: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 3px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-icon {
+            right: -70px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-icon {
+            left: -70px;
+        }
+        
+        .company-name {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .job-title {
+            color: #2d3748;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .duration {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        /* Project Cards */
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .project-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+        }
+        
+        .project-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .project-type {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .project-body {
+            padding: 25px;
+        }
+        
+        .project-tags {
+            margin: 15px 0;
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            background: #f7fafc;
+            color: #667eea;
+            padding: 5px 12px;
+            margin: 3px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .project-links {
+            margin-top: 20px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+        
+        .project-link:hover {
+            color: #764ba2;
+        }
+        
+        /* Education Card */
+        .education-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .education-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .degree {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .university {
+            font-size: 1.1rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .education-details {
+            color: #718096;
+            margin-top: 15px;
+        }
+        
+        .cgpa {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            color: #667eea;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+        
+        /* Contact Section */
+        .contact-info {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .contact-item {
+            margin: 25px 0;
+        }
+        
+        .contact-item i {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .contact-item p {
+            color: #2d3748;
+            font-weight: 500;
+            margin: 5px 0;
+        }
+        
+        .contact-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .contact-item a:hover {
+            color: #764ba2;
+        }
+        
+        .social-links {
+            margin-top: 30px;
+        }
+        
+        .social-btn {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.3rem;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .timeline:before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                margin-left: 50px !important;
+                text-align: left !important;
+            }
+            
+            .timeline-item .timeline-icon {
+                left: -70px !important;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Ashakiran Jyoti</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1>Hi, I'm Ashakiran Jyoti</h1>
+                    <p class="subtitle">Backend Developer | ERP Systems Specialist</p>
+                    <p class="description">
+                        Passionate about building enterprise-level ERP modules with expertise in 
+                        Inventory Management, Asset Tracking, and Real-time Systems. 
+                        1.5 years of hands-on experience delivering production-grade applications.
+                    </p>
+                    <div class="btn-group">
+                        <a href="#projects" class="btn btn-custom btn-primary-custom">View Projects</a>
+                        <a href="#contact" class="btn btn-custom btn-outline-custom">Get in Touch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p class="section-subtitle">Backend Developer with ERP Domain Expertise</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="education-card">
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: #4a5568;">
+                            I'm a dedicated backend developer with a strong foundation in building 
+                            <strong>ERP systems</strong> and enterprise applications. With over 1.5 years 
+                            of professional experience, I've specialized in developing comprehensive 
+                            modules for <strong>Inventory Management</strong>, <strong>Asset Tracking</strong>, 
+                            and <strong>Real-time Monitoring Systems</strong>.
+                        </p>
+                        <p style="font-size: 1.1rem; line-height: 1.8; color: #4a5568; margin-top: 15px;">
+                            My expertise lies in translating complex business processes into scalable, 
+                            user-friendly applications with robust audit capabilities and data integrity. 
+                            I've successfully delivered production systems including a government project, 
+                            demonstrating my ability to handle mission-critical applications.
+                        </p>
+                        <div style="margin-top: 30px;">
+                            <span class="skill-tag" style="margin: 10px;">PHP Development</span>
+                            <span class="skill-tag" style="margin: 10px;">ERP Systems</span>
+                            <span class="skill-tag" style="margin: 10px;">Database Design</span>
+                            <span class="skill-tag" style="margin: 10px;">Business Logic</span>
+                            <span class="skill-tag" style="margin: 10px;">Production Systems</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technical Skills</h2>
+                <p class="section-subtitle">Technologies & Tools I Work With</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-server"></i> Backend Development</h4>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">MS SQL Server</span>
+                        <span class="skill-tag">ODBC</span>
+                        <span class="skill-tag">Session Management</span>
+                        <span class="skill-tag">AJAX</span>
+                        <span class="skill-tag">REST APIs</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-laptop-code"></i> Frontend Development</h4>
+                        <span class="skill-tag">HTML5</span>
+                        <span class="skill-tag">CSS3</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">jQuery</span>
+                        <span class="skill-tag">Bootstrap</span>
+                        <span class="skill-tag">Responsive Design</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-chart-line"></i> Data & Reporting</h4>
+                        <span class="skill-tag">TCPDF</span>
+                        <span class="skill-tag">dompdf</span>
+                        <span class="skill-tag">Excel Generation</span>
+                        <span class="skill-tag">Chart.js</span>
+                        <span class="skill-tag">Data Visualization</span>
+                        <span class="skill-tag">MIS Reports</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-boxes"></i> ERP & Domain</h4>
+                        <span class="skill-tag">Inventory Management</span>
+                        <span class="skill-tag">Asset Management</span>
+                        <span class="skill-tag">Procurement</span>
+                        <span class="skill-tag">Audit Trails</span>
+                        <span class="skill-tag">Workflow Design</span>
+                        <span class="skill-tag">Business Logic</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-database"></i> Database & Design</h4>
+                        <span class="skill-tag">Database Design</span>
+                        <span class="skill-tag">Query Optimization</span>
+                        <span class="skill-tag">Indexing</span>
+                        <span class="skill-tag">Data Modeling</span>
+                        <span class="skill-tag">Normalization</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="skill-category">
+                        <h4><i class="fas fa-tools"></i> Tools & Others</h4>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">XAMPP</span>
+                        <span class="skill-tag">phpMyAdmin</span>
+                        <span class="skill-tag">Postman</span>
+                        <span class="skill-tag">VS Code</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Professional Experience</h2>
+                <p class="section-subtitle">My Career Journey</p>
+            </div>
+            <div class="timeline">
+                <!-- Current Job -->
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="company-name">MCOM Technology</div>
+                        <div class="job-title">Software Engineer</div>
+                        <div class="duration">June 2024 - Present</div>
+                        <ul style="text-align: left; color: #4a5568;">
+                            <li>Developed comprehensive ERP modules for Inventory & Asset Management serving production environments</li>
+                            <li>Built Material Management system with real-time stock calculations (event-sourced architecture)</li>
+                            <li>Created Infrastructure Asset Management system with media management, and audit trails</li>
+                            <li>Implemented SCADA-integrated monitoring system for government water supply project (government infrastructure project) covering 30+ remote sites</li>
+                            <li>Optimized database queries reducing dashboard load time from 5-6 seconds to 1-2 seconds through strategic indexing</li>
+                            <li>Designed comprehensive reporting frameworks with PDF/Excel exports and multi-dimensional analysis</li>
+                        </ul>
+                        <div style="margin-top: 15px;">
+                            <strong style="color: #667eea;">Tech:</strong> PHP, MySQL, MS SQL Server, Bootstrap, AJAX, Real-time Systems
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Previous Job -->
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="company-name">IT JOBXS</div>
+                        <div class="job-title">Intern Trainee</div>
+                        <div class="duration">October 2023 - May 2024</div>
+                        <ul style="text-align: left; color: #4a5568;">
+                            <li>Designed and developed fully responsive webpage sections for IT JOBXS platform</li>
+                            <li>Implemented user verification and authentication system</li>
+                            <li>Worked on detecting and removing fake bots and posts - tackling engineering challenges</li>
+                            <li>Integrated Google reCAPTCHA for enhanced website security</li>
+                            <li>Collaborated with team on full-stack development tasks</li>
+                        </ul>
+                        <div style="margin-top: 15px;">
+                            <strong style="color: #667eea;">Tech:</strong> HTML, CSS, JavaScript, Bootstrap, PHP, MySQL
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Internship -->
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="company-name">Profound Edutech Pvt Ltd</div>
+                        <div class="job-title">Full Stack Development Intern</div>
+                        <div class="duration">February 2023 - July 2023</div>
+                        <ul style="text-align: left; color: #4a5568;">
+                            <li>Gained hands-on experience in full-stack web development</li>
+                            <li>Worked on frontend (HTML, CSS, JavaScript, Bootstrap) and backend (Java, Springboot, PHP, MySQL) technologies</li>
+                            <li>Developed responsive web applications and learned industry best practices</li>
+                            <li>Participated in code reviews and agile development processes</li>
+                            <li>Built strong foundation in web application architecture</li>
+                        </ul>
+                        <div style="margin-top: 15px;">
+                            <strong style="color: #667eea;">Tech:</strong> HTML, CSS, JavaScript, Bootstrap,Java, Springboot, PHP, MySQL
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Projects</h2>
+                <p class="section-subtitle">Production-Grade ERP Systems</p>
+            </div>
+            <div class="row">
+                <!-- Project 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Inventory & Material Management ERP</h3>
+                            <p class="project-type">Material Management System | Production</p>
+                        </div>
+                        <div class="project-body">
+                            <p style="color: #4a5568; line-height: 1.6;">
+                                Comprehensive ERP module handling complete material lifecycle with 
+                                real-time stock calculations, automated shortage alerts, and 
+                                request-to-issue workflow.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tech-badge">PHP</span>
+                                <span class="tech-badge">MySQL</span>
+                                <span class="tech-badge">Bootstrap</span>
+                                <span class="tech-badge">Chart.js</span>
+                                <span class="tech-badge">TCPDF</span>
+                            </div>
+                            <p style="margin-top: 15px; color: #667eea; font-weight: 600;">
+                                <i class="fas fa-check-circle"></i> Live in Production
+                            </p>
+                            <div class="project-links">
+                                <a href="https://github.com/ashakiranjyoti" class="project-link" target="_blank">
+                                    <i class="fab fa-github"></i> View Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Infrastructure Asset Management</h3>
+                            <p class="project-type">Asset Tracking System | Production</p>
+                        </div>
+                        <div class="project-body">
+                            <p style="color: #4a5568; line-height: 1.6;">
+                                Multi-level asset tracking system with 
+                                daily status monitoring, media management, and comprehensive 
+                                audit trails for compliance.
+                            </p>
+                            <div class="project-tags">
+<span class="tech-badge">PHP</span>
+<span class="tech-badge">MySQL</span>
+<span class="tech-badge">OpenStreetMap</span>
+<span class="tech-badge">TCPDF</span>
+</div>
+<p style="margin-top: 15px; color: #667eea; font-weight: 600;">
+<i class="fas fa-check-circle"></i> Live in Production
+</p>
+<div class="project-links">
+<a href="https://github.com/ashakiranjyoti" class="project-link" target="_blank">
+<i class="fab fa-github"></i> View Code
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Project 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>SCADA Monitoring System</h3>
+                        <p class="project-type">Government Project - government infrastructure project | Production</p>
+                    </div>
+                    <div class="project-body">
+                        <p style="color: #4a5568; line-height: 1.6;">
+                            Real-time SCADA-integrated web application for municipal water 
+                            supply operations monitoring 30+ remote sites with remote control 
+                            capabilities.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tech-badge">PHP</span>
+                            <span class="tech-badge">MS SQL Server</span>
+                            <span class="tech-badge">AJAX</span>
+                            <span class="tech-badge">Real-time</span>
+                        </div>
+                        <p style="margin-top: 15px; color: #22c55e; font-weight: 600;">
+                            <i class="fas fa-landmark"></i> Government Project
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/ashakiranjyoti" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> View Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center" style="margin-top: 50px;">
+            <a href="https://github.com/ashakiranjyoti" class="btn btn-custom btn-primary-custom" target="_blank">
+                <i class="fab fa-github"></i> View All Projects on GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section id="education" class="section bg-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Education</h2>
+            <p class="section-subtitle">Academic Background</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="degree">Bachelor of Technology (B.Tech)</div>
+                    <div class="university">Computer Science & Engineering</div>
+                    <div class="education-details">
+                        <p style="font-size: 1.1rem; color: #667eea; font-weight: 600; margin-bottom: 5px;">
+                            Dr. Babasaheb Ambedkar Technological University
+                        </p>
+                        <p style="color: #718096;">Lonere, Maharashtra, India</p>
+                        <p style="color: #718096; margin-top: 10px;">
+                            <i class="fas fa-calendar-alt"></i> Graduated: 2023
+                        </p>
+                    </div>
+                    <div class="cgpa">
+                        <i class="fas fa-award"></i> CGPA: 8.33/10
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+            <p class="section-subtitle">Let's Connect!</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="contact-info">
+                    <div class="row">
+                        <div class="col-md-4 contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <p><strong>Email</strong></p>
+                            <p><a href="mailto:ashakirandjoti5501@gmail.com">ashakirandjoti5501@gmail.com</a></p>
+                        </div>
+                        <div class="col-md-4 contact-item">
+                            <i class="fas fa-phone"></i>
+                            <p><strong>Phone</strong></p>
+                            <p><a href="tel:+919284344460">+91 9284344460</a></p>
+                        </div>
+                        <div class="col-md-4 contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p><strong>Location</strong></p>
+                            <p>Pune, Maharashtra, India</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/ashakiranjyoti" class="social-btn" target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ashakiran-jyoti-b3489b252/" class="social-btn" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="mailto:ashakirandjoti5501@gmail.com" class="social-btn" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    
+                    <div style="margin-top: 40px;">
+                        <p style="font-size: 1.1rem; color: #4a5568; line-height: 1.8;">
+                            I'm always interested in hearing about new opportunities, 
+                            especially in <strong>ERP development</strong>, <strong>backend engineering</strong>, 
+                            or challenging technical projects. Feel free to reach out!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 Ashakiran Jyoti. All Rights Reserved.</p>
+        <p style="margin-top: 10px; opacity: 0.7; font-size: 0.9rem;">
+            Built with <i class="fas fa-heart" style="color: #e74c3c;"></i> using HTML, CSS, Bootstrap
+        </p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Smooth Scroll -->
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Add active class to nav on scroll
+    window.addEventListener('scroll', () => {
+        let current = '';
+        const sections = document.querySelectorAll('section');
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').slice(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
