@@ -19,6 +19,7 @@
             --primary-dark: #0060CC;
             --accent: #30D158;
             --accent2: #FF9F0A;
+            --accent3: #BF5AF2;
             --dark: #0D1117;
             --dark2: #161B22;
             --dark3: #21262D;
@@ -37,7 +38,6 @@
             line-height: 1.6;
         }
 
-        /* ── SCROLLBAR ── */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--dark); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -159,6 +159,12 @@
             transition: all 0.2s;
         }
         .hero-badge:hover { border-color: var(--primary); color: var(--primary); }
+        .hero-badge.ai-badge {
+            border-color: rgba(191,90,242,0.35);
+            color: var(--accent3);
+            background: rgba(191,90,242,0.07);
+        }
+        .hero-badge.ai-badge:hover { border-color: var(--accent3); }
         .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
         .btn-primary-dark {
             background: var(--primary);
@@ -188,10 +194,7 @@
             border: 1px solid var(--border);
             font-size: 0.95rem;
         }
-        .btn-ghost:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
+        .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
 
         /* ── STATS ── */
         .stats-section {
@@ -209,16 +212,7 @@
             line-height: 1;
             margin-bottom: 8px;
         }
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        .stat-divider {
-            width: 1px;
-            background: var(--border);
-            margin: auto;
-        }
+        .stat-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
 
         /* ── SECTIONS ── */
         section { padding: 90px 0; }
@@ -237,11 +231,7 @@
             color: var(--text);
             letter-spacing: -0.02em;
         }
-        .section-subtitle {
-            color: var(--text-muted);
-            margin-top: 8px;
-            font-size: 1rem;
-        }
+        .section-subtitle { color: var(--text-muted); margin-top: 8px; font-size: 1rem; }
 
         /* ── ABOUT ── */
         .about-section { background: var(--dark); }
@@ -251,12 +241,7 @@
             border-radius: 12px;
             padding: 40px;
         }
-        .about-card p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.85;
-            margin-bottom: 16px;
-        }
+        .about-card p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.85; margin-bottom: 16px; }
         .about-card p strong { color: var(--text); }
         .about-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
         .about-tag {
@@ -294,12 +279,7 @@
             font-size: 1.1rem;
             margin-bottom: 16px;
         }
-        .skill-card h5 {
-            color: var(--text);
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 16px;
-        }
+        .skill-card h5 { color: var(--text); font-weight: 600; font-size: 1rem; margin-bottom: 16px; }
         .skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
         .skill-pill {
             background: var(--dark2);
@@ -311,14 +291,16 @@
             font-family: 'DM Mono', monospace;
             transition: all 0.2s;
         }
-        .skill-pill:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
+        .skill-pill:hover { border-color: var(--accent); color: var(--accent); }
         .skill-pill.highlight {
             border-color: rgba(48,209,88,0.3);
             color: var(--accent);
             background: rgba(48,209,88,0.06);
+        }
+        .skill-pill.ai-highlight {
+            border-color: rgba(191,90,242,0.35);
+            color: var(--accent3);
+            background: rgba(191,90,242,0.07);
         }
 
         /* ── EXPERIENCE ── */
@@ -341,23 +323,11 @@
             background: linear-gradient(180deg, var(--primary), var(--accent));
             border-radius: 3px 0 0 3px;
         }
-        .exp-company {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 4px;
-        }
-        .exp-role {
-            color: var(--text);
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
+        .exp-company { color: var(--primary); font-weight: 700; font-size: 1.2rem; margin-bottom: 4px; }
+        .exp-role { color: var(--text); font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
         .exp-duration {
-            color: var(--text-dim);
-            font-size: 0.85rem;
-            font-family: 'DM Mono', monospace;
-            margin-bottom: 20px;
+            color: var(--text-dim); font-size: 0.85rem;
+            font-family: 'DM Mono', monospace; margin-bottom: 20px;
         }
         .exp-section-label {
             color: var(--accent);
@@ -375,10 +345,8 @@
             height: 1px;
             background: var(--border);
         }
-        .exp-list {
-            list-style: none;
-            padding: 0;
-        }
+        .exp-section-label.purple { color: var(--accent3); }
+        .exp-list { list-style: none; padding: 0; }
         .exp-list li {
             color: var(--text-muted);
             font-size: 0.95rem;
@@ -393,6 +361,7 @@
             color: var(--primary);
             font-size: 0.8rem;
         }
+        .exp-list li.ai-bullet::before { color: var(--accent3); }
         .exp-list li strong { color: var(--text); }
         .exp-tech {
             display: flex;
@@ -411,11 +380,195 @@
             font-size: 0.8rem;
             font-family: 'DM Mono', monospace;
         }
+        .tech-tag.ai-tag {
+            background: rgba(191,90,242,0.08);
+            border-color: rgba(191,90,242,0.2);
+            color: var(--accent3);
+        }
+
+        /* ── AI TOOLS SECTION ── */
+        .ai-tools-section { background: var(--dark2); }
+
+        .ai-section-intro {
+            background: var(--dark);
+            border: 1px solid rgba(191,90,242,0.2);
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .ai-section-intro::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent3), transparent);
+        }
+        .ai-section-intro p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.75;
+            margin: 0;
+        }
+        .ai-section-intro p strong { color: var(--text); }
+
+        .ai-tool-card {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            height: 100%;
+            transition: all 0.25s;
+        }
+        .ai-tool-card:hover {
+            border-color: rgba(191,90,242,0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(191,90,242,0.08);
+        }
+        .ai-tool-header {
+            padding: 22px 24px 18px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .ai-tool-icon {
+            width: 44px; height: 44px; flex-shrink: 0;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-family: 'DM Mono', monospace;
+        }
+        .ai-tool-icon.copilot {
+            background: rgba(10,132,255,0.12);
+            border: 1px solid rgba(10,132,255,0.25);
+            color: var(--primary);
+        }
+        .ai-tool-icon.cursor {
+            background: rgba(191,90,242,0.12);
+            border: 1px solid rgba(191,90,242,0.25);
+            color: var(--accent3);
+        }
+        .ai-tool-icon.windsurf {
+            background: rgba(48,209,88,0.12);
+            border: 1px solid rgba(48,209,88,0.25);
+            color: var(--accent);
+        }
+        .ai-tool-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+        .ai-tool-sub {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            font-family: 'DM Mono', monospace;
+        }
+        .ai-tool-body { padding: 22px 24px; }
+        .ai-tool-body p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .ai-tool-body p strong { color: var(--text); }
+        .ai-use-list { list-style: none; padding: 0; margin-bottom: 18px; }
+        .ai-use-list li {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 5px 0 5px 18px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .ai-use-list li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            font-size: 0.7rem;
+            top: 7px;
+        }
+        .ai-use-list li strong { color: var(--text); }
+        .ai-impact-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            font-family: 'DM Mono', monospace;
+        }
+        .ai-impact-badge.blue {
+            background: rgba(10,132,255,0.1);
+            border: 1px solid rgba(10,132,255,0.2);
+            color: var(--primary);
+        }
+        .ai-impact-badge.purple {
+            background: rgba(191,90,242,0.1);
+            border: 1px solid rgba(191,90,242,0.2);
+            color: var(--accent3);
+        }
+        .ai-impact-badge.green {
+            background: rgba(48,209,88,0.1);
+            border: 1px solid rgba(48,209,88,0.2);
+            color: var(--accent);
+        }
+
+        /* Workflow diagram strip */
+        .ai-workflow-strip {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-top: 40px;
+        }
+        .ai-workflow-strip h5 {
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .workflow-steps {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .workflow-step {
+            background: var(--dark2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .workflow-step .step-num {
+            display: inline-block;
+            width: 20px; height: 20px;
+            background: rgba(191,90,242,0.15);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 0.7rem;
+            color: var(--accent3);
+            font-weight: 700;
+            margin-right: 8px;
+            font-family: 'DM Mono', monospace;
+        }
+        .workflow-arrow {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
 
         /* ── PROJECTS ── */
-        .projects-section { background: var(--dark2); }
+        .projects-section { background: var(--dark); }
         .project-card {
-            background: var(--dark);
+            background: var(--dark2);
             border: 1px solid var(--border);
             border-radius: 12px;
             overflow: hidden;
@@ -443,44 +596,27 @@
             color: var(--primary);
             font-size: 1.1rem;
         }
-        .project-icon.green {
-            background: rgba(48,209,88,0.1);
-            border-color: rgba(48,209,88,0.2);
-            color: var(--accent);
-        }
-        .project-icon.orange {
-            background: rgba(255,159,10,0.1);
-            border-color: rgba(255,159,10,0.2);
-            color: var(--accent2);
-        }
-        .project-top-title h4 {
-            color: var(--text);
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .project-type-label {
-            color: var(--text-dim);
-            font-size: 0.8rem;
-            font-family: 'DM Mono', monospace;
-        }
+        .project-icon.green { background: rgba(48,209,88,0.1); border-color: rgba(48,209,88,0.2); color: var(--accent); }
+        .project-icon.orange { background: rgba(255,159,10,0.1); border-color: rgba(255,159,10,0.2); color: var(--accent2); }
+        .project-top-title h4 { color: var(--text); font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+        .project-type-label { color: var(--text-dim); font-size: 0.8rem; font-family: 'DM Mono', monospace; }
         .project-body { padding: 24px; }
-        .project-body p {
-            color: var(--text-muted);
-            font-size: 0.92rem;
-            line-height: 1.7;
-            margin-bottom: 16px;
-        }
+        .project-body p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 12px; }
         .project-body p strong { color: var(--text); }
         .project-badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
         .project-badge {
-            background: var(--dark2);
+            background: var(--dark3);
             border: 1px solid var(--border);
             color: var(--text-dim);
             padding: 3px 10px;
             border-radius: 4px;
             font-size: 0.78rem;
             font-family: 'DM Mono', monospace;
+        }
+        .project-badge.ai {
+            background: rgba(191,90,242,0.08);
+            border-color: rgba(191,90,242,0.2);
+            color: var(--accent3);
         }
         .project-links { display: flex; gap: 16px; margin-top: 16px; }
         .project-link {
@@ -516,11 +652,25 @@
             font-weight: 600;
             margin-top: 10px;
         }
+        .ai-assisted-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(191,90,242,0.08);
+            border: 1px solid rgba(191,90,242,0.2);
+            color: var(--accent3);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-top: 10px;
+            margin-left: 8px;
+        }
 
         /* ── EDUCATION ── */
-        .education-section { background: var(--dark); }
+        .education-section { background: var(--dark2); }
         .edu-card {
-            background: var(--dark2);
+            background: var(--dark);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 40px;
@@ -537,23 +687,10 @@
             color: var(--primary);
             font-size: 1.4rem;
         }
-        .edu-degree {
-            color: var(--text);
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-        .edu-field {
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
+        .edu-degree { color: var(--text); font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+        .edu-field { color: var(--primary); font-weight: 600; margin-bottom: 8px; }
         .edu-uni { color: var(--text-muted); margin-bottom: 4px; }
-        .edu-meta {
-            color: var(--text-dim);
-            font-size: 0.88rem;
-            font-family: 'DM Mono', monospace;
-        }
+        .edu-meta { color: var(--text-dim); font-size: 0.88rem; font-family: 'DM Mono', monospace; }
         .edu-cgpa {
             display: inline-block;
             background: rgba(48,209,88,0.1);
@@ -568,9 +705,9 @@
         }
 
         /* ── CONTACT ── */
-        .contact-section { background: var(--dark2); }
+        .contact-section { background: var(--dark); }
         .contact-card {
-            background: var(--dark);
+            background: var(--dark2);
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 40px;
@@ -598,7 +735,7 @@
         .social-row { display: flex; gap: 12px; margin-top: 28px; }
         .social-btn {
             width: 48px; height: 48px;
-            background: var(--dark2);
+            background: var(--dark3);
             border: 1px solid var(--border);
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
@@ -634,7 +771,7 @@
 
         /* ── FOOTER ── */
         footer {
-            background: var(--dark);
+            background: var(--dark2);
             border-top: 1px solid var(--border);
             padding: 28px 0;
             text-align: center;
@@ -647,6 +784,8 @@
             section { padding: 60px 0; }
             .edu-card { flex-direction: column; }
             .hero-btns { flex-direction: column; }
+            .workflow-steps { flex-direction: column; align-items: flex-start; }
+            .workflow-arrow { transform: rotate(90deg); }
         }
 
         /* ── ANIMATIONS ── */
@@ -655,10 +794,7 @@
             transform: translateY(24px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -676,6 +812,7 @@
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
                 <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                <li class="nav-item"><a class="nav-link" href="#ai-tools">AI Workflow</a></li>
                 <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                 <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -700,7 +837,7 @@
                     QA Automation Engineer with <strong>hands-on production experience</strong> testing real-world systems —
                     a government SCADA platform and a manufacturing ERP. Specializing in
                     <strong>Playwright automation with JavaScript/TypeScript</strong>, Page Object Model,
-                    and end-to-end quality assurance.
+                    and end-to-end quality assurance. Enhanced by <strong>AI-assisted workflows</strong> using GitHub Copilot, Cursor & Windsurf.
                 </p>
                 <div class="hero-badges">
                     <span class="hero-badge">🎭 Playwright</span>
@@ -710,9 +847,13 @@
                     <span class="hero-badge">🔍 Manual Testing</span>
                     <span class="hero-badge">🔗 API Testing</span>
                     <span class="hero-badge">⚙️ CI/CD</span>
+                    <span class="hero-badge ai-badge">🤖 GitHub Copilot</span>
+                    <span class="hero-badge ai-badge">✦ Cursor AI</span>
+                    <span class="hero-badge ai-badge">🌊 Windsurf</span>
                 </div>
                 <div class="hero-btns">
                     <a href="#projects" class="btn-primary-dark">View Projects</a>
+                    <a href="#ai-tools" class="btn-ghost">AI Workflow</a>
                     <a href="#contact" class="btn-ghost">Get in Touch</a>
                     <a href="https://github.com/ashakiranjyoti" class="btn-ghost" target="_blank">
                         <i class="fab fa-github"></i> GitHub
@@ -783,8 +924,9 @@
                         My background in application development gives me a deeper understanding of how systems
                         are built — which makes me <strong>faster at finding bugs, better at writing stable
                         selectors, and more effective at collaborating with developers</strong>.
-                        My critical bug catch: found a data integrity issue where the system accepted
-                        negative stock quantities through boundary value testing — caught before production.
+                        I also integrate AI tools like <strong>GitHub Copilot, Cursor, and Windsurf</strong> into my workflow —
+                        not to replace thinking, but to move faster, scaffold smarter, and focus more time on
+                        what actually matters: finding real bugs.
                     </p>
                     <div class="about-tags">
                         <span class="about-tag">Playwright Automation</span>
@@ -795,6 +937,7 @@
                         <span class="about-tag">CI/CD Integration</span>
                         <span class="about-tag">Bug Lifecycle Management</span>
                         <span class="about-tag">Test Documentation</span>
+                        <span class="about-tag" style="background:rgba(191,90,242,0.1);border-color:rgba(191,90,242,0.2);color:var(--accent3);">AI-Assisted Workflow</span>
                     </div>
                 </div>
             </div>
@@ -891,17 +1034,18 @@
             </div>
             <div class="col-lg-4 col-md-6 fade-up">
                 <div class="skill-card">
-                    <div class="skill-card-icon" style="background:rgba(48,209,88,0.1);border-color:rgba(48,209,88,0.2);color:var(--accent)">
-                        <i class="fas fa-chart-line"></i>
+                    <div class="skill-card-icon" style="background:rgba(191,90,242,0.1);border-color:rgba(191,90,242,0.2);color:var(--accent3)">
+                        <i class="fas fa-brain"></i>
                     </div>
-                    <h5>Reporting & Analytics</h5>
+                    <h5>AI-Assisted Development</h5>
                     <div class="skill-pills">
-                        <span class="skill-pill">Playwright HTML Reports</span>
-                        <span class="skill-pill">Trace Viewer</span>
-                        <span class="skill-pill">Screenshots on Failure</span>
-                        <span class="skill-pill">Test Coverage Metrics</span>
-                        <span class="skill-pill">Bug Reports</span>
-                        <span class="skill-pill">CI/CD Dashboards</span>
+                        <span class="skill-pill ai-highlight">GitHub Copilot</span>
+                        <span class="skill-pill ai-highlight">Cursor AI</span>
+                        <span class="skill-pill ai-highlight">Windsurf</span>
+                        <span class="skill-pill">AI Pair Programming</span>
+                        <span class="skill-pill">Prompt Engineering</span>
+                        <span class="skill-pill">AI-Guided Debugging</span>
+                        <span class="skill-pill">Test Scaffolding</span>
                     </div>
                 </div>
             </div>
@@ -954,6 +1098,14 @@
                 <li>Actively learning <strong>TypeScript</strong> to migrate JS framework to typed, maintainable TS codebase</li>
             </ul>
 
+            <div class="exp-section-label purple">AI-Assisted Productivity</div>
+            <ul class="exp-list">
+                <li class="ai-bullet">Used <strong>GitHub Copilot</strong> inside VS Code to accelerate Page Object Model class generation — page classes scaffolded in minutes instead of hours, while I focused on logic validation and selector accuracy</li>
+                <li class="ai-bullet">Leveraged <strong>Cursor AI</strong> to debug flaky test issues in the SCADA real-time tests — used AI-assisted root cause analysis to pinpoint race conditions in live sensor data polling</li>
+                <li class="ai-bullet">Used <strong>Windsurf</strong> for multi-file refactors when migrating test utilities from JavaScript to TypeScript — maintained test logic integrity while AI handled boilerplate type definitions</li>
+                <li class="ai-bullet"><strong>Increased test authoring speed by ~40%</strong> — AI handled repetitive scaffolding while I directed test strategy, edge case design, and final review</li>
+            </ul>
+
             <div class="exp-tech">
                 <span class="tech-tag">Playwright</span>
                 <span class="tech-tag">JavaScript</span>
@@ -963,6 +1115,9 @@
                 <span class="tech-tag">REST API Testing</span>
                 <span class="tech-tag">MS SQL Server</span>
                 <span class="tech-tag">MySQL</span>
+                <span class="tech-tag ai-tag">GitHub Copilot</span>
+                <span class="tech-tag ai-tag">Cursor AI</span>
+                <span class="tech-tag ai-tag">Windsurf</span>
             </div>
         </div>
 
@@ -986,13 +1141,125 @@
     </div>
 </section>
 
+<!-- ── AI TOOLS SECTION ── -->
+<section id="ai-tools" class="ai-tools-section">
+    <div class="container">
+        <div class="section-header fade-up">
+            <div class="section-label" style="color:var(--accent3);">// ai-assisted workflow</div>
+            <h2 class="section-title">Working Smarter with AI Tools</h2>
+            <p class="section-subtitle">How I use AI pair programming to move faster — without losing the fundamentals</p>
+        </div>
+
+        <div class="ai-section-intro fade-up">
+            <p>
+                I integrate AI coding tools into my daily QA workflow — not as a shortcut, but as a <strong>force multiplier</strong>.
+                I use AI to handle repetitive scaffolding, accelerate refactoring, and assist with debugging — so I can spend more
+                time on what actually requires human judgment: <strong>designing test strategies, catching edge cases, and understanding
+                system behavior</strong>. Every line of AI-suggested code is reviewed, validated, and owned by me.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- GitHub Copilot -->
+            <div class="col-lg-4 col-md-6 fade-up">
+                <div class="ai-tool-card">
+                    <div class="ai-tool-header">
+                        <div class="ai-tool-icon copilot"><i class="fab fa-github"></i></div>
+                        <div>
+                            <div class="ai-tool-name">GitHub Copilot</div>
+                            <div class="ai-tool-sub">VS Code · Daily Driver</div>
+                        </div>
+                    </div>
+                    <div class="ai-tool-body">
+                        <p>My everyday AI pair programmer inside VS Code. I use it to accelerate Page Object Model authoring, generate repetitive test structure, and get inline suggestions while writing Playwright selectors and assertions.</p>
+                        <ul class="ai-use-list">
+                            <li><strong>POM class scaffolding</strong> — generated locator maps for multi-form SCADA pages in minutes</li>
+                            <li><strong>Test boilerplate generation</strong> — describe/test blocks, beforeEach hooks, fixture patterns</li>
+                            <li><strong>Selector suggestions</strong> — I review and validate; Copilot drafts from context</li>
+                            <li><strong>Repetitive assertions</strong> — bulk status/field validation blocks drafted quickly, then refined</li>
+                        </ul>
+                        <span class="ai-impact-badge blue"><i class="fas fa-bolt"></i> ~40% faster test authoring</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cursor AI -->
+            <div class="col-lg-4 col-md-6 fade-up">
+                <div class="ai-tool-card">
+                    <div class="ai-tool-header">
+                        <div class="ai-tool-icon cursor">✦</div>
+                        <div>
+                            <div class="ai-tool-name">Cursor AI</div>
+                            <div class="ai-tool-sub">AI-First Editor · Debugging & Refactor</div>
+                        </div>
+                    </div>
+                    <div class="ai-tool-body">
+                        <p>I use Cursor for complex debugging sessions and deep code conversations. Its chat-with-codebase feature helped me diagnose flaky test failures in real-time SCADA automation — where timing issues were non-obvious.</p>
+                        <ul class="ai-use-list">
+                            <li><strong>Flaky test debugging</strong> — traced race conditions in real-time sensor polling tests</li>
+                            <li><strong>Framework architecture discussions</strong> — reviewed fixture design and data separation patterns</li>
+                            <li><strong>Error message interpretation</strong> — Playwright async/timeout errors decoded faster</li>
+                            <li><strong>Code review assistance</strong> — checked test logic for edge case coverage gaps</li>
+                        </ul>
+                        <span class="ai-impact-badge purple"><i class="fas fa-bug"></i> Faster root cause analysis</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Windsurf -->
+            <div class="col-lg-4 col-md-6 fade-up">
+                <div class="ai-tool-card">
+                    <div class="ai-tool-header">
+                        <div class="ai-tool-icon windsurf">🌊</div>
+                        <div>
+                            <div class="ai-tool-name">Windsurf</div>
+                            <div class="ai-tool-sub">Agentic AI · Multi-file Refactoring</div>
+                        </div>
+                    </div>
+                    <div class="ai-tool-body">
+                        <p>I use Windsurf for larger, multi-file tasks — especially during the JS-to-TypeScript migration of my automation framework. Its agentic Cascade feature can reason across multiple files while I supervise and validate output.</p>
+                        <ul class="ai-use-list">
+                            <li><strong>JS → TS migration</strong> — type annotations added across POM files without breaking test logic</li>
+                            <li><strong>Bulk utility refactors</strong> — helper functions updated consistently across test files</li>
+                            <li><strong>Interface generation</strong> — TypeScript interfaces for test data models created from JSON structure</li>
+                            <li><strong>Import path fixes</strong> — multi-file dependency updates handled in single sessions</li>
+                        </ul>
+                        <span class="ai-impact-badge green"><i class="fas fa-code-branch"></i> Safe large-scale refactoring</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workflow Strip -->
+        <div class="ai-workflow-strip fade-up">
+            <h5>⚡ My AI-Enhanced QA Workflow</h5>
+            <div class="workflow-steps">
+                <div class="workflow-step"><span class="step-num">1</span>Analyze Requirements</div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step"><span class="step-num">2</span>Design Test Strategy (me)</div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step"><span class="step-num">3</span>Scaffold POM with Copilot</div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step"><span class="step-num">4</span>Write & Validate Tests (me)</div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step"><span class="step-num">5</span>Debug Failures with Cursor</div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step"><span class="step-num">6</span>Refactor with Windsurf</div>
+                <div class="workflow-arrow">→</div>
+                <div class="workflow-step"><span class="step-num">7</span>Review & Own All Output (me)</div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ── PROJECTS ── -->
 <section id="projects" class="projects-section">
     <div class="container">
         <div class="section-header fade-up">
             <div class="section-label">// projects</div>
             <h2 class="section-title">Testing Projects</h2>
-            <p class="section-subtitle">Production systems tested · Automation frameworks built</p>
+            <p class="section-subtitle">Production systems tested · Automation frameworks built · AI-assisted workflow</p>
         </div>
         <div class="row g-4">
 
@@ -1009,14 +1276,17 @@
                     <div class="project-body">
                         <p><strong>Tested:</strong> Real-time web SCADA monitoring 50+ water supply stations with live sensor data updating every 5 seconds, remote pump/valve control, and role-based access for 4 user types.</p>
                         <p><strong>QA Work:</strong> 80+ manual test cases, 50+ automated Playwright scenarios — real-time telemetry validation, control button security, KPI accuracy, 24/7 reliability testing.</p>
-                        <p><strong>Key Challenge:</strong> Developed protocol with developer to insert known sensor values in live DB for reliable real-time assertions.</p>
+                        <p><strong>AI Edge:</strong> Used Cursor AI to debug timing-sensitive flaky tests; Copilot to scaffold control panel POM classes at speed.</p>
                         <div class="project-badges">
                             <span class="project-badge">Playwright</span>
                             <span class="project-badge">JS/TS</span>
                             <span class="project-badge">MS SQL Server</span>
                             <span class="project-badge">Real-time Testing</span>
+                            <span class="project-badge ai">Cursor AI</span>
+                            <span class="project-badge ai">GitHub Copilot</span>
                         </div>
                         <div class="govt-badge"><i class="fas fa-landmark"></i> Government Project</div>
+                        <div class="ai-assisted-badge"><i class="fas fa-robot"></i> AI-Assisted</div>
                     </div>
                 </div>
             </div>
@@ -1034,23 +1304,21 @@
                     <div class="project-body">
                         <p><strong>Tested:</strong> End-to-end material lifecycle — inward/outward stock, shortage detection, supplier management, 1000+ product categories (3-level hierarchy), and report exports.</p>
                         <p><strong>QA Work:</strong> 120+ manual test cases, 60+ automated scenarios. Critical catch: boundary value testing at qty = available + 1 found a data integrity bug (negative stock) — blocked release.</p>
+                        <p><strong>AI Edge:</strong> Used Copilot to generate bulk stock validation tests across 10+ product types; Windsurf to refactor test utilities to TypeScript.</p>
                         <div class="project-badges">
                             <span class="project-badge">Playwright</span>
                             <span class="project-badge">JS/TS</span>
                             <span class="project-badge">MySQL</span>
                             <span class="project-badge">BVA</span>
+                            <span class="project-badge ai">Copilot</span>
+                            <span class="project-badge ai">Windsurf</span>
                         </div>
                         <div class="project-highlight"><i class="fas fa-bug"></i> Critical bug found before go-live</div>
-                        <div hidden class="project-links">
-                            <a href="https://github.com/ashakiranjyoti/Inventory-and-material-management-erp" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> GitHub
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Asset Management -->
+            <!-- Site Track -->
             <div class="col-lg-4 col-md-6 fade-up">
                 <div class="project-card">
                     <div class="project-top">
@@ -1063,11 +1331,13 @@
                     <div class="project-body">
                         <p><strong>Tested:</strong> Role-based system with multi-level hierarchy (Sites → Tubewells → LCS), media uploads, audit trails, and compliance workflows.</p>
                         <p><strong>QA Work:</strong> 60+ manual test cases, 60+ automated tests — CRUD validation, boundary testing, media upload edge cases, LCS workflow end-to-end, security testing.</p>
+                        <p><strong>AI Edge:</strong> Copilot-assisted generation of CRUD test blocks for all 3 hierarchy levels; reduced repetitive authoring time significantly.</p>
                         <div class="project-badges">
                             <span class="project-badge">Playwright</span>
                             <span class="project-badge">JS/TS</span>
                             <span class="project-badge">Validation</span>
                             <span class="project-badge">Security Testing</span>
+                            <span class="project-badge ai">GitHub Copilot</span>
                         </div>
                         <div class="project-links">
                             <a href="https://github.com/ashakiranjyoti/SITE_TRACK_SYSTEM" class="project-link" target="_blank">
@@ -1238,7 +1508,8 @@
                         <p>
                             I'm actively seeking opportunities as a <strong>QA Automation Engineer</strong> or <strong>SDET</strong>.
                             I bring hands-on production testing experience, a built-from-scratch Playwright framework,
-                            and a developer background that makes me effective at root-cause analysis and collaboration.
+                            a developer background that makes me effective at root-cause analysis, and a modern
+                            <strong>AI-assisted workflow</strong> that multiplies my output without compromising quality.
                         </p>
                         <div class="open-to-roles">
                             <span class="role-tag">QA Automation Engineer</span>
@@ -1261,7 +1532,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             e.preventDefault();
@@ -1270,14 +1540,12 @@
         });
     });
 
-    // Fade up on scroll
     const fadeEls = document.querySelectorAll('.fade-up');
     const observer = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     fadeEls.forEach(el => observer.observe(el));
 
-    // Active nav link
     window.addEventListener('scroll', () => {
         let current = '';
         document.querySelectorAll('section[id]').forEach(s => {
@@ -1291,9 +1559,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
