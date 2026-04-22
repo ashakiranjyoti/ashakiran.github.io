@@ -3,941 +3,366 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashakiran Jyoti | QA Automation Engineer | Playwright JavaScript/TypeScript</title>
-    
-    <meta name="description" content="Ashakiran Jyoti - QA Automation Engineer specializing in Playwright with JavaScript/TypeScript. Manual testing, test automation, POM framework, CI/CD integration.">
-    <meta name="keywords" content="QA Automation Engineer, Playwright, JavaScript, TypeScript, Manual Testing, Test Automation, POM, SDET, Bug Testing">
-    
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Ashakiran Jyoti — QA Engineer · Playwright · Manual Testing</title>
+    <meta name="description" content="Ashakiran Jyoti — QA Engineer with hands-on experience in Manual Testing and Playwright Automation. Tested Government of India SCADA and Manufacturing ERP systems.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #0A84FF;
-            --primary-dark: #0060CC;
-            --accent: #30D158;
-            --accent2: #FF9F0A;
-            --accent3: #BF5AF2;
-            --dark: #0D1117;
-            --dark2: #161B22;
-            --dark3: #21262D;
-            --border: #30363D;
-            --text: #E6EDF3;
-            --text-muted: #8B949E;
-            --text-dim: #6E7681;
+            --bg:        #09090F;
+            --surface:   #0F1018;
+            --card:      #13151F;
+            --border:    #1C1F2E;
+            --border2:   #242840;
+            --blue:      #5B8DEF;
+            --blue2:     #3D6ED6;
+            --green:     #34D399;
+            --amber:     #FBBF24;
+            --violet:    #A78BFA;
+            --text:      #F1F3FA;
+            --muted:     #6B7280;
+            --dim:       #374151;
         }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* NAV */
+        nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(9,9,15,0.88); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+        .nav-inner { max-width:1160px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:58px; }
+        .nav-brand { font-family:'IBM Plex Mono',monospace; font-size:0.86rem; color:var(--text); text-decoration:none; }
+        .nav-brand em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:2px; }
+        .nav-links a { color:var(--muted); text-decoration:none; font-size:0.76rem; font-weight:500; letter-spacing:0.05em; text-transform:uppercase; padding:6px 11px; border-radius:5px; transition:color 0.15s, background 0.15s; }
+        .nav-links a:hover { color:var(--text); background:var(--border); }
 
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--dark);
-            color: var(--text);
-            line-height: 1.6;
-        }
+        /* WRAP */
+        .wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--dark); }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        /* HERO */
+        .hero { min-height:100vh; display:flex; align-items:center; padding:120px 0 80px; position:relative; overflow:hidden; }
+        .glow1 { position:absolute; top:5%; right:-8%; width:650px; height:650px; background:radial-gradient(ellipse,rgba(91,141,239,0.07) 0%,transparent 65%); pointer-events:none; }
+        .glow2 { position:absolute; bottom:-5%; left:-8%; width:480px; height:480px; background:radial-gradient(ellipse,rgba(52,211,153,0.05) 0%,transparent 65%); pointer-events:none; }
+        .pill-status { display:inline-flex; align-items:center; gap:7px; background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); color:var(--green); font-family:'IBM Plex Mono',monospace; font-size:0.7rem; letter-spacing:0.09em; text-transform:uppercase; padding:5px 14px; border-radius:100px; margin-bottom:28px; }
+        .sdot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:blink 2.2s ease infinite; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+        .hero h1 { font-size:clamp(2.8rem,5.5vw,4.8rem); font-weight:800; line-height:1.06; letter-spacing:-0.04em; margin-bottom:18px; }
+        .hero h1 .hi { display:block; font-size:0.55em; font-weight:300; color:var(--muted); letter-spacing:0; margin-bottom:8px; }
+        .hero h1 .ng { background:linear-gradient(120deg,#F1F3FA 0%,var(--blue) 55%,var(--green) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .hero-role { font-size:1.05rem; color:var(--muted); margin-bottom:18px; }
+        .hero-role b { color:var(--blue); font-weight:600; }
+        .hero-desc { font-size:0.97rem; color:var(--muted); max-width:570px; line-height:1.88; margin-bottom:32px; }
+        .hero-desc b { color:var(--text); font-weight:500; }
+        .tag-row { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:32px; }
+        .tag { font-family:'IBM Plex Mono',monospace; font-size:0.71rem; color:var(--muted); background:var(--card); border:1px solid var(--border2); padding:4px 11px; border-radius:4px; transition:all 0.15s; }
+        .tag:hover { color:var(--blue); border-color:var(--blue); }
+        .tag.g { border-color:rgba(52,211,153,0.3); color:var(--green); background:rgba(52,211,153,0.05); }
+        .tag.v { border-color:rgba(167,139,250,0.3); color:var(--violet); background:rgba(167,139,250,0.05); }
+        .btn-row { display:flex; flex-wrap:wrap; gap:9px; }
+        .bp { background:var(--blue); color:#fff; padding:10px 20px; border-radius:6px; font-size:0.85rem; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:all 0.18s; }
+        .bp:hover { background:var(--blue2); color:#fff; transform:translateY(-1px); box-shadow:0 5px 18px rgba(91,141,239,0.3); }
+        .bs { background:transparent; color:var(--text); padding:10px 20px; border-radius:6px; font-size:0.85rem; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--border2); transition:all 0.18s; }
+        .bs:hover { border-color:var(--blue); color:var(--blue); }
 
-        /* ── NAV ── */
-        .navbar {
-            background: rgba(13,17,23,0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .navbar-brand {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text) !important;
-            font-family: 'DM Mono', monospace;
-        }
-        .navbar-brand span { color: var(--accent); }
-        .nav-link {
-            color: var(--text-muted) !important;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin: 0 0.3rem;
-            transition: color 0.2s;
-        }
-        .nav-link:hover { color: var(--primary) !important; }
+        /* METRICS */
+        .metrics { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:44px 0; }
+        .metric { text-align:center; padding:10px; }
+        .mn { font-family:'IBM Plex Mono',monospace; font-size:2.3rem; font-weight:500; color:var(--blue); line-height:1; margin-bottom:7px; }
+        .ml { color:var(--muted); font-size:0.81rem; }
 
-        /* ── HERO ── */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: var(--dark);
-            position: relative;
-            overflow: hidden;
-            padding: 80px 0;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -200px; right: -200px;
-            width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(10,132,255,0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -100px; left: -100px;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(48,209,88,0.06) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .hero-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(48,209,88,0.1);
-            border: 1px solid rgba(48,209,88,0.3);
-            color: var(--accent);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 24px;
-            font-family: 'DM Mono', monospace;
-        }
-        .hero-tag::before {
-            content: '';
-            width: 8px; height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%,100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.8); }
-        }
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            line-height: 1.15;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-        }
-        .hero h1 .name-highlight {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero .role {
-            font-size: 1.4rem;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            font-weight: 400;
-        }
-        .hero .role strong { color: var(--primary); font-weight: 600; }
-        .hero .desc {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin-bottom: 36px;
-            line-height: 1.8;
-        }
-        .hero .desc strong { color: var(--text); }
-        .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
-        .hero-badge {
-            background: var(--dark2);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-family: 'DM Mono', monospace;
-            transition: all 0.2s;
-        }
-        .hero-badge:hover { border-color: var(--primary); color: var(--primary); }
-        .hero-badge.ai-badge {
-            border-color: rgba(191,90,242,0.35);
-            color: var(--accent3);
-            background: rgba(191,90,242,0.07);
-        }
-        .hero-badge.ai-badge:hover { border-color: var(--accent3); }
-        .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
-        .btn-primary-dark {
-            background: var(--primary);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-            border: none;
-            font-size: 0.95rem;
-        }
-        .btn-primary-dark:hover {
-            background: var(--primary-dark);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(10,132,255,0.3);
-        }
-        .btn-ghost {
-            background: transparent;
-            color: var(--text);
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-            border: 1px solid var(--border);
-            font-size: 0.95rem;
-        }
-        .btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+        /* SECTION */
+        .sec { padding:80px 0; }
+        .sec-alt { background:var(--surface); }
+        .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--blue); letter-spacing:0.14em; text-transform:uppercase; margin-bottom:10px; }
+        .eyebrow.g { color:var(--green); }
+        .eyebrow.v { color:var(--violet); }
+        .sh { font-size:1.8rem; font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.15; margin-bottom:7px; }
+        .ssub { color:var(--muted); font-size:0.9rem; }
+        .sec-header { margin-bottom:44px; }
 
-        /* ── STATS ── */
-        .stats-section {
-            background: var(--dark2);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 50px 0;
-        }
-        .stat-item { text-align: center; padding: 20px; }
-        .stat-number {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            font-family: 'DM Mono', monospace;
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-        .stat-label { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+        /* ABOUT */
+        .abox { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:38px; }
+        .abox p { color:var(--muted); font-size:0.95rem; line-height:1.9; margin-bottom:14px; }
+        .abox p b { color:var(--text); font-weight:500; }
+        .achips { display:flex; flex-wrap:wrap; gap:7px; margin-top:22px; }
+        .ac { background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.18); color:var(--blue); font-size:0.8rem; font-weight:500; padding:4px 12px; border-radius:4px; }
+        .ac.g { background:rgba(52,211,153,0.07); border-color:rgba(52,211,153,0.2); color:var(--green); }
+        .ac.v { background:rgba(167,139,250,0.07); border-color:rgba(167,139,250,0.2); color:var(--violet); }
 
-        /* ── SECTIONS ── */
-        section { padding: 90px 0; }
-        .section-header { margin-bottom: 56px; }
-        .section-label {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--primary);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.02em;
-        }
-        .section-subtitle { color: var(--text-muted); margin-top: 8px; font-size: 1rem; }
+        /* SKILLS */
+        .skc { background:var(--card); border:1px solid var(--border); border-radius:11px; padding:24px; height:100%; transition:border-color 0.2s, transform 0.2s; }
+        .skc:hover { border-color:var(--border2); transform:translateY(-2px); }
+        .skh { display:flex; align-items:center; gap:9px; margin-bottom:14px; }
+        .ski { width:32px; height:32px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.85rem; }
+        .ski.b { background:rgba(91,141,239,0.12); color:var(--blue); }
+        .ski.g { background:rgba(52,211,153,0.12); color:var(--green); }
+        .ski.a { background:rgba(251,191,36,0.12); color:var(--amber); }
+        .ski.v { background:rgba(167,139,250,0.12); color:var(--violet); }
+        .skc h5 { font-size:0.88rem; font-weight:600; color:var(--text); }
+        .pills { display:flex; flex-wrap:wrap; gap:5px; }
+        .pill { font-family:'IBM Plex Mono',monospace; font-size:0.69rem; color:var(--muted); background:var(--surface); border:1px solid var(--border); padding:2px 9px; border-radius:3px; transition:all 0.15s; }
+        .pill:hover { color:var(--green); border-color:rgba(52,211,153,0.3); }
+        .pill.hi { color:var(--green); border-color:rgba(52,211,153,0.25); background:rgba(52,211,153,0.05); }
+        .pill.vi { color:var(--violet); border-color:rgba(167,139,250,0.25); background:rgba(167,139,250,0.05); }
 
-        /* ── ABOUT ── */
-        .about-section { background: var(--dark); }
-        .about-card {
-            background: var(--dark2);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
-        }
-        .about-card p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.85; margin-bottom: 16px; }
-        .about-card p strong { color: var(--text); }
-        .about-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-        .about-tag {
-            background: rgba(10,132,255,0.1);
-            border: 1px solid rgba(10,132,255,0.2);
-            color: var(--primary);
-            padding: 6px 16px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
+        /* EXPERIENCE */
+        .ec { background:var(--card); border:1px solid var(--border); border-left:2px solid var(--blue); border-radius:12px; padding:34px; margin-bottom:18px; }
+        .ec-badge { display:inline-flex; align-items:center; gap:5px; background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); color:var(--green); font-size:0.68rem; font-weight:600; font-family:'IBM Plex Mono',monospace; padding:3px 9px; border-radius:100px; letter-spacing:0.04em; }
+        .ec-badge::before { content:''; width:5px; height:5px; background:var(--green); border-radius:50%; animation:blink 2s infinite; }
+        .eco { color:var(--blue); font-weight:700; font-size:1.1rem; margin-bottom:2px; margin-top:12px; }
+        .ero { color:var(--text); font-weight:600; font-size:0.95rem; margin-bottom:2px; }
+        .edu { color:var(--dim); font-family:'IBM Plex Mono',monospace; font-size:0.74rem; margin-bottom:20px; }
+        .esect { font-family:'IBM Plex Mono',monospace; font-size:0.66rem; font-weight:500; letter-spacing:0.13em; text-transform:uppercase; margin:20px 0 9px; display:flex; align-items:center; gap:9px; }
+        .esect::after { content:''; flex:1; height:1px; background:var(--border); }
+        .esect.b { color:var(--blue); }
+        .esect.g { color:var(--green); }
+        .esect.v { color:var(--violet); }
+        .esect.a { color:var(--amber); }
+        .ul { list-style:none; padding:0; }
+        .ul li { color:var(--muted); font-size:0.88rem; padding:4px 0 4px 16px; position:relative; line-height:1.65; }
+        .ul li::before { content:'›'; position:absolute; left:0; color:var(--dim); font-size:0.95rem; top:3px; }
+        .ul li.g::before { color:var(--green); }
+        .ul li.b::before { color:var(--blue); }
+        .ul li.v::before { color:var(--violet); }
+        .ul li b { color:var(--text); font-weight:500; }
+        .tr { display:flex; flex-wrap:wrap; gap:5px; margin-top:18px; padding-top:14px; border-top:1px solid var(--border); }
+        .tc { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--blue); background:rgba(91,141,239,0.07); border:1px solid rgba(91,141,239,0.14); padding:2px 8px; border-radius:3px; }
+        .tc.v { color:var(--violet); background:rgba(167,139,250,0.07); border-color:rgba(167,139,250,0.17); }
 
-        /* ── SKILLS ── */
-        .skills-section { background: var(--dark2); }
-        .skill-card {
-            background: var(--dark);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 28px;
-            height: 100%;
-            transition: all 0.2s;
-        }
-        .skill-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(10,132,255,0.1);
-        }
-        .skill-card-icon {
-            width: 42px; height: 42px;
-            background: rgba(10,132,255,0.1);
-            border: 1px solid rgba(10,132,255,0.2);
-            border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--primary);
-            font-size: 1.1rem;
-            margin-bottom: 16px;
-        }
-        .skill-card h5 { color: var(--text); font-weight: 600; font-size: 1rem; margin-bottom: 16px; }
-        .skill-pills { display: flex; flex-wrap: wrap; gap: 8px; }
-        .skill-pill {
-            background: var(--dark2);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.82rem;
-            font-family: 'DM Mono', monospace;
-            transition: all 0.2s;
-        }
-        .skill-pill:hover { border-color: var(--accent); color: var(--accent); }
-        .skill-pill.highlight {
-            border-color: rgba(48,209,88,0.3);
-            color: var(--accent);
-            background: rgba(48,209,88,0.06);
-        }
-        .skill-pill.ai-highlight {
-            border-color: rgba(191,90,242,0.35);
-            color: var(--accent3);
-            background: rgba(191,90,242,0.07);
-        }
+        /* DUAL PANEL */
+        .dp { border:1px solid var(--border); border-radius:12px; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; }
+        @media(max-width:768px){ .dp{grid-template-columns:1fr;} }
+        .pn { padding:34px; }
+        .pn:first-child { background:var(--card); border-right:1px solid var(--border); }
+        .pn:last-child { background:var(--surface); }
+        .pntag { display:inline-flex; align-items:center; gap:5px; font-family:'IBM Plex Mono',monospace; font-size:0.66rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; padding:3px 10px; border-radius:3px; margin-bottom:14px; }
+        .pntag.g { background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); color:var(--green); }
+        .pntag.b { background:rgba(91,141,239,0.07); border:1px solid rgba(91,141,239,0.2); color:var(--blue); }
+        .pn h3 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:9px; }
+        .pn p { color:var(--muted); font-size:0.86rem; line-height:1.78; margin-bottom:14px; }
+        .pn p b { color:var(--text); font-weight:500; }
+        .dl { list-style:none; padding:0; }
+        .dl li { color:var(--muted); font-size:0.84rem; padding:7px 0 7px 14px; position:relative; border-bottom:1px solid var(--border); line-height:1.6; }
+        .dl li:last-child { border-bottom:none; }
+        .dl li::before { content:'–'; position:absolute; left:0; color:var(--dim); }
+        .dl li b { color:var(--text); font-weight:500; }
 
-        /* ── EXPERIENCE ── */
-        .experience-section { background: var(--dark); }
-        .exp-card {
-            background: var(--dark2);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 36px;
-            margin-bottom: 24px;
-            position: relative;
-            transition: all 0.2s;
-        }
-        .exp-card:hover { border-color: var(--primary); }
-        .exp-card::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--primary), var(--accent));
-            border-radius: 3px 0 0 3px;
-        }
-        .exp-company { color: var(--primary); font-weight: 700; font-size: 1.2rem; margin-bottom: 4px; }
-        .exp-role { color: var(--text); font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
-        .exp-duration {
-            color: var(--text-dim); font-size: 0.85rem;
-            font-family: 'DM Mono', monospace; margin-bottom: 20px;
-        }
-        .exp-section-label {
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .exp-section-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-        .exp-section-label.purple { color: var(--accent3); }
-        .exp-list { list-style: none; padding: 0; }
-        .exp-list li {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            padding: 6px 0 6px 20px;
-            position: relative;
-            line-height: 1.6;
-        }
-        .exp-list li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-size: 0.8rem;
-        }
-        .exp-list li.ai-bullet::before { color: var(--accent3); }
-        .exp-list li strong { color: var(--text); }
-        .exp-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
-        }
-        .tech-tag {
-            background: rgba(10,132,255,0.08);
-            border: 1px solid rgba(10,132,255,0.15);
-            color: var(--primary);
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-family: 'DM Mono', monospace;
-        }
-        .tech-tag.ai-tag {
-            background: rgba(191,90,242,0.08);
-            border-color: rgba(191,90,242,0.2);
-            color: var(--accent3);
-        }
+        /* AI */
+        .aic { background:var(--card); border:1px solid var(--border); border-radius:11px; overflow:hidden; height:100%; transition:border-color 0.2s; }
+        .aic:hover { border-color:rgba(167,139,250,0.3); }
+        .aich { padding:17px 20px 14px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:11px; }
+        .aiico { width:36px; height:36px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.9rem; font-weight:700; }
+        .aiico.b { background:rgba(91,141,239,0.12); border:1px solid rgba(91,141,239,0.2); color:var(--blue); }
+        .aiico.v { background:rgba(167,139,250,0.12); border:1px solid rgba(167,139,250,0.2); color:var(--violet); }
+        .aiico.g { background:rgba(52,211,153,0.12); border:1px solid rgba(52,211,153,0.2); color:var(--green); }
+        .ain { font-size:0.9rem; font-weight:700; color:var(--text); }
+        .ais { font-size:0.69rem; color:var(--dim); font-family:'IBM Plex Mono',monospace; }
+        .aib { padding:18px 20px; }
+        .aib p { color:var(--muted); font-size:0.84rem; line-height:1.72; margin-bottom:11px; }
+        .aib p b { color:var(--text); font-weight:500; }
+        .ail { list-style:none; padding:0; margin-bottom:12px; }
+        .ail li { color:var(--muted); font-size:0.82rem; padding:3px 0 3px 13px; position:relative; line-height:1.5; }
+        .ail li::before { content:'→'; position:absolute; left:0; font-size:0.68rem; top:5px; color:var(--dim); }
+        .ail li b { color:var(--text); font-weight:500; }
+        .air { display:inline-flex; align-items:center; gap:4px; font-family:'IBM Plex Mono',monospace; font-size:0.69rem; font-weight:500; padding:3px 9px; border-radius:3px; }
+        .air.b { background:rgba(91,141,239,0.07); border:1px solid rgba(91,141,239,0.17); color:var(--blue); }
+        .air.v { background:rgba(167,139,250,0.07); border:1px solid rgba(167,139,250,0.17); color:var(--violet); }
+        .air.g { background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.17); color:var(--green); }
+        .flow { background:var(--card); border:1px solid var(--border); border-radius:11px; padding:22px 26px; margin-top:28px; }
+        .flow h5 { font-size:0.86rem; font-weight:600; color:var(--text); margin-bottom:14px; }
+        .fr { display:flex; align-items:center; flex-wrap:wrap; gap:5px; }
+        .fs { background:var(--surface); border:1px solid var(--border); border-radius:5px; padding:5px 11px; font-size:0.75rem; color:var(--muted); font-weight:500; white-space:nowrap; }
+        .fs .fn { display:inline-block; width:15px; height:15px; background:rgba(167,139,250,0.15); border-radius:50%; text-align:center; line-height:15px; font-size:0.58rem; color:var(--violet); font-weight:700; margin-right:4px; font-family:'IBM Plex Mono',monospace; }
+        .fa { color:var(--dim); font-size:0.78rem; }
 
-        /* ── AI TOOLS SECTION ── */
-        .ai-tools-section { background: var(--dark2); }
+        /* PROJECTS */
+        .pdiv { display:flex; align-items:center; gap:12px; margin-bottom:22px; }
+        .pdiv .line { flex:1; height:1px; background:var(--border); }
+        .pc { background:var(--card); border:1px solid var(--border); border-radius:11px; overflow:hidden; height:100%; transition:transform 0.22s, border-color 0.22s, box-shadow 0.22s; }
+        .pc:hover { transform:translateY(-4px); border-color:var(--border2); box-shadow:0 14px 38px rgba(0,0,0,0.3); }
+        .pch { padding:18px 20px; border-bottom:1px solid var(--border); display:flex; align-items:flex-start; gap:11px; }
+        .pico { width:36px; height:36px; flex-shrink:0; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:0.9rem; }
+        .pico.b { background:rgba(91,141,239,0.1); border:1px solid rgba(91,141,239,0.2); color:var(--blue); }
+        .pico.g { background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.2); color:var(--green); }
+        .pico.a { background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.2); color:var(--amber); }
+        .pico.v { background:rgba(167,139,250,0.1); border:1px solid rgba(167,139,250,0.2); color:var(--violet); }
+        .pch h4 { font-size:0.92rem; font-weight:700; color:var(--text); margin-bottom:2px; }
+        .ptyp { font-family:'IBM Plex Mono',monospace; font-size:0.66rem; color:var(--dim); }
+        .pb { padding:18px 20px; }
+        .pb p { color:var(--muted); font-size:0.83rem; line-height:1.7; margin-bottom:7px; }
+        .pb p b { color:var(--text); font-weight:500; }
+        .tw { display:flex; flex-wrap:wrap; gap:4px; margin:9px 0; }
+        .pt { font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:var(--dim); background:var(--surface); border:1px solid var(--border); padding:2px 7px; border-radius:3px; }
+        .pt.v { color:var(--violet); border-color:rgba(167,139,250,0.2); background:rgba(167,139,250,0.05); }
+        .br { display:flex; flex-wrap:wrap; gap:5px; margin-top:9px; align-items:center; }
+        .pb2 { display:inline-flex; align-items:center; gap:3px; font-size:0.71rem; font-weight:600; padding:2px 9px; border-radius:3px; }
+        .pb2.g { background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); color:var(--green); }
+        .pb2.a { background:rgba(251,191,36,0.07); border:1px solid rgba(251,191,36,0.2); color:var(--amber); }
+        .pb2.b { background:rgba(91,141,239,0.07); border:1px solid rgba(91,141,239,0.2); color:var(--blue); }
+        .ghl { display:inline-flex; align-items:center; gap:4px; color:var(--blue); font-size:0.8rem; font-weight:600; text-decoration:none; margin-top:9px; transition:color 0.15s; }
+        .ghl:hover { color:var(--green); }
 
-        .ai-section-intro {
-            background: var(--dark);
-            border: 1px solid rgba(191,90,242,0.2);
-            border-radius: 12px;
-            padding: 28px 32px;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        .ai-section-intro::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent3), transparent);
-        }
-        .ai-section-intro p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.75;
-            margin: 0;
-        }
-        .ai-section-intro p strong { color: var(--text); }
+        /* EDU */
+        .educ { background:var(--card); border:1px solid var(--border); border-radius:11px; padding:34px 38px; display:flex; gap:20px; align-items:flex-start; }
+        .edico { width:46px; height:46px; flex-shrink:0; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.15rem; background:rgba(91,141,239,0.1); border:1px solid rgba(91,141,239,0.2); color:var(--blue); }
+        .edd { font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:2px; }
+        .edf { color:var(--blue); font-weight:600; font-size:0.9rem; margin-bottom:6px; }
+        .edu2 { color:var(--muted); font-size:0.88rem; margin-bottom:2px; }
+        .edm { font-family:'IBM Plex Mono',monospace; font-size:0.73rem; color:var(--dim); }
+        .edg { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.79rem; color:var(--green); background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); padding:3px 12px; border-radius:3px; margin-top:10px; }
 
-        .ai-tool-card {
-            background: var(--dark);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            height: 100%;
-            transition: all 0.25s;
-        }
-        .ai-tool-card:hover {
-            border-color: rgba(191,90,242,0.4);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(191,90,242,0.08);
-        }
-        .ai-tool-header {
-            padding: 22px 24px 18px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .ai-tool-icon {
-            width: 44px; height: 44px; flex-shrink: 0;
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem;
-            font-weight: 700;
-            font-family: 'DM Mono', monospace;
-        }
-        .ai-tool-icon.copilot {
-            background: rgba(10,132,255,0.12);
-            border: 1px solid rgba(10,132,255,0.25);
-            color: var(--primary);
-        }
-        .ai-tool-icon.cursor {
-            background: rgba(191,90,242,0.12);
-            border: 1px solid rgba(191,90,242,0.25);
-            color: var(--accent3);
-        }
-        .ai-tool-icon.windsurf {
-            background: rgba(48,209,88,0.12);
-            border: 1px solid rgba(48,209,88,0.25);
-            color: var(--accent);
-        }
-        .ai-tool-name {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 2px;
-        }
-        .ai-tool-sub {
-            font-size: 0.78rem;
-            color: var(--text-dim);
-            font-family: 'DM Mono', monospace;
-        }
-        .ai-tool-body { padding: 22px 24px; }
-        .ai-tool-body p {
-            color: var(--text-muted);
-            font-size: 0.92rem;
-            line-height: 1.7;
-            margin-bottom: 16px;
-        }
-        .ai-tool-body p strong { color: var(--text); }
-        .ai-use-list { list-style: none; padding: 0; margin-bottom: 18px; }
-        .ai-use-list li {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            padding: 5px 0 5px 18px;
-            position: relative;
-            line-height: 1.5;
-        }
-        .ai-use-list li::before {
-            content: '⚡';
-            position: absolute;
-            left: 0;
-            font-size: 0.7rem;
-            top: 7px;
-        }
-        .ai-use-list li strong { color: var(--text); }
-        .ai-impact-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 14px;
-            border-radius: 6px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            font-family: 'DM Mono', monospace;
-        }
-        .ai-impact-badge.blue {
-            background: rgba(10,132,255,0.1);
-            border: 1px solid rgba(10,132,255,0.2);
-            color: var(--primary);
-        }
-        .ai-impact-badge.purple {
-            background: rgba(191,90,242,0.1);
-            border: 1px solid rgba(191,90,242,0.2);
-            color: var(--accent3);
-        }
-        .ai-impact-badge.green {
-            background: rgba(48,209,88,0.1);
-            border: 1px solid rgba(48,209,88,0.2);
-            color: var(--accent);
-        }
+        /* CONTACT */
+        .ccard { background:var(--card); border:1px solid var(--border); border-radius:11px; padding:34px; }
+        .crow { display:flex; align-items:center; gap:13px; padding:12px 0; border-bottom:1px solid var(--border); }
+        .crow:last-of-type { border-bottom:none; }
+        .cico { width:34px; height:34px; border-radius:6px; display:flex; align-items:center; justify-content:center; background:rgba(91,141,239,0.09); border:1px solid rgba(91,141,239,0.17); color:var(--blue); font-size:0.82rem; flex-shrink:0; }
+        .clbl { font-family:'IBM Plex Mono',monospace; font-size:0.66rem; color:var(--dim); letter-spacing:0.06em; text-transform:uppercase; }
+        .cval { font-size:0.88rem; font-weight:500; color:var(--text); }
+        .cval a { color:var(--text); text-decoration:none; transition:color 0.15s; }
+        .cval a:hover { color:var(--blue); }
+        .sr { display:flex; gap:7px; margin-top:20px; }
+        .soc { width:40px; height:40px; background:var(--surface); border:1px solid var(--border); border-radius:7px; display:flex; align-items:center; justify-content:center; color:var(--muted); text-decoration:none; font-size:0.95rem; transition:all 0.18s; }
+        .soc:hover { border-color:var(--blue); color:var(--blue); transform:translateY(-2px); }
+        .ob { background:rgba(52,211,153,0.04); border:1px solid rgba(52,211,153,0.14); border-radius:7px; padding:16px 18px; margin-top:20px; }
+        .ob p { color:var(--muted); font-size:0.86rem; line-height:1.78; margin-bottom:10px; }
+        .ob p b { color:var(--text); font-weight:500; }
+        .rtags { display:flex; flex-wrap:wrap; gap:6px; }
+        .rt { background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); color:var(--green); font-size:0.78rem; font-weight:600; padding:3px 11px; border-radius:4px; }
 
-        /* Workflow diagram strip */
-        .ai-workflow-strip {
-            background: var(--dark);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 28px 32px;
-            margin-top: 40px;
-        }
-        .ai-workflow-strip h5 {
-            color: var(--text);
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        .workflow-steps {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .workflow-step {
-            background: var(--dark2);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 10px 16px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-weight: 500;
-            white-space: nowrap;
-        }
-        .workflow-step .step-num {
-            display: inline-block;
-            width: 20px; height: 20px;
-            background: rgba(191,90,242,0.15);
-            border-radius: 50%;
-            text-align: center;
-            line-height: 20px;
-            font-size: 0.7rem;
-            color: var(--accent3);
-            font-weight: 700;
-            margin-right: 8px;
-            font-family: 'DM Mono', monospace;
-        }
-        .workflow-arrow {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-        }
+        /* FOOTER */
+        footer { background:var(--surface); border-top:1px solid var(--border); padding:22px 0; text-align:center; }
+        footer p { font-family:'IBM Plex Mono',monospace; font-size:0.73rem; color:var(--dim); }
 
-        /* ── PROJECTS ── */
-        .projects-section { background: var(--dark); }
-        .project-card {
-            background: var(--dark2);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            height: 100%;
-            transition: all 0.3s;
-        }
-        .project-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--primary);
-            box-shadow: 0 16px 40px rgba(10,132,255,0.12);
-        }
-        .project-top {
-            padding: 24px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-        }
-        .project-icon {
-            width: 44px; height: 44px; flex-shrink: 0;
-            background: rgba(10,132,255,0.1);
-            border: 1px solid rgba(10,132,255,0.2);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-        .project-icon.green { background: rgba(48,209,88,0.1); border-color: rgba(48,209,88,0.2); color: var(--accent); }
-        .project-icon.orange { background: rgba(255,159,10,0.1); border-color: rgba(255,159,10,0.2); color: var(--accent2); }
-        .project-top-title h4 { color: var(--text); font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
-        .project-type-label { color: var(--text-dim); font-size: 0.8rem; font-family: 'DM Mono', monospace; }
-        .project-body { padding: 24px; }
-        .project-body p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 12px; }
-        .project-body p strong { color: var(--text); }
-        .project-badges { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
-        .project-badge {
-            background: var(--dark3);
-            border: 1px solid var(--border);
-            color: var(--text-dim);
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 0.78rem;
-            font-family: 'DM Mono', monospace;
-        }
-        .project-badge.ai {
-            background: rgba(191,90,242,0.08);
-            border-color: rgba(191,90,242,0.2);
-            color: var(--accent3);
-        }
-        .project-links { display: flex; gap: 16px; margin-top: 16px; }
-        .project-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 0.88rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: color 0.2s;
-        }
-        .project-link:hover { color: var(--accent); }
-        .project-highlight {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--accent);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 10px;
-        }
-        .govt-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255,159,10,0.1);
-            border: 1px solid rgba(255,159,10,0.25);
-            color: var(--accent2);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            margin-top: 10px;
-        }
-        .ai-assisted-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(191,90,242,0.08);
-            border: 1px solid rgba(191,90,242,0.2);
-            color: var(--accent3);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            margin-top: 10px;
-            margin-left: 8px;
-        }
+        /* REVEAL */
+        .reveal { opacity:0; transform:translateY(16px); transition:opacity 0.5s ease, transform 0.5s ease; }
+        .reveal.in { opacity:1; transform:translateY(0); }
 
-        /* ── EDUCATION ── */
-        .education-section { background: var(--dark2); }
-        .edu-card {
-            background: var(--dark);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
-            display: flex;
-            gap: 24px;
-            align-items: flex-start;
+        /* RESPONSIVE */
+        @media(max-width:768px){
+            .hero h1 { font-size:2.4rem; }
+            .sec { padding:56px 0; }
+            .educ { flex-direction:column; }
+            .btn-row { flex-direction:column; }
+            .abox,.ccard { padding:24px; }
+            .nav-links { display:none; }
         }
-        .edu-icon {
-            width: 56px; height: 56px; flex-shrink: 0;
-            background: rgba(10,132,255,0.1);
-            border: 1px solid rgba(10,132,255,0.2);
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--primary);
-            font-size: 1.4rem;
-        }
-        .edu-degree { color: var(--text); font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
-        .edu-field { color: var(--primary); font-weight: 600; margin-bottom: 8px; }
-        .edu-uni { color: var(--text-muted); margin-bottom: 4px; }
-        .edu-meta { color: var(--text-dim); font-size: 0.88rem; font-family: 'DM Mono', monospace; }
-        .edu-cgpa {
-            display: inline-block;
-            background: rgba(48,209,88,0.1);
-            border: 1px solid rgba(48,209,88,0.25);
-            color: var(--accent);
-            padding: 6px 16px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-top: 12px;
-            font-family: 'DM Mono', monospace;
-        }
-
-        /* ── CONTACT ── */
-        .contact-section { background: var(--dark); }
-        .contact-card {
-            background: var(--dark2);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
-        }
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border);
-        }
-        .contact-item:last-child { border-bottom: none; }
-        .contact-icon {
-            width: 42px; height: 42px; flex-shrink: 0;
-            background: rgba(10,132,255,0.1);
-            border: 1px solid rgba(10,132,255,0.2);
-            border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--primary);
-        }
-        .contact-label { color: var(--text-dim); font-size: 0.8rem; font-family: 'DM Mono', monospace; }
-        .contact-value { color: var(--text); font-weight: 500; font-size: 0.95rem; }
-        .contact-value a { color: var(--text); text-decoration: none; transition: color 0.2s; }
-        .contact-value a:hover { color: var(--primary); }
-        .social-row { display: flex; gap: 12px; margin-top: 28px; }
-        .social-btn {
-            width: 48px; height: 48px;
-            background: var(--dark3);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.2s;
-        }
-        .social-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            transform: translateY(-3px);
-        }
-        .open-to {
-            background: rgba(48,209,88,0.06);
-            border: 1px solid rgba(48,209,88,0.2);
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 28px;
-        }
-        .open-to p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 12px; }
-        .open-to p strong { color: var(--text); }
-        .open-to-roles { display: flex; flex-wrap: wrap; gap: 8px; }
-        .role-tag {
-            background: rgba(48,209,88,0.1);
-            border: 1px solid rgba(48,209,88,0.25);
-            color: var(--accent);
-            padding: 5px 14px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* ── FOOTER ── */
-        footer {
-            background: var(--dark2);
-            border-top: 1px solid var(--border);
-            padding: 28px 0;
-            text-align: center;
-        }
-        footer p { color: var(--text-dim); font-size: 0.88rem; font-family: 'DM Mono', monospace; }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            section { padding: 60px 0; }
-            .edu-card { flex-direction: column; }
-            .hero-btns { flex-direction: column; }
-            .workflow-steps { flex-direction: column; align-items: flex-start; }
-            .workflow-arrow { transform: rotate(90deg); }
-        }
-
-        /* ── ANIMATIONS ── */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-<!-- ── NAVBAR ── -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="#home">ashakiran<span>.jyoti</span></a>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            style="color: var(--text-muted);">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-                <li class="nav-item"><a class="nav-link" href="#ai-tools">AI Workflow</a></li>
-                <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-                <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-            </ul>
+<nav>
+    <div class="nav-inner">
+        <a href="#home" class="nav-brand">ashakiran<em>.jyoti</em></a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#depth">Testing Depth</a>
+            <a href="#ai">AI Workflow</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
         </div>
     </div>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section id="home" class="hero">
-    <div class="container">
+    <div class="glow1"></div>
+    <div class="glow2"></div>
+    <div class="wrap">
         <div class="row">
             <div class="col-lg-9">
-                <div class="hero-tag">Available for opportunities</div>
+                <div class="pill-status"><span class="sdot"></span>Open to opportunities</div>
                 <h1>
-                    Hi, I'm <span class="name-highlight">Ashakiran Jyoti</span>
+                    <span class="hi">Hi, I'm</span>
+                    <span class="ng">Ashakiran Jyoti</span>
                 </h1>
-                <p class="role">
-                    <strong>QA Automation Engineer</strong> · Playwright JavaScript/TypeScript
+                <p class="hero-role"><b>Junior QA Engineer</b> — Manual Testing &amp; Playwright Automation</p>
+                <p class="hero-desc">
+                    QA Engineer with <b>2+ years of experience</b> working on two large-scale software projects —
+                    <b>AMRUT 2.0</b> (Government of India water infrastructure monitoring) and an
+                    <b>Inventory Management System</b> for manufacturing. Worked under a <b>Senior QA Lead</b>
+                    in cross-functional Agile teams. Day-to-day: manual test execution, bug reporting in GitLab,
+                    and writing Playwright scripts in <b>JavaScript</b>. Building TypeScript skills through
+                    personal projects independently.
                 </p>
-                <p class="desc">
-                    QA Automation Engineer with <strong>hands-on production experience</strong> testing real-world systems —
-                    a government SCADA platform and a manufacturing ERP. Specializing in
-                    <strong>Playwright automation with JavaScript/TypeScript</strong>, Page Object Model,
-                    and end-to-end quality assurance. Enhanced by <strong>AI-assisted workflows</strong> using GitHub Copilot, Cursor & Windsurf.
-                </p>
-                <div class="hero-badges">
-                    <span class="hero-badge">🎭 Playwright</span>
-                    <span class="hero-badge">📝 JavaScript</span>
-                    <span class="hero-badge">📝 TypeScript</span>
-                    <span class="hero-badge">🏗️ Page Object Model</span>
-                    <span class="hero-badge">🔍 Manual Testing</span>
-                    <span class="hero-badge">🔗 API Testing</span>
-                    <span class="hero-badge">⚙️ CI/CD</span>
-                    <span class="hero-badge ai-badge">🤖 GitHub Copilot</span>
-                    <span class="hero-badge ai-badge">✦ Cursor AI</span>
-                    <span class="hero-badge ai-badge">🌊 Windsurf</span>
+                <div class="tag-row">
+                    <span class="tag">Playwright · JS</span>
+                    <span class="tag">Manual Testing</span>
+                    <span class="tag">STLC · Agile · Scrum</span>
+                    <span class="tag">Page Object Model</span>
+                    <span class="tag">API Testing</span>
+                    <span class="tag">GitLab · CI/CD</span>
+                    <span class="tag g">Govt. of India Project</span>
+                    <span class="tag v">AI-Assisted Workflow</span>
                 </div>
-                <div class="hero-btns">
-                    <a href="#projects" class="btn-primary-dark">View Projects</a>
-                    <a href="#ai-tools" class="btn-ghost">AI Workflow</a>
-                    <a href="#contact" class="btn-ghost">Get in Touch</a>
-                    <a href="https://github.com/ashakiranjyoti" class="btn-ghost" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
+                <div class="btn-row">
+                    <a href="#projects" class="bp"><i class="fas fa-folder-open"></i> Projects</a>
+                    <a href="#depth" class="bs"><i class="fas fa-vial"></i> Testing Depth</a>
+                    <a href="https://github.com/ashakiranjyoti" class="bs" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="#contact" class="bs"><i class="fas fa-envelope"></i> Contact</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ── STATS ── -->
-<section class="stats-section">
-    <div class="container">
-        <div class="row text-center g-0">
-            <div class="col-6 col-md-3">
-                <div class="stat-item">
-                    <div class="stat-number">270+</div>
-                    <div class="stat-label">Test Cases Written</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item">
-                    <div class="stat-number">80+</div>
-                    <div class="stat-label">Automated Tests</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Critical Bugs Found</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3">
-                <div class="stat-item">
-                    <div class="stat-number">70%</div>
-                    <div class="stat-label">Regression Time Saved</div>
-                </div>
-            </div>
+<!-- METRICS -->
+<div class="metrics">
+    <div class="wrap">
+        <div class="row text-center">
+            <div class="col-6 col-md-3"><div class="metric"><div class="mn">300+</div><div class="ml">Test Cases Written</div></div></div>
+            <div class="col-6 col-md-3"><div class="metric"><div class="mn">160+</div><div class="ml">Automated Tests</div></div></div>
+            <div class="col-6 col-md-3"><div class="metric"><div class="mn">15+</div><div class="ml">Critical Bugs Found</div></div></div>
+            <div class="col-6 col-md-3"><div class="metric"><div class="mn">70%</div><div class="ml">Regression Time Saved</div></div></div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- ── ABOUT ── -->
-<section id="about" class="about-section">
-    <div class="container">
-        <div class="section-header fade-up">
-            <div class="section-label">// about me</div>
-            <h2 class="section-title">QA Automation Engineer</h2>
-            <p class="section-subtitle">Testing production systems with real impact</p>
+<!-- ABOUT -->
+<section id="about" class="sec">
+    <div class="wrap">
+        <div class="sec-header reveal">
+            <div class="eyebrow">// about</div>
+            <h2 class="sh">Who I Am as a QA Engineer</h2>
+            <p class="ssub">Manual testing execution + automation skills — on real projects</p>
         </div>
-        <div class="row justify-content-center fade-up">
+        <div class="row justify-content-center reveal">
             <div class="col-lg-10">
-                <div class="about-card">
+                <div class="abox">
                     <p>
-                        I'm a <strong>QA Automation Engineer</strong> with 2+ years of hands-on experience
-                        ensuring quality of production-grade applications. I've been the <strong>sole QA in a
-                        3-member engineering team</strong> — which means I've owned the complete quality lifecycle:
-                        from requirement analysis and test case design, through manual execution, bug tracking,
-                        all the way to building and maintaining Playwright automation frameworks from scratch.
+                        I'm a <b>Junior QA Engineer</b> with 2+ years of hands-on experience on two live software projects.
+                        At Modern Communication Technology (MCOM), I work under a <b>Senior QA Lead</b> in a
+                        cross-functional team that includes a Project Manager, SCADA Domain Specialists,
+                        Backend and Frontend Developers, and our QA team. My Senior QA Lead designed the automation
+                        framework and reviews all my code through Merge Requests. My day-to-day responsibility is
+                        the actual testing execution.
                     </p>
                     <p>
-                        I've tested two live production systems: <strong>AMRUT 2.0</strong>, a real-time government
-                        SCADA platform monitoring municipal water infrastructure across 50+ stations, and an
-                        <strong>Inventory Management ERP</strong> used in active manufacturing operations.
-                        Both are live — real users, real data, real stakes.
+                        I've worked across <b>AMRUT 2.0</b> — a live Government of India SCADA dashboard monitoring
+                        water supply across Indian cities — and an <b>Inventory Management System (IMS)</b>
+                        for a manufacturing organisation. Both are live deployments with real users and real stakes.
                     </p>
                     <p>
-                        My background in application development gives me a deeper understanding of how systems
-                        are built — which makes me <strong>faster at finding bugs, better at writing stable
-                        selectors, and more effective at collaborating with developers</strong>.
-                        I also integrate AI tools like <strong>GitHub Copilot, Cursor, and Windsurf</strong> into my workflow —
-                        not to replace thinking, but to move faster, scaffold smarter, and focus more time on
-                        what actually matters: finding real bugs.
+                        I write <b>JavaScript</b> in my work automation scripts, and build personal projects in
+                        <b>TypeScript</b> to grow my skills. From mid-project onwards, I've integrated AI tools
+                        (Claude, ChatGPT, GitHub Copilot, Cursor, Windsurf) at specific bounded points in my workflow —
+                        always with sanitized prompts, never sharing real credentials, server data, or government project details.
                     </p>
-                    <div class="about-tags">
-                        <span class="about-tag">Playwright Automation</span>
-                        <span class="about-tag">TypeScript / JavaScript</span>
-                        <span class="about-tag">Manual Testing</span>
-                        <span class="about-tag">API Testing</span>
-                        <span class="about-tag">Page Object Model</span>
-                        <span class="about-tag">CI/CD Integration</span>
-                        <span class="about-tag">Bug Lifecycle Management</span>
-                        <span class="about-tag">Test Documentation</span>
-                        <span class="about-tag" style="background:rgba(191,90,242,0.1);border-color:rgba(191,90,242,0.2);color:var(--accent3);">AI-Assisted Workflow</span>
+                    <div class="achips">
+                        <span class="ac g">Manual Testing</span>
+                        <span class="ac g">STLC · Agile · Scrum</span>
+                        <span class="ac g">GitLab Bug Reporting</span>
+                        <span class="ac">Playwright (JS)</span>
+                        <span class="ac">Page Object Model</span>
+                        <span class="ac">API Testing</span>
+                        <span class="ac">GitHub Actions CI/CD</span>
+                        <span class="ac v">AI-Assisted Workflow</span>
                     </div>
                 </div>
             </div>
@@ -945,107 +370,80 @@
     </div>
 </section>
 
-<!-- ── SKILLS ── -->
-<section id="skills" class="skills-section">
-    <div class="container">
-        <div class="section-header fade-up">
-            <div class="section-label">// technical skills</div>
-            <h2 class="section-title">Testing & Automation Stack</h2>
-            <p class="section-subtitle">Tools and techniques I use in production testing</p>
+<!-- SKILLS -->
+<section id="skills" class="sec sec-alt">
+    <div class="wrap">
+        <div class="sec-header reveal">
+            <div class="eyebrow">// skills</div>
+            <h2 class="sh">Testing &amp; Automation Stack</h2>
+            <p class="ssub">On-the-job tools and independently built skills</p>
         </div>
         <div class="row g-4">
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="skill-card">
-                    <div class="skill-card-icon"><i class="fas fa-robot"></i></div>
-                    <h5>Test Automation</h5>
-                    <div class="skill-pills">
-                        <span class="skill-pill highlight">Playwright</span>
-                        <span class="skill-pill highlight">TypeScript</span>
-                        <span class="skill-pill highlight">JavaScript</span>
-                        <span class="skill-pill highlight">Page Object Model</span>
-                        <span class="skill-pill">Data-Driven Testing</span>
-                        <span class="skill-pill">Custom Fixtures</span>
-                        <span class="skill-pill">CI/CD (GitHub Actions)</span>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="skc">
+                    <div class="skh"><div class="ski g"><i class="fas fa-vial"></i></div><h5>Manual Testing</h5></div>
+                    <div class="pills">
+                        <span class="pill hi">Test Case Design</span><span class="pill hi">Functional Testing</span>
+                        <span class="pill hi">Regression Testing</span><span class="pill">Smoke &amp; Sanity</span>
+                        <span class="pill">Exploratory Testing</span><span class="pill">Boundary Value Analysis</span>
+                        <span class="pill">Equivalence Partitioning</span><span class="pill">Bug Lifecycle</span>
+                        <span class="pill">STLC · Agile · Scrum</span>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="skill-card">
-                    <div class="skill-card-icon" style="background:rgba(48,209,88,0.1);border-color:rgba(48,209,88,0.2);color:var(--accent)">
-                        <i class="fas fa-vial"></i>
-                    </div>
-                    <h5>Manual Testing</h5>
-                    <div class="skill-pills">
-                        <span class="skill-pill highlight">Test Case Design</span>
-                        <span class="skill-pill">Functional Testing</span>
-                        <span class="skill-pill">Regression Testing</span>
-                        <span class="skill-pill">Smoke & Sanity</span>
-                        <span class="skill-pill">Exploratory Testing</span>
-                        <span class="skill-pill">Boundary Value Analysis</span>
-                        <span class="skill-pill">Bug Tracking</span>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="skc">
+                    <div class="skh"><div class="ski b"><i class="fas fa-robot"></i></div><h5>Test Automation</h5></div>
+                    <div class="pills">
+                        <span class="pill hi">Playwright (JavaScript)</span><span class="pill hi">Playwright (TypeScript)</span>
+                        <span class="pill hi">Page Object Model</span><span class="pill">Data-Driven Testing</span>
+                        <span class="pill">Custom Fixtures</span><span class="pill">Allure Reports</span>
+                        <span class="pill">HTML Reports</span><span class="pill">GitHub Actions</span>
+                        <span class="pill">Cross-Browser Testing</span>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="skill-card">
-                    <div class="skill-card-icon" style="background:rgba(255,159,10,0.1);border-color:rgba(255,159,10,0.2);color:var(--accent2)">
-                        <i class="fas fa-flask"></i>
-                    </div>
-                    <h5>API Testing</h5>
-                    <div class="skill-pills">
-                        <span class="skill-pill highlight">Playwright Request</span>
-                        <span class="skill-pill">REST APIs</span>
-                        <span class="skill-pill">Postman</span>
-                        <span class="skill-pill">Response Validation</span>
-                        <span class="skill-pill">Authentication Testing</span>
-                        <span class="skill-pill">CRUD Testing</span>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="skc">
+                    <div class="skh"><div class="ski a"><i class="fas fa-flask"></i></div><h5>API Testing</h5></div>
+                    <div class="pills">
+                        <span class="pill hi">Playwright Request Context</span><span class="pill">REST APIs</span>
+                        <span class="pill">Postman</span><span class="pill">CRUD Validation</span>
+                        <span class="pill">Auth Testing</span><span class="pill">Schema Validation</span>
+                        <span class="pill">Multi-env Config</span><span class="pill">Negative Testing</span>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="skill-card">
-                    <div class="skill-card-icon"><i class="fas fa-clipboard-check"></i></div>
-                    <h5>Testing Concepts</h5>
-                    <div class="skill-pills">
-                        <span class="skill-pill">Test Strategy</span>
-                        <span class="skill-pill">STLC</span>
-                        <span class="skill-pill">Bug Lifecycle</span>
-                        <span class="skill-pill">Cross-browser Testing</span>
-                        <span class="skill-pill">Role-Based Testing</span>
-                        <span class="skill-pill">Integration Testing</span>
-                        <span class="skill-pill">UAT</span>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="skc">
+                    <div class="skh"><div class="ski b"><i class="fas fa-clipboard-list"></i></div><h5>QA Concepts</h5></div>
+                    <div class="pills">
+                        <span class="pill">Test Planning</span><span class="pill">RBAC Testing</span>
+                        <span class="pill">Security Testing</span><span class="pill">Integration Testing</span>
+                        <span class="pill">Real-time Data Testing</span><span class="pill">UAT</span>
+                        <span class="pill">Merge Request Reviews</span><span class="pill">Sprint QA Summaries</span>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="skill-card">
-                    <div class="skill-card-icon"><i class="fas fa-tools"></i></div>
-                    <h5>Tools & Platforms</h5>
-                    <div class="skill-pills">
-                        <span class="skill-pill highlight">VS Code</span>
-                        <span class="skill-pill highlight">Git / GitHub</span>
-                        <span class="skill-pill">Node.js</span>
-                        <span class="skill-pill">npm</span>
-                        <span class="skill-pill">GitHub Actions</span>
-                        <span class="skill-pill">Playwright Trace Viewer</span>
-                        <span class="skill-pill">HTML Reports</span>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="skc">
+                    <div class="skh"><div class="ski g"><i class="fas fa-tools"></i></div><h5>Tools &amp; Platforms</h5></div>
+                    <div class="pills">
+                        <span class="pill hi">VS Code</span><span class="pill hi">Git · GitHub · GitLab</span>
+                        <span class="pill">Node.js · npm</span><span class="pill">Playwright Trace Viewer</span>
+                        <span class="pill">MS SQL Server</span><span class="pill">MySQL</span>
+                        <span class="pill">Excel (Test Docs)</span><span class="pill">Allure Report</span>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="skill-card">
-                    <div class="skill-card-icon" style="background:rgba(191,90,242,0.1);border-color:rgba(191,90,242,0.2);color:var(--accent3)">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h5>AI-Assisted Development</h5>
-                    <div class="skill-pills">
-                        <span class="skill-pill ai-highlight">GitHub Copilot</span>
-                        <span class="skill-pill ai-highlight">Cursor AI</span>
-                        <span class="skill-pill ai-highlight">Windsurf</span>
-                        <span class="skill-pill">AI Pair Programming</span>
-                        <span class="skill-pill">Prompt Engineering</span>
-                        <span class="skill-pill">AI-Guided Debugging</span>
-                        <span class="skill-pill">Test Scaffolding</span>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="skc">
+                    <div class="skh"><div class="ski v"><i class="fas fa-brain"></i></div><h5>AI Workflow</h5></div>
+                    <div class="pills">
+                        <span class="pill vi">GitHub Copilot</span><span class="pill vi">Cursor AI</span>
+                        <span class="pill vi">Windsurf</span><span class="pill vi">Claude · ChatGPT</span>
+                        <span class="pill">Prompt Engineering</span><span class="pill">Edge Case Brainstorming</span>
+                        <span class="pill">Test Scaffolding</span><span class="pill">Sanitized Prompting</span>
                     </div>
                 </div>
             </div>
@@ -1053,401 +451,311 @@
     </div>
 </section>
 
-<!-- ── EXPERIENCE ── -->
-<section id="experience" class="experience-section">
-    <div class="container">
-        <div class="section-header fade-up">
-            <div class="section-label">// experience</div>
-            <h2 class="section-title">Professional Journey</h2>
-            <p class="section-subtitle">Real systems, real bugs, real impact</p>
+<!-- EXPERIENCE -->
+<section id="experience" class="sec">
+    <div class="wrap">
+        <div class="sec-header reveal">
+            <div class="eyebrow">// experience</div>
+            <h2 class="sh">Work History</h2>
+            <p class="ssub">Real teams, real accountability, real learning</p>
         </div>
 
-        <!-- MCOM -->
-        <div class="exp-card fade-up">
+        <div class="ec reveal">
             <div class="row align-items-start">
                 <div class="col-md-8">
-                    <div class="exp-company">Modern Communication Technology (MCOM)</div>
-                    <div class="exp-role">QA Automation Engineer</div>
-                    <div class="exp-duration">June 2024 – Present · Pune, Maharashtra</div>
-                </div>
-                <div class="col-md-4 text-md-end">
-                    <span style="background:rgba(48,209,88,0.1);border:1px solid rgba(48,209,88,0.25);color:var(--accent);padding:4px 12px;border-radius:20px;font-size:0.8rem;font-weight:600;">
-                        ● Current Role
-                    </span>
+                    <span class="ec-badge">Current Role</span>
+                    <div class="eco">Modern Communication Technology (MCOM)</div>
+                    <div class="ero">Junior QA Engineer</div>
+                    <div class="edu">June 2024 – Present · Pune, Maharashtra</div>
                 </div>
             </div>
 
-            <div class="exp-section-label">Manual Testing</div>
-            <ul class="exp-list">
-                <li>Designed and executed <strong>270+ comprehensive test cases</strong> across 3 production systems covering all STLC phases</li>
-                <li>Performed functional, regression, smoke, sanity, integration, boundary value, and exploratory testing</li>
-                <li>Found and tracked <strong>15+ critical bugs</strong> including a data integrity issue (negative stock) caught through boundary value analysis before go-live</li>
-                <li>Conducted thorough <strong>role-based access testing</strong> across 4 user types — discovered security vulnerability where View-Only users could see control buttons</li>
-                <li>Tested <strong>real-time data</strong> in a live SCADA system — developed test protocol with developer to insert known values for reliable assertions</li>
-                <li>Created detailed test documentation, bug reports, and test plans for all features</li>
+            <div class="esect g">Team &amp; Context</div>
+            <ul class="ul">
+                <li class="g">Cross-functional Agile team: <b>Project Manager, SCADA Domain Specialists, Backend &amp; Frontend Developers, Senior QA Lead</b>, and myself as Junior QA</li>
+                <li class="g">Reported to a <b>Senior QA Lead</b> — she designed the automation framework, reviewed all my Playwright scripts via Merge Requests, and mentored me on framework patterns and best practices</li>
+                <li class="g">Participated in full Scrum ceremonies each sprint: <b>planning, daily standups, sprint demos, retrospectives, backlog grooming</b></li>
             </ul>
 
-            <div class="exp-section-label">Test Automation</div>
-            <ul class="exp-list">
-                <li>Built <strong>Playwright automation framework from scratch</strong> using JavaScript and Page Object Model design pattern</li>
-                <li>Automated <strong>80+ test scenarios</strong> covering login flows, stock management, SCADA display, role-based access, and report exports</li>
-                <li>Implemented <strong>data-driven testing</strong> with JSON test data and reusable fixture patterns</li>
-                <li>Integrated automation suite with <strong>GitHub Actions</strong> for CI/CD — tests run on every push</li>
-                <li>Generated comprehensive <strong>HTML reports</strong> with screenshots and traces on failure</li>
-                <li><strong>Reduced regression testing time by 70%</strong> — from 3+ hours manually to under 15 minutes via automation</li>
-                <li>Actively learning <strong>TypeScript</strong> to migrate JS framework to typed, maintainable TS codebase</li>
+            <div class="esect b">Manual Testing</div>
+            <ul class="ul">
+                <li class="b">Primary manual test execution owner for AMRUT 2.0 and IMS — wrote <b>300+ test cases in Excel</b>, executed every sprint, reported all bugs in GitLab with screenshots</li>
+                <li class="b">Covered: functional, regression, smoke, sanity, integration, exploratory, <b>boundary value analysis, equivalence partitioning, role-based access</b> testing</li>
+                <li class="b">Found <b>15+ critical bugs</b> — including negative stock (BVA) that blocked a release, and a security vulnerability in RBAC where restricted users could see control buttons</li>
+                <li class="b">Worked with developer to design a <b>real-time test protocol</b> for SCADA sensor data — inserting known values so assertions were reliable on live-updating dashboards</li>
+                <li class="b">Used <b>AI tools (Claude, ChatGPT) with sanitized prompts</b> to brainstorm non-obvious edge cases — filtered and validated every suggestion myself before adding to the test suite</li>
+                <li class="b">Full <b>bug reports in GitLab</b>: Title · Steps to Reproduce · Expected · Actual · Environment · Severity + screenshot on every report</li>
             </ul>
 
-            <div class="exp-section-label purple">AI-Assisted Productivity</div>
-            <ul class="exp-list">
-                <li class="ai-bullet">Used <strong>GitHub Copilot</strong> inside VS Code to accelerate Page Object Model class generation — page classes scaffolded in minutes instead of hours, while I focused on logic validation and selector accuracy</li>
-                <li class="ai-bullet">Leveraged <strong>Cursor AI</strong> to debug flaky test issues in the SCADA real-time tests — used AI-assisted root cause analysis to pinpoint race conditions in live sensor data polling</li>
-                <li class="ai-bullet">Used <strong>Windsurf</strong> for multi-file refactors when migrating test utilities from JavaScript to TypeScript — maintained test logic integrity while AI handled boilerplate type definitions</li>
-                <li class="ai-bullet"><strong>Increased test authoring speed by ~40%</strong> — AI handled repetitive scaffolding while I directed test strategy, edge case design, and final review</li>
+            <div class="esect g">Playwright Automation (JavaScript)</div>
+            <ul class="ul">
+                <li class="g">Wrote <b>160+ test scripts in JavaScript</b> inside the POM framework designed and taught by Senior QA Lead</li>
+                <li class="g">Covered: login flows, stock management, SCADA dashboard, RBAC, report exports, AJAX cascade dropdowns</li>
+                <li class="g">Followed a strict <b>Merge Request process</b> — branched, tested locally in headed mode, pushed, addressed Senior's review comments before merge</li>
+                <li class="g"><b>GitLab CI pipeline</b> runs all tests automatically on every merge — results visible to the whole team</li>
+                <li class="g">Reduced manual regression from 4–5 days per sprint to <b>under 1 day — 70% time saving</b></li>
             </ul>
 
-            <div class="exp-tech">
-                <span class="tech-tag">Playwright</span>
-                <span class="tech-tag">JavaScript</span>
-                <span class="tech-tag">TypeScript</span>
-                <span class="tech-tag">Page Object Model</span>
-                <span class="tech-tag">GitHub Actions</span>
-                <span class="tech-tag">REST API Testing</span>
-                <span class="tech-tag">MS SQL Server</span>
-                <span class="tech-tag">MySQL</span>
-                <span class="tech-tag ai-tag">GitHub Copilot</span>
-                <span class="tech-tag ai-tag">Cursor AI</span>
-                <span class="tech-tag ai-tag">Windsurf</span>
+            <div class="esect v">AI Tools in Workflow</div>
+            <ul class="ul">
+                <li class="v"><b>GitHub Copilot</b> — POM class scaffolding and boilerplate; I focus on selector accuracy and logic</li>
+                <li class="v"><b>Cursor AI</b> — debugging flaky SCADA tests; AI-assisted trace analysis for timing issues in sensor polling</li>
+                <li class="v"><b>Windsurf</b> — multi-file JS→TS migrations in personal projects; supervised all AI output</li>
+                <li class="v">~<b>40% faster test authoring</b> on repetitive scaffolding; test strategy and edge case decisions always mine</li>
+            </ul>
+
+            <div class="tr">
+                <span class="tc">Playwright · JS</span><span class="tc">Page Object Model</span>
+                <span class="tc">Manual Testing</span><span class="tc">Agile · Scrum</span>
+                <span class="tc">GitLab CI</span><span class="tc">MS SQL Server</span><span class="tc">MySQL</span>
+                <span class="tc v">GitHub Copilot</span><span class="tc v">Cursor AI</span><span class="tc v">Windsurf</span>
             </div>
         </div>
 
-        <!-- IT JOBXS -->
-        <div class="exp-card fade-up">
-            <div class="exp-company">IT JOBXS</div>
-            <div class="exp-role">Intern Trainee — QA & Testing</div>
-            <div class="exp-duration">October 2023 – May 2024</div>
-            <ul class="exp-list" style="margin-top:16px;">
-                <li>Tested security features including bot detection, spam prevention, and user authentication flows</li>
-                <li>Integrated and tested Google reCAPTCHA — performed end-to-end security validation</li>
-                <li>Wrote test cases for user verification system and performed functional testing</li>
-                <li>Collaborated with development team on QA tasks and defect resolution</li>
+        <div class="ec reveal">
+            <div class="eco">IT JOBXS</div>
+            <div class="ero">Intern Trainee — QA &amp; Testing</div>
+            <div class="edu">October 2023 – May 2024</div>
+            <ul class="ul" style="margin-top:14px;">
+                <li class="b">Tested security features: <b>bot detection, spam prevention</b>, and user authentication flows</li>
+                <li class="b">Validated <b>Google reCAPTCHA</b> integration end-to-end — security testing of verification flows</li>
+                <li class="b">Wrote test cases, executed functional testing, reported defects with developer collaboration</li>
             </ul>
-            <div class="exp-tech">
-                <span class="tech-tag">Manual Testing</span>
-                <span class="tech-tag">Security Testing</span>
-                <span class="tech-tag">Functional Testing</span>
+            <div class="tr">
+                <span class="tc">Manual Testing</span><span class="tc">Security Testing</span><span class="tc">Functional Testing</span>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ── AI TOOLS SECTION ── -->
-<section id="ai-tools" class="ai-tools-section">
-    <div class="container">
-        <div class="section-header fade-up">
-            <div class="section-label" style="color:var(--accent3);">// ai-assisted workflow</div>
-            <h2 class="section-title">Working Smarter with AI Tools</h2>
-            <p class="section-subtitle">How I use AI pair programming to move faster — without losing the fundamentals</p>
+<!-- TESTING DEPTH -->
+<section id="depth" class="sec sec-alt">
+    <div class="wrap">
+        <div class="sec-header reveal">
+            <div class="eyebrow g">// testing depth</div>
+            <h2 class="sh">Manual Testing + Automation Together</h2>
+            <p class="ssub">How both disciplines worked on the same projects</p>
         </div>
+        <div class="dp reveal">
+            <div class="pn">
+                <div class="pntag g"><i class="fas fa-vial"></i> Manual Testing</div>
+                <h3>Day-to-Day Execution</h3>
+                <p>Every sprint I received User Stories with Acceptance Criteria from the PM. My job: write test cases in Excel (happy path + negatives + edge cases), execute on staging, report bugs in GitLab, retest fixes, deliver a sprint QA summary to Senior QA Lead.</p>
+                <ul class="dl">
+                    <li><b>Requirement chain:</b> Stakeholder → PM → BRD → Sprint User Story → Acceptance Criteria → my Excel test cases</li>
+                    <li><b>AMRUT example:</b> Zone Board Alert — 1 User Story → 8 test cases covering 5 ACs + AI-brainstormed edge cases (simultaneous over-pressure + trip state; zone with zero assigned stations)</li>
+                    <li><b>IMS example:</b> Inward Stock Form — 1 User Story → 11 test cases including AJAX empty-array state (TC_IN_007 — AI-suggested, validated by me)</li>
+                    <li><b>Every GitLab bug report:</b> Title · Steps · Expected · Actual · Environment · Severity + screenshot</li>
+                    <li><b>Security bug found:</b> View-Only users could see SCADA control buttons — RBAC testing caught it</li>
+                    <li><b>Data bug found:</b> Negative stock at qty = available + 1 — boundary value analysis</li>
+                    <li><b>Agile ceremonies:</b> Planning, standups, demo prep (pass/fail counts, bugs raised vs closed), retrospectives</li>
+                </ul>
+            </div>
+            <div class="pn">
+                <div class="pntag b"><i class="fas fa-code"></i> JS at work · TS for personal growth</div>
+                <h3>Automation Skills</h3>
+                <p>At work I write JavaScript inside the Senior QA Lead's framework. For personal projects I build TypeScript frameworks from scratch — deliberately growing both skill sets.</p>
+                <ul class="dl">
+                    <li><b>Work (JavaScript):</b> 160+ scripts, strict MR process — Senior reviewed every line before merge, taught me patterns via code comments</li>
+                    <li><b>Personal (TypeScript):</b> DemoBlaze (typed POM + Allure + GitHub Pages), SauceDemo (cross-browser: Chromium/Firefox/WebKit), ReqRes API (typed client, multi-env config)</li>
+                    <li><b>Hardest work challenge — AJAX cascade:</b> IMS inward form needed <code>waitForResponse</code> to intercept subcategory API call before asserting child dropdown — taught by Senior QA via MR comment</li>
+                    <li><b>SCADA real-time challenge:</b> Live sensor data changed every 15s — designed insert-known-value protocol with developer for stable assertions</li>
+                    <li><b>Flaky test resolution:</b> Playwright trace viewer + Cursor AI to diagnose race condition in sensor polling — fixed to zero failures</li>
+                    <li><b>MR learning loop:</b> Senior's comments ("use waitForResponse here", "move locator to page class", "externalise this to JSON") shaped how I write automation today</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <div class="ai-section-intro fade-up">
-            <p>
-                I integrate AI coding tools into my daily QA workflow — not as a shortcut, but as a <strong>force multiplier</strong>.
-                I use AI to handle repetitive scaffolding, accelerate refactoring, and assist with debugging — so I can spend more
-                time on what actually requires human judgment: <strong>designing test strategies, catching edge cases, and understanding
-                system behavior</strong>. Every line of AI-suggested code is reviewed, validated, and owned by me.
+<!-- AI WORKFLOW -->
+<section id="ai" class="sec">
+    <div class="wrap">
+        <div class="sec-header reveal">
+            <div class="eyebrow v">// ai workflow</div>
+            <h2 class="sh">AI Tools in My Testing Process</h2>
+            <p class="ssub">Used at specific moments — test decisions always mine</p>
+        </div>
+        <div class="abox reveal" style="margin-bottom:28px; padding:24px 28px;">
+            <p style="margin:0; font-size:0.92rem;">
+                I use AI at <b>specific, bounded points</b>: scenario brainstorming, code scaffolding, debugging, and refactoring.
+                Reading requirements, deciding what to test, executing, and signing off — always mine.
+                <b>Security rule (strictly followed):</b> No real server IPs, credentials, database values, or government data ever enters any AI tool.
+                All prompts describe logic generically, never actual project details.
             </p>
         </div>
-
         <div class="row g-4">
-
-            <!-- GitHub Copilot -->
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="ai-tool-card">
-                    <div class="ai-tool-header">
-                        <div class="ai-tool-icon copilot"><i class="fab fa-github"></i></div>
-                        <div>
-                            <div class="ai-tool-name">GitHub Copilot</div>
-                            <div class="ai-tool-sub">VS Code · Daily Driver</div>
-                        </div>
-                    </div>
-                    <div class="ai-tool-body">
-                        <p>My everyday AI pair programmer inside VS Code. I use it to accelerate Page Object Model authoring, generate repetitive test structure, and get inline suggestions while writing Playwright selectors and assertions.</p>
-                        <ul class="ai-use-list">
-                            <li><strong>POM class scaffolding</strong> — generated locator maps for multi-form SCADA pages in minutes</li>
-                            <li><strong>Test boilerplate generation</strong> — describe/test blocks, beforeEach hooks, fixture patterns</li>
-                            <li><strong>Selector suggestions</strong> — I review and validate; Copilot drafts from context</li>
-                            <li><strong>Repetitive assertions</strong> — bulk status/field validation blocks drafted quickly, then refined</li>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="aic">
+                    <div class="aich"><div class="aiico b"><i class="fab fa-github"></i></div><div><div class="ain">GitHub Copilot</div><div class="ais">VS Code · Daily</div></div></div>
+                    <div class="aib">
+                        <p>Inline assistant for test scaffolding — handles boilerplate so I focus on selector accuracy and test logic.</p>
+                        <ul class="ail">
+                            <li><b>POM class scaffolding</b> — locator maps for complex forms generated fast</li>
+                            <li><b>describe / test blocks</b> — structure generated, logic added by me</li>
+                            <li><b>Assertion blocks</b> — bulk field validations drafted, then refined</li>
                         </ul>
-                        <span class="ai-impact-badge blue"><i class="fas fa-bolt"></i> ~40% faster test authoring</span>
+                        <span class="air b"><i class="fas fa-bolt"></i> ~40% faster authoring</span>
                     </div>
                 </div>
             </div>
-
-            <!-- Cursor AI -->
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="ai-tool-card">
-                    <div class="ai-tool-header">
-                        <div class="ai-tool-icon cursor">✦</div>
-                        <div>
-                            <div class="ai-tool-name">Cursor AI</div>
-                            <div class="ai-tool-sub">AI-First Editor · Debugging & Refactor</div>
-                        </div>
-                    </div>
-                    <div class="ai-tool-body">
-                        <p>I use Cursor for complex debugging sessions and deep code conversations. Its chat-with-codebase feature helped me diagnose flaky test failures in real-time SCADA automation — where timing issues were non-obvious.</p>
-                        <ul class="ai-use-list">
-                            <li><strong>Flaky test debugging</strong> — traced race conditions in real-time sensor polling tests</li>
-                            <li><strong>Framework architecture discussions</strong> — reviewed fixture design and data separation patterns</li>
-                            <li><strong>Error message interpretation</strong> — Playwright async/timeout errors decoded faster</li>
-                            <li><strong>Code review assistance</strong> — checked test logic for edge case coverage gaps</li>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="aic">
+                    <div class="aich"><div class="aiico v">✦</div><div><div class="ain">Cursor AI</div><div class="ais">Debugging &amp; Code Chat</div></div></div>
+                    <div class="aib">
+                        <p>Used for complex debugging sessions — chat-with-codebase helped trace timing-sensitive flaky test failures.</p>
+                        <ul class="ail">
+                            <li><b>Flaky test root cause</b> — race condition in SCADA sensor polling</li>
+                            <li><b>Playwright error decoding</b> — async/timeout messages understood faster</li>
+                            <li><b>Coverage gap review</b> — AI scans test logic for missed scenarios</li>
                         </ul>
-                        <span class="ai-impact-badge purple"><i class="fas fa-bug"></i> Faster root cause analysis</span>
+                        <span class="air v"><i class="fas fa-bug"></i> Faster root cause analysis</span>
                     </div>
                 </div>
             </div>
-
-            <!-- Windsurf -->
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="ai-tool-card">
-                    <div class="ai-tool-header">
-                        <div class="ai-tool-icon windsurf">🌊</div>
-                        <div>
-                            <div class="ai-tool-name">Windsurf</div>
-                            <div class="ai-tool-sub">Agentic AI · Multi-file Refactoring</div>
-                        </div>
-                    </div>
-                    <div class="ai-tool-body">
-                        <p>I use Windsurf for larger, multi-file tasks — especially during the JS-to-TypeScript migration of my automation framework. Its agentic Cascade feature can reason across multiple files while I supervise and validate output.</p>
-                        <ul class="ai-use-list">
-                            <li><strong>JS → TS migration</strong> — type annotations added across POM files without breaking test logic</li>
-                            <li><strong>Bulk utility refactors</strong> — helper functions updated consistently across test files</li>
-                            <li><strong>Interface generation</strong> — TypeScript interfaces for test data models created from JSON structure</li>
-                            <li><strong>Import path fixes</strong> — multi-file dependency updates handled in single sessions</li>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="aic">
+                    <div class="aich"><div class="aiico g">🌊</div><div><div class="ain">Windsurf</div><div class="ais">Multi-file · Agentic</div></div></div>
+                    <div class="aib">
+                        <p>Used for large multi-file operations in personal projects — JS→TS migrations across many files at once.</p>
+                        <ul class="ail">
+                            <li><b>JS → TS migration</b> — type annotations added, logic kept intact</li>
+                            <li><b>Interface generation</b> — typed interfaces from JSON test data</li>
+                            <li><b>Import path fixes</b> — multi-file dependency updates at once</li>
                         </ul>
-                        <span class="ai-impact-badge green"><i class="fas fa-code-branch"></i> Safe large-scale refactoring</span>
+                        <span class="air g"><i class="fas fa-code-branch"></i> Multi-file refactoring</span>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Workflow Strip -->
-        <div class="ai-workflow-strip fade-up">
-            <h5>⚡ My AI-Enhanced QA Workflow</h5>
-            <div class="workflow-steps">
-                <div class="workflow-step"><span class="step-num">1</span>Analyze Requirements</div>
-                <div class="workflow-arrow">→</div>
-                <div class="workflow-step"><span class="step-num">2</span>Design Test Strategy (me)</div>
-                <div class="workflow-arrow">→</div>
-                <div class="workflow-step"><span class="step-num">3</span>Scaffold POM with Copilot</div>
-                <div class="workflow-arrow">→</div>
-                <div class="workflow-step"><span class="step-num">4</span>Write & Validate Tests (me)</div>
-                <div class="workflow-arrow">→</div>
-                <div class="workflow-step"><span class="step-num">5</span>Debug Failures with Cursor</div>
-                <div class="workflow-arrow">→</div>
-                <div class="workflow-step"><span class="step-num">6</span>Refactor with Windsurf</div>
-                <div class="workflow-arrow">→</div>
-                <div class="workflow-step"><span class="step-num">7</span>Review & Own All Output (me)</div>
+        <div class="flow reveal">
+            <h5>My AI-Enhanced QA Workflow</h5>
+            <div class="fr">
+                <div class="fs"><span class="fn">1</span>Read Requirements</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">2</span>Design Test Strategy</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">3</span>AI Edge Case Brainstorm</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">4</span>Write &amp; Execute Tests</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">5</span>Scaffold with Copilot</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">6</span>Debug with Cursor</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">7</span>MR Review &amp; Merge</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ── PROJECTS ── -->
-<section id="projects" class="projects-section">
-    <div class="container">
-        <div class="section-header fade-up">
-            <div class="section-label">// projects</div>
-            <h2 class="section-title">Testing Projects</h2>
-            <p class="section-subtitle">Production systems tested · Automation frameworks built · AI-assisted workflow</p>
+<!-- PROJECTS -->
+<section id="projects" class="sec sec-alt">
+    <div class="wrap">
+        <div class="sec-header reveal">
+            <div class="eyebrow">// projects</div>
+            <h2 class="sh">Work Projects &amp; Personal Frameworks</h2>
+            <p class="ssub">JavaScript for work · TypeScript for personal skill building</p>
+        </div>
+
+        <div class="pdiv reveal">
+            <span class="eyebrow g" style="margin:0; white-space:nowrap;">Work Projects — JavaScript</span>
+            <div class="line"></div>
+        </div>
+        <div class="row g-4 mb-5">
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="pc">
+                    <div class="pch"><div class="pico a"><i class="fas fa-broadcast-tower"></i></div><div><h4>AMRUT 2.0 — SCADA Dashboard</h4><div class="ptyp">Govt. of India · Water Infrastructure</div></div></div>
+                    <div class="pb">
+                        <p><b>About:</b> Real-time monitoring of water supply across Indian cities — 50+ pumping stations, live sensor data every 15–60 seconds, remote pump/valve controls, role-based access for field engineers and officers.</p>
+                        <p><b>My work:</b> 8 modules tested manually (150+ test cases). 50+ Playwright JS scripts. Found RBAC security bug and LPCD calculation error on the dashboard.</p>
+                        <p><b>Hardest challenge:</b> Real-time sensor data — designed a test protocol with the developer to insert known values for reliable assertions.</p>
+                        <div class="tw"><span class="pt">Playwright JS</span><span class="pt">POM</span><span class="pt">MS SQL Server</span><span class="pt">RBAC Testing</span><span class="pt v">Cursor AI</span></div>
+                        <div class="br"><span class="pb2 a"><i class="fas fa-landmark"></i> Government of India</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="pc">
+                    <div class="pch"><div class="pico b"><i class="fas fa-boxes"></i></div><div><h4>Inventory Management System</h4><div class="ptyp">Manufacturing · Internal ERP</div></div></div>
+                    <div class="pb">
+                        <p><b>About:</b> Internal stock management for a manufacturing organisation — inward from suppliers, outward to departments, shortage detection, 1000+ product categories (3-level hierarchy), PDF/Excel exports.</p>
+                        <p><b>My work:</b> 7 modules manually (150+ test cases). 60+ Playwright JS scripts. Critical catch: negative stock from boundary value testing at qty = available + 1 — blocked the release.</p>
+                        <p><b>Hardest challenge:</b> AJAX cascade dropdown needed <code>waitForResponse</code> to intercept API call before asserting child dropdown — learned from Senior QA's MR review.</p>
+                        <div class="tw"><span class="pt">Playwright JS</span><span class="pt">POM</span><span class="pt">MySQL</span><span class="pt">BVA</span><span class="pt v">GitHub Copilot</span></div>
+                        <div class="br"><span class="pb2 g"><i class="fas fa-bug"></i> Critical bug — blocked release</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="pc">
+                    <div class="pch"><div class="pico g"><i class="fas fa-map-marked-alt"></i></div><div><h4>Site Track System</h4><div class="ptyp">Field Operations · Internal Tool</div></div></div>
+                    <div class="pb">
+                        <p><b>About:</b> Role-based field operations tool — Sites → Tubewells → LCS hierarchy (3 levels), media uploads, audit trails, and compliance workflows for field engineers.</p>
+                        <p><b>My work:</b> 60+ manual test cases across CRUD, uploads, and access control. 60+ automated scripts covering the full hierarchy, upload edge cases, and workflow end-to-end.</p>
+                        <div class="tw"><span class="pt">Playwright JS</span><span class="pt">POM</span><span class="pt">CRUD Testing</span><span class="pt">Security Testing</span><span class="pt v">GitHub Copilot</span></div>
+                        <div class="br"><a href="https://github.com/ashakiranjyoti/SITE_TRACK_SYSTEM" class="ghl" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pdiv reveal">
+            <span class="eyebrow" style="margin:0; white-space:nowrap;">Personal Frameworks — TypeScript</span>
+            <div class="line"></div>
         </div>
         <div class="row g-4">
-
-            <!-- SCADA -->
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="project-card">
-                    <div class="project-top">
-                        <div class="project-icon orange"><i class="fas fa-broadcast-tower"></i></div>
-                        <div class="project-top-title">
-                            <h4>SCADA Monitoring System</h4>
-                            <div class="project-type-label">Government · AMRUT 2.0 · Production</div>
-                        </div>
-                    </div>
-                    <div class="project-body">
-                        <p><strong>Tested:</strong> Real-time web SCADA monitoring 50+ water supply stations with live sensor data updating every 5 seconds, remote pump/valve control, and role-based access for 4 user types.</p>
-                        <p><strong>QA Work:</strong> 80+ manual test cases, 50+ automated Playwright scenarios — real-time telemetry validation, control button security, KPI accuracy, 24/7 reliability testing.</p>
-                        <p><strong>AI Edge:</strong> Used Cursor AI to debug timing-sensitive flaky tests; Copilot to scaffold control panel POM classes at speed.</p>
-                        <div class="project-badges">
-                            <span class="project-badge">Playwright</span>
-                            <span class="project-badge">JS/TS</span>
-                            <span class="project-badge">MS SQL Server</span>
-                            <span class="project-badge">Real-time Testing</span>
-                            <span class="project-badge ai">Cursor AI</span>
-                            <span class="project-badge ai">GitHub Copilot</span>
-                        </div>
-                        <div class="govt-badge"><i class="fas fa-landmark"></i> Government Project</div>
-                        <div class="ai-assisted-badge"><i class="fas fa-robot"></i> AI-Assisted</div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="pc">
+                    <div class="pch"><div class="pico b"><i class="fas fa-shopping-bag"></i></div><div><h4>DemoBlaze — E2E Framework</h4><div class="ptyp">TypeScript · Allure · GitHub Pages</div></div></div>
+                    <div class="pb">
+                        <p><b>Goal:</b> Practise JS→TS migration — typed POM classes, interfaces, explicit return types. Allure reports with trend history auto-published to GitHub Pages on every push.</p>
+                        <p><b>Coverage:</b> Login (multi-role), products, cart, checkout — smoke + regression tagged suites, externalized test data.</p>
+                        <div class="tw"><span class="pt">Playwright TS</span><span class="pt">POM</span><span class="pt">Allure</span><span class="pt">GitHub Actions</span><span class="pt">Smoke + Regression</span></div>
+                        <div class="br"><a href="https://github.com/ashakiranjyoti/demoblaze_playwright_ts" class="ghl" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
                     </div>
                 </div>
             </div>
-
-            <!-- IMS -->
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="project-card">
-                    <div class="project-top">
-                        <div class="project-icon"><i class="fas fa-boxes"></i></div>
-                        <div class="project-top-title">
-                            <h4>Inventory Management ERP</h4>
-                            <div class="project-type-label">Manufacturing · Production</div>
-                        </div>
-                    </div>
-                    <div class="project-body">
-                        <p><strong>Tested:</strong> End-to-end material lifecycle — inward/outward stock, shortage detection, supplier management, 1000+ product categories (3-level hierarchy), and report exports.</p>
-                        <p><strong>QA Work:</strong> 120+ manual test cases, 60+ automated scenarios. Critical catch: boundary value testing at qty = available + 1 found a data integrity bug (negative stock) — blocked release.</p>
-                        <p><strong>AI Edge:</strong> Used Copilot to generate bulk stock validation tests across 10+ product types; Windsurf to refactor test utilities to TypeScript.</p>
-                        <div class="project-badges">
-                            <span class="project-badge">Playwright</span>
-                            <span class="project-badge">JS/TS</span>
-                            <span class="project-badge">MySQL</span>
-                            <span class="project-badge">BVA</span>
-                            <span class="project-badge ai">Copilot</span>
-                            <span class="project-badge ai">Windsurf</span>
-                        </div>
-                        <div class="project-highlight"><i class="fas fa-bug"></i> Critical bug found before go-live</div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="pc">
+                    <div class="pch"><div class="pico a"><i class="fas fa-shopping-cart"></i></div><div><h4>SauceDemo — Cross-Browser TS</h4><div class="ptyp">TypeScript · 3 Browsers · CI/CD</div></div></div>
+                    <div class="pb">
+                        <p><b>Goal:</b> Practise cross-browser setup (Chromium / Firefox / WebKit), typed page objects, externalized test data (users.json, products.json), CI with retries.</p>
+                        <p><b>Coverage:</b> Auth, product management, cart, checkout, API smoke test. Screenshot + video on failure.</p>
+                        <div class="tw"><span class="pt">Playwright TS</span><span class="pt">POM</span><span class="pt">Cross-browser</span><span class="pt">GitHub Actions</span><span class="pt">Data-driven</span></div>
+                        <div class="br"><a href="https://github.com/ashakiranjyoti/saucedemo-playwright-ts" class="ghl" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
                     </div>
                 </div>
             </div>
-
-            <!-- Site Track -->
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="project-card">
-                    <div class="project-top">
-                        <div class="project-icon green"><i class="fas fa-map-marked-alt"></i></div>
-                        <div class="project-top-title">
-                            <h4>Site Track System</h4>
-                            <div class="project-type-label">Field Operations · Production</div>
-                        </div>
-                    </div>
-                    <div class="project-body">
-                        <p><strong>Tested:</strong> Role-based system with multi-level hierarchy (Sites → Tubewells → LCS), media uploads, audit trails, and compliance workflows.</p>
-                        <p><strong>QA Work:</strong> 60+ manual test cases, 60+ automated tests — CRUD validation, boundary testing, media upload edge cases, LCS workflow end-to-end, security testing.</p>
-                        <p><strong>AI Edge:</strong> Copilot-assisted generation of CRUD test blocks for all 3 hierarchy levels; reduced repetitive authoring time significantly.</p>
-                        <div class="project-badges">
-                            <span class="project-badge">Playwright</span>
-                            <span class="project-badge">JS/TS</span>
-                            <span class="project-badge">Validation</span>
-                            <span class="project-badge">Security Testing</span>
-                            <span class="project-badge ai">GitHub Copilot</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/ashakiranjyoti/SITE_TRACK_SYSTEM" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> GitHub
-                            </a>
-                        </div>
+            <div class="col-lg-4 col-md-6 reveal">
+                <div class="pc">
+                    <div class="pch"><div class="pico v"><i class="fas fa-plug"></i></div><div><h4>ReqRes REST API Framework</h4><div class="ptyp">TypeScript · Multi-env · API Testing</div></div></div>
+                    <div class="pb">
+                        <p><b>Goal:</b> Build a typed API test framework — typed client, multi-environment config (DEV/QA switchable via env var), reusable typed assertion helpers.</p>
+                        <p><b>Coverage:</b> GET (pagination + negatives), POST (create + missing fields), PUT (update + empty body), DELETE (valid + invalid IDs).</p>
+                        <div class="tw"><span class="pt">Playwright Request</span><span class="pt">TypeScript</span><span class="pt">Multi-env</span><span class="pt">Schema Validation</span><span class="pt">GitHub Actions</span></div>
+                        <div class="br"><a href="https://github.com/ashakiranjyoti/REQRES_API-TS" class="ghl" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
                     </div>
                 </div>
             </div>
-
-            <!-- SauceDemo -->
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="project-card">
-                    <div class="project-top">
-                        <div class="project-icon"><i class="fas fa-shopping-cart"></i></div>
-                        <div class="project-top-title">
-                            <h4>E-commerce Automation Suite</h4>
-                            <div class="project-type-label">Playwright · Practice Project</div>
-                        </div>
-                    </div>
-                    <div class="project-body">
-                        <p>Complete shopping flow automation (SauceDemo) — login with multiple user roles, product browsing, cart operations, checkout, and order completion using POM architecture and CI/CD pipeline.</p>
-                        <div class="project-badges">
-                            <span class="project-badge">Playwright</span>
-                            <span class="project-badge">JavaScript</span>
-                            <span class="project-badge">POM</span>
-                            <span class="project-badge">GitHub Actions</span>
-                        </div>
-                        <div class="project-highlight"><i class="fas fa-robot"></i> 50+ Automated Scenarios</div>
-                        <div class="project-links">
-                            <a href="https://github.com/ashakiranjyoti/saucedemo-playwright" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> View Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DemoQA -->
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="project-card">
-                    <div class="project-top">
-                        <div class="project-icon green"><i class="fas fa-layer-group"></i></div>
-                        <div class="project-top-title">
-                            <h4>Complex UI Automation</h4>
-                            <div class="project-type-label">DemoQA · TypeScript</div>
-                        </div>
-                    </div>
-                    <div class="project-body">
-                        <p>Advanced UI interaction automation — modals, cascading dropdowns, file uploads, drag-and-drop, dynamic elements, and form validations. Focus on smart wait strategies and flaky-test-free execution.</p>
-                        <div class="project-badges">
-                            <span class="project-badge">Playwright</span>
-                            <span class="project-badge">TypeScript</span>
-                            <span class="project-badge">Dynamic Elements</span>
-                            <span class="project-badge">Smart Waits</span>
-                        </div>
-                        <div class="project-highlight"><i class="fas fa-check-double"></i> Zero Flaky Tests</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- API Testing -->
-            <div class="col-lg-4 col-md-6 fade-up">
-                <div class="project-card">
-                    <div class="project-top">
-                        <div class="project-icon orange"><i class="fas fa-plug"></i></div>
-                        <div class="project-top-title">
-                            <h4>API Testing Framework</h4>
-                            <div class="project-type-label">Playwright Request · REST APIs</div>
-                        </div>
-                    </div>
-                    <div class="project-body">
-                        <p>REST API automation using Playwright's request context — CRUD operations, authentication flows, response schema validation, and combined API+UI testing (setup state via API, verify on UI).</p>
-                        <div class="project-badges">
-                            <span class="project-badge">Playwright Request</span>
-                            <span class="project-badge">REST APIs</span>
-                            <span class="project-badge">JavaScript</span>
-                            <span class="project-badge">Schema Validation</span>
-                        </div>
-                        <div class="project-highlight"><i class="fas fa-flask"></i> API Testing</div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-        <div class="text-center mt-5 fade-up">
-            <a href="https://github.com/ashakiranjyoti" class="btn-primary-dark" target="_blank">
-                <i class="fab fa-github me-2"></i> View All on GitHub
-            </a>
+        <div class="text-center mt-5 reveal">
+            <a href="https://github.com/ashakiranjyoti" class="bp" target="_blank"><i class="fab fa-github"></i> All on GitHub</a>
         </div>
     </div>
 </section>
 
-<!-- ── EDUCATION ── -->
-<section id="education" class="education-section">
-    <div class="container">
-        <div class="section-header fade-up">
-            <div class="section-label">// education</div>
-            <h2 class="section-title">Academic Background</h2>
+<!-- EDUCATION -->
+<section id="education" class="sec">
+    <div class="wrap">
+        <div class="sec-header reveal">
+            <div class="eyebrow">// education</div>
+            <h2 class="sh">Academic Background</h2>
         </div>
-        <div class="row justify-content-center fade-up">
+        <div class="row justify-content-center reveal">
             <div class="col-lg-8">
-                <div class="edu-card">
-                    <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="educ">
+                    <div class="edico"><i class="fas fa-graduation-cap"></i></div>
                     <div>
-                        <div class="edu-degree">Bachelor of Technology (B.Tech)</div>
-                        <div class="edu-field">Computer Science & Engineering</div>
-                        <div class="edu-uni">Dr. Babasaheb Ambedkar Technological University</div>
-                        <div class="edu-meta">Lonere, Maharashtra · Graduated 2023</div>
-                        <div class="edu-cgpa"><i class="fas fa-award me-1"></i> CGPA: 8.33 / 10</div>
+                        <div class="edd">Bachelor of Technology (B.Tech)</div>
+                        <div class="edf">Computer Science &amp; Engineering</div>
+                        <div class="edu2">Dr. Babasaheb Ambedkar Technological University</div>
+                        <div class="edm">Lonere, Maharashtra · Graduated 2023</div>
+                        <div class="edg">CGPA: 8.33 / 10</div>
                     </div>
                 </div>
             </div>
@@ -1455,66 +763,31 @@
     </div>
 </section>
 
-<!-- ── CONTACT ── -->
-<section id="contact" class="contact-section">
-    <div class="container">
-        <div class="section-header fade-up">
-            <div class="section-label">// contact</div>
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="section-subtitle">Open to QA Automation Engineer opportunities</p>
+<!-- CONTACT -->
+<section id="contact" class="sec sec-alt">
+    <div class="wrap">
+        <div class="sec-header reveal">
+            <div class="eyebrow">// contact</div>
+            <h2 class="sh">Get In Touch</h2>
+            <p class="ssub">Open to QA Engineer &amp; SDET roles</p>
         </div>
-        <div class="row justify-content-center fade-up">
+        <div class="row justify-content-center reveal">
             <div class="col-lg-7">
-                <div class="contact-card">
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <div class="contact-label">email</div>
-                            <div class="contact-value">
-                                <a href="mailto:ashakirandjoti5501@gmail.com">ashakirandjoti5501@gmail.com</a>
-                            </div>
-                        </div>
+                <div class="ccard">
+                    <div class="crow"><div class="cico"><i class="fas fa-envelope"></i></div><div><div class="clbl">Email</div><div class="cval"><a href="mailto:ashakirandjoti5501@gmail.com">ashakirandjoti5501@gmail.com</a></div></div></div>
+                    <div class="crow"><div class="cico"><i class="fas fa-phone"></i></div><div><div class="clbl">Phone</div><div class="cval"><a href="tel:+919284344460">+91 9284344460</a></div></div></div>
+                    <div class="crow"><div class="cico"><i class="fas fa-map-marker-alt"></i></div><div><div class="clbl">Location</div><div class="cval">Pune, Maharashtra, India</div></div></div>
+                    <div class="sr">
+                        <a href="https://github.com/ashakiranjyoti" class="soc" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/ashakiran-jyoti-b3489b252/" class="soc" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:ashakirandjoti5501@gmail.com" class="soc"><i class="fas fa-envelope"></i></a>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                        <div>
-                            <div class="contact-label">phone</div>
-                            <div class="contact-value">
-                                <a href="tel:+919284344460">+91 9284344460</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <div class="contact-label">location</div>
-                            <div class="contact-value">Pune, Maharashtra, India</div>
-                        </div>
-                    </div>
-
-                    <div class="social-row">
-                        <a href="https://github.com/ashakiranjyoti" class="social-btn" target="_blank" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/ashakiran-jyoti-b3489b252/" class="social-btn" target="_blank" title="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="mailto:ashakirandjoti5501@gmail.com" class="social-btn" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-
-                    <div class="open-to">
-                        <p>
-                            I'm actively seeking opportunities as a <strong>QA Automation Engineer</strong> or <strong>SDET</strong>.
-                            I bring hands-on production testing experience, a built-from-scratch Playwright framework,
-                            a developer background that makes me effective at root-cause analysis, and a modern
-                            <strong>AI-assisted workflow</strong> that multiplies my output without compromising quality.
-                        </p>
-                        <div class="open-to-roles">
-                            <span class="role-tag">QA Automation Engineer</span>
-                            <span class="role-tag">SDET</span>
-                            <span class="role-tag">Test Engineer</span>
+                    <div class="ob">
+                        <p>Looking for <b>QA Engineer</b> or <b>SDET</b> roles where I can grow — bringing hands-on manual testing experience, Playwright automation (JS + TS), Agile team experience, and an AI-augmented workflow.</p>
+                        <div class="rtags">
+                            <span class="rt">QA Engineer</span>
+                            <span class="rt">QA Automation Engineer</span>
+                            <span class="rt">SDET</span>
                         </div>
                     </div>
                 </div>
@@ -1523,41 +796,28 @@
     </div>
 </section>
 
-<!-- ── FOOTER ── -->
 <footer>
-    <div class="container">
-        <p>© 2025 Ashakiran Jyoti · QA Automation Engineer · Pune, India</p>
+    <div class="wrap">
+        <p>© 2025 Ashakiran Jyoti · Junior QA Engineer · Pune, India</p>
     </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-            e.preventDefault();
-            const t = document.querySelector(a.getAttribute('href'));
-            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-    });
-
-    const fadeEls = document.querySelectorAll('.fade-up');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    fadeEls.forEach(el => observer.observe(el));
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
     window.addEventListener('scroll', () => {
-        let current = '';
+        let cur = '';
         document.querySelectorAll('section[id]').forEach(s => {
-            if (pageYOffset >= s.offsetTop - 200) current = s.id;
+            if (pageYOffset >= s.offsetTop - 140) cur = s.id;
         });
-        document.querySelectorAll('.nav-link').forEach(l => {
-            l.classList.remove('active');
-            if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+        document.querySelectorAll('.nav-links a').forEach(l => {
+            l.style.color = l.getAttribute('href') === '#' + cur ? 'var(--blue)' : '';
         });
     });
 </script>
 </body>
 </html>
-
-
