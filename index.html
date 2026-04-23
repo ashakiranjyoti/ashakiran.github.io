@@ -4,258 +4,336 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashakiran Jyoti — QA Engineer · Playwright · Manual Testing</title>
-    <meta name="description" content="Ashakiran Jyoti — QA Engineer with hands-on experience in Manual Testing and Playwright Automation. Tested Government of India SCADA and Manufacturing ERP systems.">
+    <meta name="description" content="Ashakiran Jyoti — QA Engineer with hands-on experience in Manual Testing and Playwright Automation.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg:        #09090F;
-            --surface:   #0F1018;
-            --card:      #13151F;
-            --border:    #1C1F2E;
-            --border2:   #242840;
-            --blue:      #5B8DEF;
-            --blue2:     #3D6ED6;
-            --green:     #34D399;
-            --amber:     #FBBF24;
-            --violet:    #A78BFA;
-            --text:      #F1F3FA;
-            --muted:     #6B7280;
-            --dim:       #374151;
-        }
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+            --bg:      #07080E;
+            --surface: #0D0F18;
+            --card:    #11131E;
+            --card2:   #161825;
+            --border:  #1E2133;
+            --border2: #262A42;
+            --blue:    #6B9FFF;
+            --blue2:   #4A7FE5;
+            --green:   #3DDBA8;
+            --amber:   #FFC947;
+            --violet:  #B89CFF;
+            --red:     #FF6B6B;
 
-        /* NAV */
-        nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(9,9,15,0.88); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
-        .nav-inner { max-width:1160px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:58px; }
-        .nav-brand { font-family:'IBM Plex Mono',monospace; font-size:0.86rem; color:var(--text); text-decoration:none; }
+            /* READABLE TEXT — no more dim/muted blur */
+            --text:    #ECEEF8;
+            --sub:     #C4CAE0;   /* secondary text — clearly readable */
+            --hint:    #8B92B3;   /* tertiary — still visible on dark */
+            --faint:   #5A6080;   /* borders, dividers only — NOT text */
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
+        ::-webkit-scrollbar { width:3px; }
+        ::-webkit-scrollbar-track { background:var(--bg); }
+        ::-webkit-scrollbar-thumb { background:var(--border2); border-radius:4px; }
+
+        /* ── NAV ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:200;
+            background:rgba(7,8,14,0.94);
+            backdrop-filter:blur(24px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:1160px; margin:0 auto; padding:0 24px;
+            display:flex; align-items:center; justify-content:space-between; height:58px;
+        }
+        .nav-brand { font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--text); text-decoration:none; letter-spacing:0.02em; }
         .nav-brand em { color:var(--green); font-style:normal; }
         .nav-links { display:flex; gap:2px; }
-        .nav-links a { color:var(--muted); text-decoration:none; font-size:0.76rem; font-weight:500; letter-spacing:0.05em; text-transform:uppercase; padding:6px 11px; border-radius:5px; transition:color 0.15s, background 0.15s; }
-        .nav-links a:hover { color:var(--text); background:var(--border); }
+        .nav-links a {
+            color:var(--hint); text-decoration:none; font-size:0.75rem; font-weight:600;
+            letter-spacing:0.07em; text-transform:uppercase; padding:6px 11px;
+            border-radius:5px; transition:color 0.15s, background 0.15s;
+        }
+        .nav-links a:hover, .nav-links a.active { color:var(--text); background:var(--border); }
+        .nav-toggle {
+            display:none; background:none; border:none; cursor:pointer;
+            padding:6px; color:var(--hint); font-size:1.2rem; transition:color 0.15s;
+        }
+        .nav-toggle:hover { color:var(--text); }
+        .mobile-menu {
+            display:none; position:fixed; top:58px; left:0; right:0; bottom:0;
+            background:rgba(7,8,14,0.98); backdrop-filter:blur(24px); z-index:199;
+            flex-direction:column; align-items:center; justify-content:center; gap:8px;
+            opacity:0; pointer-events:none; transition:opacity 0.25s ease;
+        }
+        .mobile-menu.open { pointer-events:all; opacity:1; }
+        .mobile-menu a {
+            color:var(--sub); text-decoration:none; font-size:1.1rem; font-weight:700;
+            letter-spacing:0.06em; text-transform:uppercase; padding:14px 32px;
+            border-radius:8px; width:240px; text-align:center; border:1px solid var(--border);
+            transition:color 0.15s, background 0.15s, border-color 0.15s;
+        }
+        .mobile-menu a:hover { color:var(--blue); border-color:var(--blue); background:rgba(107,159,255,0.06); }
+        @media(max-width:860px) {
+            .nav-links { display:none; }
+            .nav-toggle { display:flex; align-items:center; justify-content:center; }
+            .mobile-menu { display:flex; }
+        }
 
-        /* WRAP */
+        /* ── LAYOUT ── */
         .wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
 
-        /* HERO */
+        /* ── HERO ── */
         .hero { min-height:100vh; display:flex; align-items:center; padding:120px 0 80px; position:relative; overflow:hidden; }
-        .glow1 { position:absolute; top:5%; right:-8%; width:650px; height:650px; background:radial-gradient(ellipse,rgba(91,141,239,0.07) 0%,transparent 65%); pointer-events:none; }
-        .glow2 { position:absolute; bottom:-5%; left:-8%; width:480px; height:480px; background:radial-gradient(ellipse,rgba(52,211,153,0.05) 0%,transparent 65%); pointer-events:none; }
-        .pill-status { display:inline-flex; align-items:center; gap:7px; background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); color:var(--green); font-family:'IBM Plex Mono',monospace; font-size:0.7rem; letter-spacing:0.09em; text-transform:uppercase; padding:5px 14px; border-radius:100px; margin-bottom:28px; }
+        .glow1 { position:absolute; top:0; right:-10%; width:700px; height:700px; background:radial-gradient(ellipse,rgba(107,159,255,0.06) 0%,transparent 60%); pointer-events:none; }
+        .glow2 { position:absolute; bottom:-10%; left:-8%; width:500px; height:500px; background:radial-gradient(ellipse,rgba(61,219,168,0.04) 0%,transparent 60%); pointer-events:none; }
+
+        .pill-status {
+            display:inline-flex; align-items:center; gap:7px;
+            background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25);
+            color:var(--green); font-family:'JetBrains Mono',monospace;
+            font-size:0.69rem; letter-spacing:0.1em; text-transform:uppercase;
+            padding:5px 14px; border-radius:100px; margin-bottom:28px;
+        }
         .sdot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:blink 2.2s ease infinite; }
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
-        .hero h1 { font-size:clamp(2.8rem,5.5vw,4.8rem); font-weight:800; line-height:1.06; letter-spacing:-0.04em; margin-bottom:18px; }
-        .hero h1 .hi { display:block; font-size:0.55em; font-weight:300; color:var(--muted); letter-spacing:0; margin-bottom:8px; }
-        .hero h1 .ng { background:linear-gradient(120deg,#F1F3FA 0%,var(--blue) 55%,var(--green) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-        .hero-role { font-size:1.05rem; color:var(--muted); margin-bottom:18px; }
-        .hero-role b { color:var(--blue); font-weight:600; }
-        .hero-desc { font-size:0.97rem; color:var(--muted); max-width:570px; line-height:1.88; margin-bottom:32px; }
-        .hero-desc b { color:var(--text); font-weight:500; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+        .hero h1 { font-size:clamp(2.6rem,5.5vw,4.6rem); font-weight:800; line-height:1.07; letter-spacing:-0.04em; margin-bottom:20px; }
+        .hero h1 .hi { display:block; font-size:0.52em; font-weight:400; color:var(--sub); letter-spacing:0; margin-bottom:10px; }
+        .hero h1 .ng {
+            background:linear-gradient(125deg,#ECEEF8 0%,var(--blue) 50%,var(--green) 100%);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        }
+        .hero-role { font-size:1.05rem; color:var(--sub); margin-bottom:16px; font-weight:500; }
+        .hero-role b { color:var(--blue); font-weight:700; }
+        .hero-desc { font-size:0.97rem; color:var(--sub); max-width:580px; line-height:1.9; margin-bottom:30px; }
+        .hero-desc b { color:var(--text); font-weight:600; }
+
         .tag-row { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:32px; }
-        .tag { font-family:'IBM Plex Mono',monospace; font-size:0.71rem; color:var(--muted); background:var(--card); border:1px solid var(--border2); padding:4px 11px; border-radius:4px; transition:all 0.15s; }
+        .tag {
+            font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--sub);
+            background:var(--card); border:1px solid var(--border2); padding:4px 12px;
+            border-radius:4px; transition:all 0.15s;
+        }
         .tag:hover { color:var(--blue); border-color:var(--blue); }
-        .tag.g { border-color:rgba(52,211,153,0.3); color:var(--green); background:rgba(52,211,153,0.05); }
-        .tag.v { border-color:rgba(167,139,250,0.3); color:var(--violet); background:rgba(167,139,250,0.05); }
+        .tag.g { border-color:rgba(61,219,168,0.35); color:var(--green); background:rgba(61,219,168,0.06); }
+        .tag.v { border-color:rgba(184,156,255,0.35); color:var(--violet); background:rgba(184,156,255,0.06); }
+
         .btn-row { display:flex; flex-wrap:wrap; gap:9px; }
-        .bp { background:var(--blue); color:#fff; padding:10px 20px; border-radius:6px; font-size:0.85rem; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:all 0.18s; }
-        .bp:hover { background:var(--blue2); color:#fff; transform:translateY(-1px); box-shadow:0 5px 18px rgba(91,141,239,0.3); }
-        .bs { background:transparent; color:var(--text); padding:10px 20px; border-radius:6px; font-size:0.85rem; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--border2); transition:all 0.18s; }
+        .bp {
+            background:var(--blue); color:#07080E; padding:10px 22px; border-radius:7px;
+            font-size:0.85rem; font-weight:700; text-decoration:none;
+            display:inline-flex; align-items:center; gap:7px; transition:all 0.18s;
+        }
+        .bp:hover { background:var(--blue2); color:#fff; transform:translateY(-2px); box-shadow:0 6px 20px rgba(107,159,255,0.28); }
+        .bs {
+            background:transparent; color:var(--sub); padding:10px 22px; border-radius:7px;
+            font-size:0.85rem; font-weight:600; text-decoration:none;
+            display:inline-flex; align-items:center; gap:7px;
+            border:1px solid var(--border2); transition:all 0.18s;
+        }
         .bs:hover { border-color:var(--blue); color:var(--blue); }
 
-        /* METRICS */
-        .metrics { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:44px 0; }
-        .metric { text-align:center; padding:10px; }
-        .mn { font-family:'IBM Plex Mono',monospace; font-size:2.3rem; font-weight:500; color:var(--blue); line-height:1; margin-bottom:7px; }
-        .ml { color:var(--muted); font-size:0.81rem; }
+        /* ── METRICS ── */
+        .metrics { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 0; }
+        .metric { text-align:center; padding:12px; }
+        .mn { font-family:'JetBrains Mono',monospace; font-size:2.4rem; font-weight:600; color:var(--blue); line-height:1; margin-bottom:7px; }
+        .ml { color:var(--text); font-size:0.86rem; font-weight:600; margin-bottom:5px; }
+        .mc { color:var(--sub); font-size:0.78rem; line-height:1.5; }
 
-        /* SECTION */
-        .sec { padding:80px 0; }
+        /* ── SECTIONS ── */
+        .sec { padding:84px 0; }
         .sec-alt { background:var(--surface); }
-        .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--blue); letter-spacing:0.14em; text-transform:uppercase; margin-bottom:10px; }
+        .eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.67rem; color:var(--blue); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:10px; }
         .eyebrow.g { color:var(--green); }
         .eyebrow.v { color:var(--violet); }
-        .sh { font-size:1.8rem; font-weight:700; color:var(--text); letter-spacing:-0.03em; line-height:1.15; margin-bottom:7px; }
-        .ssub { color:var(--muted); font-size:0.9rem; }
-        .sec-header { margin-bottom:44px; }
+        .sh { font-size:1.85rem; font-weight:800; color:var(--text); letter-spacing:-0.03em; line-height:1.15; margin-bottom:8px; }
+        .ssub { color:var(--sub); font-size:0.92rem; }
+        .sec-header { margin-bottom:46px; }
 
-        /* ABOUT */
-        .abox { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:38px; }
-        .abox p { color:var(--muted); font-size:0.95rem; line-height:1.9; margin-bottom:14px; }
-        .abox p b { color:var(--text); font-weight:500; }
+        /* ── ABOUT ── */
+        .abox { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:40px; }
+        .abox p { color:var(--sub); font-size:0.96rem; line-height:1.92; margin-bottom:16px; }
+        .abox p b { color:var(--text); font-weight:700; }
         .achips { display:flex; flex-wrap:wrap; gap:7px; margin-top:22px; }
-        .ac { background:rgba(91,141,239,0.08); border:1px solid rgba(91,141,239,0.18); color:var(--blue); font-size:0.8rem; font-weight:500; padding:4px 12px; border-radius:4px; }
-        .ac.g { background:rgba(52,211,153,0.07); border-color:rgba(52,211,153,0.2); color:var(--green); }
-        .ac.v { background:rgba(167,139,250,0.07); border-color:rgba(167,139,250,0.2); color:var(--violet); }
+        .ac { background:rgba(107,159,255,0.09); border:1px solid rgba(107,159,255,0.22); color:var(--blue); font-size:0.82rem; font-weight:600; padding:5px 13px; border-radius:5px; }
+        .ac.g { background:rgba(61,219,168,0.08); border-color:rgba(61,219,168,0.25); color:var(--green); }
+        .ac.v { background:rgba(184,156,255,0.08); border-color:rgba(184,156,255,0.25); color:var(--violet); }
 
-        /* SKILLS */
-        .skc { background:var(--card); border:1px solid var(--border); border-radius:11px; padding:24px; height:100%; transition:border-color 0.2s, transform 0.2s; }
-        .skc:hover { border-color:var(--border2); transform:translateY(-2px); }
-        .skh { display:flex; align-items:center; gap:9px; margin-bottom:14px; }
-        .ski { width:32px; height:32px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.85rem; }
-        .ski.b { background:rgba(91,141,239,0.12); color:var(--blue); }
-        .ski.g { background:rgba(52,211,153,0.12); color:var(--green); }
-        .ski.a { background:rgba(251,191,36,0.12); color:var(--amber); }
-        .ski.v { background:rgba(167,139,250,0.12); color:var(--violet); }
-        .skc h5 { font-size:0.88rem; font-weight:600; color:var(--text); }
+        /* ── SKILLS ── */
+        .skc { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:26px; height:100%; transition:border-color 0.2s, transform 0.2s; }
+        .skc:hover { border-color:var(--border2); transform:translateY(-3px); }
+        .skh { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+        .ski { width:34px; height:34px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:0.85rem; }
+        .ski.b { background:rgba(107,159,255,0.13); color:var(--blue); }
+        .ski.g { background:rgba(61,219,168,0.13); color:var(--green); }
+        .ski.a { background:rgba(255,201,71,0.13); color:var(--amber); }
+        .ski.v { background:rgba(184,156,255,0.13); color:var(--violet); }
+        .skc h5 { font-size:0.9rem; font-weight:700; color:var(--text); }
         .pills { display:flex; flex-wrap:wrap; gap:5px; }
-        .pill { font-family:'IBM Plex Mono',monospace; font-size:0.69rem; color:var(--muted); background:var(--surface); border:1px solid var(--border); padding:2px 9px; border-radius:3px; transition:all 0.15s; }
-        .pill:hover { color:var(--green); border-color:rgba(52,211,153,0.3); }
-        .pill.hi { color:var(--green); border-color:rgba(52,211,153,0.25); background:rgba(52,211,153,0.05); }
-        .pill.vi { color:var(--violet); border-color:rgba(167,139,250,0.25); background:rgba(167,139,250,0.05); }
+        .pill { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--sub); background:var(--surface); border:1px solid var(--border); padding:3px 9px; border-radius:4px; transition:all 0.15s; }
+        .pill:hover { color:var(--green); border-color:rgba(61,219,168,0.35); }
+        .pill.hi { color:var(--green); border-color:rgba(61,219,168,0.3); background:rgba(61,219,168,0.06); }
+        .pill.vi { color:var(--violet); border-color:rgba(184,156,255,0.3); background:rgba(184,156,255,0.06); }
 
-        /* EXPERIENCE */
-        .ec { background:var(--card); border:1px solid var(--border); border-left:2px solid var(--blue); border-radius:12px; padding:34px; margin-bottom:18px; }
-        .ec-badge { display:inline-flex; align-items:center; gap:5px; background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); color:var(--green); font-size:0.68rem; font-weight:600; font-family:'IBM Plex Mono',monospace; padding:3px 9px; border-radius:100px; letter-spacing:0.04em; }
+        /* ── EXPERIENCE ── */
+        .ec { background:var(--card); border:1px solid var(--border); border-left:3px solid var(--blue); border-radius:13px; padding:36px; margin-bottom:20px; }
+        .ec-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25); color:var(--green); font-size:0.69rem; font-weight:700; font-family:'JetBrains Mono',monospace; padding:4px 10px; border-radius:100px; letter-spacing:0.04em; }
         .ec-badge::before { content:''; width:5px; height:5px; background:var(--green); border-radius:50%; animation:blink 2s infinite; }
-        .eco { color:var(--blue); font-weight:700; font-size:1.1rem; margin-bottom:2px; margin-top:12px; }
-        .ero { color:var(--text); font-weight:600; font-size:0.95rem; margin-bottom:2px; }
-        .edu { color:var(--dim); font-family:'IBM Plex Mono',monospace; font-size:0.74rem; margin-bottom:20px; }
-        .esect { font-family:'IBM Plex Mono',monospace; font-size:0.66rem; font-weight:500; letter-spacing:0.13em; text-transform:uppercase; margin:20px 0 9px; display:flex; align-items:center; gap:9px; }
+        .eco { color:var(--blue); font-weight:800; font-size:1.12rem; margin-bottom:3px; margin-top:14px; }
+        .ero { color:var(--text); font-weight:700; font-size:0.97rem; margin-bottom:3px; }
+        .edur { color:var(--hint); font-family:'JetBrains Mono',monospace; font-size:0.74rem; margin-bottom:22px; }
+
+        .esect { font-family:'JetBrains Mono',monospace; font-size: 18px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; margin:22px 0 10px; display:flex; align-items:center; gap:10px; }
         .esect::after { content:''; flex:1; height:1px; background:var(--border); }
         .esect.b { color:var(--blue); }
         .esect.g { color:var(--green); }
         .esect.v { color:var(--violet); }
-        .esect.a { color:var(--amber); }
+
         .ul { list-style:none; padding:0; }
-        .ul li { color:var(--muted); font-size:0.88rem; padding:4px 0 4px 16px; position:relative; line-height:1.65; }
-        .ul li::before { content:'›'; position:absolute; left:0; color:var(--dim); font-size:0.95rem; top:3px; }
+        .ul li { color:var(--sub); font-size:0.9rem; padding:5px 0 5px 18px; position:relative; line-height:1.7; }
+        .ul li::before { content:'›'; position:absolute; left:0; font-size:1rem; top:4px; color:var(--hint); }
         .ul li.g::before { color:var(--green); }
         .ul li.b::before { color:var(--blue); }
         .ul li.v::before { color:var(--violet); }
-        .ul li b { color:var(--text); font-weight:500; }
-        .tr { display:flex; flex-wrap:wrap; gap:5px; margin-top:18px; padding-top:14px; border-top:1px solid var(--border); }
-        .tc { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--blue); background:rgba(91,141,239,0.07); border:1px solid rgba(91,141,239,0.14); padding:2px 8px; border-radius:3px; }
-        .tc.v { color:var(--violet); background:rgba(167,139,250,0.07); border-color:rgba(167,139,250,0.17); }
+        .ul li b { color:var(--text); font-weight:700; }
+        .ul li code { font-family:'JetBrains Mono',monospace; font-size:0.82em; color:var(--amber); background:rgba(255,201,71,0.1); padding:1px 5px; border-radius:3px; }
 
-        /* DUAL PANEL */
-        .dp { border:1px solid var(--border); border-radius:12px; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; }
+        .tr { display:flex; flex-wrap:wrap; gap:5px; margin-top:20px; padding-top:16px; border-top:1px solid var(--border); }
+        .tc { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--blue); background:rgba(107,159,255,0.08); border:1px solid rgba(107,159,255,0.18); padding:3px 9px; border-radius:4px; }
+        .tc.v { color:var(--violet); background:rgba(184,156,255,0.08); border-color:rgba(184,156,255,0.2); }
+
+        /* ── DUAL PANEL ── */
+        .dp { border:1px solid var(--border); border-radius:13px; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; }
         @media(max-width:768px){ .dp{grid-template-columns:1fr;} }
-        .pn { padding:34px; }
+        .pn { padding:36px; }
         .pn:first-child { background:var(--card); border-right:1px solid var(--border); }
-        .pn:last-child { background:var(--surface); }
-        .pntag { display:inline-flex; align-items:center; gap:5px; font-family:'IBM Plex Mono',monospace; font-size:0.66rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; padding:3px 10px; border-radius:3px; margin-bottom:14px; }
-        .pntag.g { background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); color:var(--green); }
-        .pntag.b { background:rgba(91,141,239,0.07); border:1px solid rgba(91,141,239,0.2); color:var(--blue); }
-        .pn h3 { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:9px; }
-        .pn p { color:var(--muted); font-size:0.86rem; line-height:1.78; margin-bottom:14px; }
-        .pn p b { color:var(--text); font-weight:500; }
+        .pn:last-child { background:var(--card2); }
+        .pntag { display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace; font-size:0.66rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:4px; margin-bottom:14px; }
+        .pntag.g { background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25); color:var(--green); }
+        .pntag.b { background:rgba(107,159,255,0.08); border:1px solid rgba(107,159,255,0.22); color:var(--blue); }
+        .pn h3 { font-size:1.02rem; font-weight:800; color:var(--text); margin-bottom:10px; }
+        .pn p { color:var(--sub); font-size:0.87rem; line-height:1.8; margin-bottom:14px; }
+        .pn p b { color:var(--text); font-weight:700; }
         .dl { list-style:none; padding:0; }
-        .dl li { color:var(--muted); font-size:0.84rem; padding:7px 0 7px 14px; position:relative; border-bottom:1px solid var(--border); line-height:1.6; }
+        .dl li { color:var(--sub); font-size:0.85rem; padding:8px 0 8px 16px; position:relative; border-bottom:1px solid var(--border); line-height:1.65; }
         .dl li:last-child { border-bottom:none; }
-        .dl li::before { content:'–'; position:absolute; left:0; color:var(--dim); }
-        .dl li b { color:var(--text); font-weight:500; }
+        .dl li::before { content:'–'; position:absolute; left:0; color:var(--hint); }
+        .dl li b { color:var(--text); font-weight:700; }
+        .dl li code { font-family:'JetBrains Mono',monospace; font-size:0.81em; color:var(--amber); background:rgba(255,201,71,0.1); padding:1px 5px; border-radius:3px; }
 
-        /* AI */
-        .aic { background:var(--card); border:1px solid var(--border); border-radius:11px; overflow:hidden; height:100%; transition:border-color 0.2s; }
-        .aic:hover { border-color:rgba(167,139,250,0.3); }
-        .aich { padding:17px 20px 14px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:11px; }
-        .aiico { width:36px; height:36px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.9rem; font-weight:700; }
-        .aiico.b { background:rgba(91,141,239,0.12); border:1px solid rgba(91,141,239,0.2); color:var(--blue); }
-        .aiico.v { background:rgba(167,139,250,0.12); border:1px solid rgba(167,139,250,0.2); color:var(--violet); }
-        .aiico.g { background:rgba(52,211,153,0.12); border:1px solid rgba(52,211,153,0.2); color:var(--green); }
-        .ain { font-size:0.9rem; font-weight:700; color:var(--text); }
-        .ais { font-size:0.69rem; color:var(--dim); font-family:'IBM Plex Mono',monospace; }
-        .aib { padding:18px 20px; }
-        .aib p { color:var(--muted); font-size:0.84rem; line-height:1.72; margin-bottom:11px; }
-        .aib p b { color:var(--text); font-weight:500; }
-        .ail { list-style:none; padding:0; margin-bottom:12px; }
-        .ail li { color:var(--muted); font-size:0.82rem; padding:3px 0 3px 13px; position:relative; line-height:1.5; }
-        .ail li::before { content:'→'; position:absolute; left:0; font-size:0.68rem; top:5px; color:var(--dim); }
-        .ail li b { color:var(--text); font-weight:500; }
-        .air { display:inline-flex; align-items:center; gap:4px; font-family:'IBM Plex Mono',monospace; font-size:0.69rem; font-weight:500; padding:3px 9px; border-radius:3px; }
-        .air.b { background:rgba(91,141,239,0.07); border:1px solid rgba(91,141,239,0.17); color:var(--blue); }
-        .air.v { background:rgba(167,139,250,0.07); border:1px solid rgba(167,139,250,0.17); color:var(--violet); }
-        .air.g { background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.17); color:var(--green); }
-        .flow { background:var(--card); border:1px solid var(--border); border-radius:11px; padding:22px 26px; margin-top:28px; }
-        .flow h5 { font-size:0.86rem; font-weight:600; color:var(--text); margin-bottom:14px; }
-        .fr { display:flex; align-items:center; flex-wrap:wrap; gap:5px; }
-        .fs { background:var(--surface); border:1px solid var(--border); border-radius:5px; padding:5px 11px; font-size:0.75rem; color:var(--muted); font-weight:500; white-space:nowrap; }
-        .fs .fn { display:inline-block; width:15px; height:15px; background:rgba(167,139,250,0.15); border-radius:50%; text-align:center; line-height:15px; font-size:0.58rem; color:var(--violet); font-weight:700; margin-right:4px; font-family:'IBM Plex Mono',monospace; }
-        .fa { color:var(--dim); font-size:0.78rem; }
+        /* ── AI TOOLS ── */
+        .aic { background:var(--card); border:1px solid var(--border); border-radius:13px; overflow:hidden; height:100%; transition:border-color 0.2s, transform 0.2s; }
+        .aic:hover { border-color:rgba(184,156,255,0.3); transform:translateY(-2px); }
+        .aich { padding:18px 22px 15px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; }
+        .aiico { width:38px; height:38px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.9rem; font-weight:700; }
+        .aiico.b { background:rgba(107,159,255,0.13); border:1px solid rgba(107,159,255,0.22); color:var(--blue); }
+        .aiico.v { background:rgba(184,156,255,0.13); border:1px solid rgba(184,156,255,0.22); color:var(--violet); }
+        .aiico.g { background:rgba(61,219,168,0.13); border:1px solid rgba(61,219,168,0.22); color:var(--green); }
+        .ain { font-size:0.92rem; font-weight:800; color:var(--text); }
+        .ais { font-size:0.7rem; color:var(--hint); font-family:'JetBrains Mono',monospace; }
+        .aib { padding:20px 22px; }
+        .aib p { color:var(--sub); font-size:0.86rem; line-height:1.75; margin-bottom:12px; }
+        .aib p b { color:var(--text); font-weight:700; }
+        .ail { list-style:none; padding:0; margin-bottom:14px; }
+        .ail li { color:var(--sub); font-size:0.84rem; padding:3px 0 3px 14px; position:relative; line-height:1.55; }
+        .ail li::before { content:'→'; position:absolute; left:0; font-size:0.68rem; top:5px; color:var(--hint); }
+        .ail li b { color:var(--text); font-weight:700; }
+        .air { display:inline-flex; align-items:center; gap:5px; font-family:'JetBrains Mono',monospace; font-size:0.69rem; font-weight:600; padding:4px 10px; border-radius:4px; }
+        .air.b { background:rgba(107,159,255,0.08); border:1px solid rgba(107,159,255,0.2); color:var(--blue); }
+        .air.v { background:rgba(184,156,255,0.08); border:1px solid rgba(184,156,255,0.2); color:var(--violet); }
+        .air.g { background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.2); color:var(--green); }
 
-        /* PROJECTS */
-        .pdiv { display:flex; align-items:center; gap:12px; margin-bottom:22px; }
+        .flow { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:24px 28px; margin-top:30px; }
+        .flow h5 { font-size:0.88rem; font-weight:700; color:var(--text); margin-bottom:16px; }
+        .fr { display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
+        .fs { background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:6px 12px; font-size:0.78rem; color:var(--sub); font-weight:600; white-space:nowrap; display:flex; align-items:center; gap:7px; }
+        .fn { display:inline-flex; width:17px; height:17px; background:rgba(184,156,255,0.15); border-radius:50%; align-items:center; justify-content:center; font-size:0.58rem; color:var(--violet); font-weight:700; font-family:'JetBrains Mono',monospace; flex-shrink:0; }
+        .fa { color:var(--hint); font-size:0.8rem; }
+
+        /* ── PROJECTS ── */
+        .pdiv { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
         .pdiv .line { flex:1; height:1px; background:var(--border); }
-        .pc { background:var(--card); border:1px solid var(--border); border-radius:11px; overflow:hidden; height:100%; transition:transform 0.22s, border-color 0.22s, box-shadow 0.22s; }
-        .pc:hover { transform:translateY(-4px); border-color:var(--border2); box-shadow:0 14px 38px rgba(0,0,0,0.3); }
-        .pch { padding:18px 20px; border-bottom:1px solid var(--border); display:flex; align-items:flex-start; gap:11px; }
-        .pico { width:36px; height:36px; flex-shrink:0; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:0.9rem; }
-        .pico.b { background:rgba(91,141,239,0.1); border:1px solid rgba(91,141,239,0.2); color:var(--blue); }
-        .pico.g { background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.2); color:var(--green); }
-        .pico.a { background:rgba(251,191,36,0.1); border:1px solid rgba(251,191,36,0.2); color:var(--amber); }
-        .pico.v { background:rgba(167,139,250,0.1); border:1px solid rgba(167,139,250,0.2); color:var(--violet); }
-        .pch h4 { font-size:0.92rem; font-weight:700; color:var(--text); margin-bottom:2px; }
-        .ptyp { font-family:'IBM Plex Mono',monospace; font-size:0.66rem; color:var(--dim); }
-        .pb { padding:18px 20px; }
-        .pb p { color:var(--muted); font-size:0.83rem; line-height:1.7; margin-bottom:7px; }
-        .pb p b { color:var(--text); font-weight:500; }
-        .tw { display:flex; flex-wrap:wrap; gap:4px; margin:9px 0; }
-        .pt { font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:var(--dim); background:var(--surface); border:1px solid var(--border); padding:2px 7px; border-radius:3px; }
-        .pt.v { color:var(--violet); border-color:rgba(167,139,250,0.2); background:rgba(167,139,250,0.05); }
-        .br { display:flex; flex-wrap:wrap; gap:5px; margin-top:9px; align-items:center; }
-        .pb2 { display:inline-flex; align-items:center; gap:3px; font-size:0.71rem; font-weight:600; padding:2px 9px; border-radius:3px; }
-        .pb2.g { background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); color:var(--green); }
-        .pb2.a { background:rgba(251,191,36,0.07); border:1px solid rgba(251,191,36,0.2); color:var(--amber); }
-        .pb2.b { background:rgba(91,141,239,0.07); border:1px solid rgba(91,141,239,0.2); color:var(--blue); }
-        .ghl { display:inline-flex; align-items:center; gap:4px; color:var(--blue); font-size:0.8rem; font-weight:600; text-decoration:none; margin-top:9px; transition:color 0.15s; }
-        .ghl:hover { color:var(--green); }
+        .pc { background:var(--card); border:1px solid var(--border); border-radius:13px; overflow:hidden; height:100%; display:flex; flex-direction:column; transition:transform 0.22s, border-color 0.22s, box-shadow 0.22s; }
+        .pc:hover { transform:translateY(-5px); border-color:var(--border2); box-shadow:0 16px 40px rgba(0,0,0,0.35); }
+        .pch { padding:20px 22px; border-bottom:1px solid var(--border); display:flex; align-items:flex-start; gap:12px; }
+        .pico { width:38px; height:38px; flex-shrink:0; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.95rem; }
+        .pico.b { background:rgba(107,159,255,0.12); border:1px solid rgba(107,159,255,0.22); color:var(--blue); }
+        .pico.g { background:rgba(61,219,168,0.12); border:1px solid rgba(61,219,168,0.22); color:var(--green); }
+        .pico.a { background:rgba(255,201,71,0.12); border:1px solid rgba(255,201,71,0.22); color:var(--amber); }
+        .pico.v { background:rgba(184,156,255,0.12); border:1px solid rgba(184,156,255,0.22); color:var(--violet); }
+        .pch h4 { font-size:0.94rem; font-weight:800; color:var(--text); margin-bottom:2px; }
+        .ptyp { font-family:'JetBrains Mono',monospace; font-size:0.67rem; color:var(--hint); }
+        .pb { padding:20px 22px; flex:1; display:flex; flex-direction:column; }
+        .pb p { color:var(--sub); font-size:0.85rem; line-height:1.72; margin-bottom:9px; }
+        .pb p b { color:var(--text); font-weight:700; }
+        .pb p code { font-family:'JetBrains Mono',monospace; font-size:0.82em; color:var(--amber); background:rgba(255,201,71,0.1); padding:1px 5px; border-radius:3px; }
+        .tw { display:flex; flex-wrap:wrap; gap:4px; margin:10px 0; }
+        .pt { font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--hint); background:var(--surface); border:1px solid var(--border); padding:2px 8px; border-radius:3px; }
+        .pt.v { color:var(--violet); border-color:rgba(184,156,255,0.22); background:rgba(184,156,255,0.06); }
+        .proj-actions { display:flex; flex-wrap:wrap; gap:7px; margin-top:auto; padding-top:13px; }
+        .ghl { display:inline-flex; align-items:center; gap:5px; color:var(--blue); font-size:0.8rem; font-weight:700; text-decoration:none; padding:6px 13px; border:1px solid rgba(107,159,255,0.28); border-radius:6px; transition:all 0.15s; }
+        .ghl:hover { color:var(--green); border-color:rgba(61,219,168,0.4); background:rgba(61,219,168,0.06); }
+        .rhl { display:inline-flex; align-items:center; gap:5px; color:var(--violet); font-size:0.8rem; font-weight:700; text-decoration:none; padding:6px 13px; border:1px solid rgba(184,156,255,0.28); border-radius:6px; transition:all 0.15s; }
+        .rhl:hover { color:var(--amber); border-color:rgba(255,201,71,0.4); background:rgba(255,201,71,0.06); }
+        .pb2 { display:inline-flex; align-items:center; gap:4px; font-size:0.73rem; font-weight:700; padding:3px 10px; border-radius:4px; }
+        .pb2.g { background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25); color:var(--green); }
+        .pb2.a { background:rgba(255,201,71,0.08); border:1px solid rgba(255,201,71,0.25); color:var(--amber); }
 
-        /* EDU */
-        .educ { background:var(--card); border:1px solid var(--border); border-radius:11px; padding:34px 38px; display:flex; gap:20px; align-items:flex-start; }
-        .edico { width:46px; height:46px; flex-shrink:0; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1.15rem; background:rgba(91,141,239,0.1); border:1px solid rgba(91,141,239,0.2); color:var(--blue); }
-        .edd { font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:2px; }
-        .edf { color:var(--blue); font-weight:600; font-size:0.9rem; margin-bottom:6px; }
-        .edu2 { color:var(--muted); font-size:0.88rem; margin-bottom:2px; }
-        .edm { font-family:'IBM Plex Mono',monospace; font-size:0.73rem; color:var(--dim); }
-        .edg { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.79rem; color:var(--green); background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); padding:3px 12px; border-radius:3px; margin-top:10px; }
+        /* ── EDUCATION ── */
+        .educ { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:36px 40px; display:flex; gap:22px; align-items:flex-start; }
+        .edico { width:48px; height:48px; flex-shrink:0; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; background:rgba(107,159,255,0.12); border:1px solid rgba(107,159,255,0.22); color:var(--blue); }
+        .edd { font-size:1.12rem; font-weight:800; color:var(--text); margin-bottom:3px; }
+        .edf { color:var(--blue); font-weight:700; font-size:0.92rem; margin-bottom:7px; }
+        .edu2 { color:var(--sub); font-size:0.9rem; margin-bottom:3px; }
+        .edm { font-family:'JetBrains Mono',monospace; font-size:0.74rem; color:var(--hint); }
+        .edg { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--green); background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25); padding:4px 13px; border-radius:4px; margin-top:12px; font-weight:600; }
 
-        /* CONTACT */
-        .ccard { background:var(--card); border:1px solid var(--border); border-radius:11px; padding:34px; }
-        .crow { display:flex; align-items:center; gap:13px; padding:12px 0; border-bottom:1px solid var(--border); }
+        /* ── CONTACT ── */
+        .ccard { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:36px; }
+        .crow { display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid var(--border); }
         .crow:last-of-type { border-bottom:none; }
-        .cico { width:34px; height:34px; border-radius:6px; display:flex; align-items:center; justify-content:center; background:rgba(91,141,239,0.09); border:1px solid rgba(91,141,239,0.17); color:var(--blue); font-size:0.82rem; flex-shrink:0; }
-        .clbl { font-family:'IBM Plex Mono',monospace; font-size:0.66rem; color:var(--dim); letter-spacing:0.06em; text-transform:uppercase; }
-        .cval { font-size:0.88rem; font-weight:500; color:var(--text); }
+        .cico { width:36px; height:36px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(107,159,255,0.1); border:1px solid rgba(107,159,255,0.2); color:var(--blue); font-size:0.83rem; flex-shrink:0; }
+        .clbl { font-family:'JetBrains Mono',monospace; font-size:0.66rem; color:var(--hint); letter-spacing:0.07em; text-transform:uppercase; margin-bottom:2px; }
+        .cval { font-size:0.9rem; font-weight:600; color:var(--text); }
         .cval a { color:var(--text); text-decoration:none; transition:color 0.15s; }
         .cval a:hover { color:var(--blue); }
-        .sr { display:flex; gap:7px; margin-top:20px; }
-        .soc { width:40px; height:40px; background:var(--surface); border:1px solid var(--border); border-radius:7px; display:flex; align-items:center; justify-content:center; color:var(--muted); text-decoration:none; font-size:0.95rem; transition:all 0.18s; }
+        .sr { display:flex; gap:8px; margin-top:22px; }
+        .soc { width:42px; height:42px; background:var(--surface); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--sub); text-decoration:none; font-size:0.95rem; transition:all 0.18s; }
         .soc:hover { border-color:var(--blue); color:var(--blue); transform:translateY(-2px); }
-        .ob { background:rgba(52,211,153,0.04); border:1px solid rgba(52,211,153,0.14); border-radius:7px; padding:16px 18px; margin-top:20px; }
-        .ob p { color:var(--muted); font-size:0.86rem; line-height:1.78; margin-bottom:10px; }
-        .ob p b { color:var(--text); font-weight:500; }
+        .ob { background:rgba(61,219,168,0.05); border:1px solid rgba(61,219,168,0.18); border-radius:9px; padding:18px 20px; margin-top:22px; }
+        .ob p { color:var(--sub); font-size:0.88rem; line-height:1.8; margin-bottom:12px; }
+        .ob p b { color:var(--text); font-weight:700; }
         .rtags { display:flex; flex-wrap:wrap; gap:6px; }
-        .rt { background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.2); color:var(--green); font-size:0.78rem; font-weight:600; padding:3px 11px; border-radius:4px; }
+        .rt { background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25); color:var(--green); font-size:0.8rem; font-weight:700; padding:4px 12px; border-radius:5px; }
 
-        /* FOOTER */
-        footer { background:var(--surface); border-top:1px solid var(--border); padding:22px 0; text-align:center; }
-        footer p { font-family:'IBM Plex Mono',monospace; font-size:0.73rem; color:var(--dim); }
+        /* ── FOOTER ── */
+        footer { background:var(--surface); border-top:1px solid var(--border); padding:24px 0; text-align:center; }
+        footer p { font-family:'JetBrains Mono',monospace; font-size:0.73rem; color:var(--hint); }
 
-        /* REVEAL */
-        .reveal { opacity:0; transform:translateY(16px); transition:opacity 0.5s ease, transform 0.5s ease; }
+        /* ── REVEAL ── */
+        .reveal { opacity:0; transform:translateY(18px); transition:opacity 0.5s ease, transform 0.5s ease; }
         .reveal.in { opacity:1; transform:translateY(0); }
 
-        /* RESPONSIVE */
+        /* ── RESPONSIVE ── */
         @media(max-width:768px){
-            .hero h1 { font-size:2.4rem; }
+            .hero h1 { font-size:2.3rem; }
             .sec { padding:56px 0; }
             .educ { flex-direction:column; }
             .btn-row { flex-direction:column; }
-            .abox,.ccard { padding:24px; }
-            .nav-links { display:none; }
+            .abox, .ccard { padding:24px; }
+            .pn { padding:24px; }
         }
+        @media(max-width:480px){ .mn { font-size:1.85rem; } }
     </style>
 </head>
 <body>
 
-<nav>
+<!-- NAV -->
+<nav role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
         <a href="#home" class="nav-brand">ashakiran<em>.jyoti</em></a>
         <div class="nav-links">
@@ -267,8 +345,21 @@
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
     </div>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#skills" class="mobile-link">Skills</a>
+    <a href="#experience" class="mobile-link">Experience</a>
+    <a href="#depth" class="mobile-link">Testing Depth</a>
+    <a href="#ai" class="mobile-link">AI Workflow</a>
+    <a href="#projects" class="mobile-link">Projects</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+</div>
 
 <!-- HERO -->
 <section id="home" class="hero">
@@ -277,14 +368,16 @@
     <div class="wrap">
         <div class="row">
             <div class="col-lg-9">
-                <div class="pill-status"><span class="sdot"></span>Open to opportunities</div>
+                <div class="pill-status">
+                    <span class="sdot"></span>Open to opportunities
+                </div>
                 <h1>
                     <span class="hi">Hi, I'm</span>
                     <span class="ng">Ashakiran Jyoti</span>
                 </h1>
                 <p class="hero-role"><b>Junior QA Engineer</b> — Manual Testing &amp; Playwright Automation</p>
                 <p class="hero-desc">
-                    QA Engineer with <b>2+ years of experience</b> working on two large-scale software projects —
+                    QA Engineer with <b>2+ years of experience</b> on two large-scale software projects —
                     <b>AMRUT 2.0</b> (Government of India water infrastructure monitoring) and an
                     <b>Inventory Management System</b> for manufacturing. Worked under a <b>Senior QA Lead</b>
                     in cross-functional Agile teams. Day-to-day: manual test execution, bug reporting in GitLab,
@@ -292,10 +385,11 @@
                     personal projects independently.
                 </p>
                 <div class="tag-row">
-                    <span class="tag">Playwright · JS</span>
-                    <span class="tag">Manual Testing</span>
-                    <span class="tag">STLC · Agile · Scrum</span>
+                    <span class="tag">Playwright · JS &amp; TS</span>
                     <span class="tag">Page Object Model</span>
+                    <span class="tag">Manual Testing</span>
+                    <span class="tag">Agile · Scrum</span>
+                    <span class="tag">STLC</span>
                     <span class="tag">API Testing</span>
                     <span class="tag">GitLab · CI/CD</span>
                     <span class="tag g">Govt. of India Project</span>
@@ -304,7 +398,9 @@
                 <div class="btn-row">
                     <a href="#projects" class="bp"><i class="fas fa-folder-open"></i> Projects</a>
                     <a href="#depth" class="bs"><i class="fas fa-vial"></i> Testing Depth</a>
-                    <a href="https://github.com/ashakiranjyoti" class="bs" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://github.com/ashakiranjyoti" class="bs" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
                     <a href="#contact" class="bs"><i class="fas fa-envelope"></i> Contact</a>
                 </div>
             </div>
@@ -316,10 +412,34 @@
 <div class="metrics">
     <div class="wrap">
         <div class="row text-center">
-            <div class="col-6 col-md-3"><div class="metric"><div class="mn">300+</div><div class="ml">Test Cases Written</div></div></div>
-            <div class="col-6 col-md-3"><div class="metric"><div class="mn">160+</div><div class="ml">Automated Tests</div></div></div>
-            <div class="col-6 col-md-3"><div class="metric"><div class="mn">15+</div><div class="ml">Critical Bugs Found</div></div></div>
-            <div class="col-6 col-md-3"><div class="metric"><div class="mn">70%</div><div class="ml">Regression Time Saved</div></div></div>
+            <div class="col-6 col-md-3">
+                <div class="metric">
+                    <div class="mn">300+</div>
+                    <div class="ml">Test Cases Written</div>
+                    <div class="mc">Across 3 projects in Excel — manual suites covering all STLC phases</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="metric">
+                    <div class="mn">160+</div>
+                    <div class="ml">Automated Tests</div>
+                    <div class="mc">Playwright JS scripts — login, RBAC, stock, SCADA, reports</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="metric">
+                    <div class="mn">15+</div>
+                    <div class="ml">Critical Bugs Found</div>
+                    <div class="mc">Including RBAC security flaw &amp; negative-stock data bug before release</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="metric">
+                    <div class="mn">70%</div>
+                    <div class="ml">Regression Time Saved</div>
+                    <div class="mc">Manual regression: 4–5 days/sprint → under 1 day via automation</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -330,30 +450,14 @@
         <div class="sec-header reveal">
             <div class="eyebrow">// about</div>
             <h2 class="sh">Who I Am as a QA Engineer</h2>
-            <p class="ssub">Manual testing execution + automation skills — on real projects</p>
+            <p class="ssub">Manual testing foundation, automation skills, real projects</p>
         </div>
         <div class="row justify-content-center reveal">
             <div class="col-lg-10">
                 <div class="abox">
-                    <p>
-                        I'm a <b>Junior QA Engineer</b> with 2+ years of hands-on experience on two live software projects.
-                        At Modern Communication Technology (MCOM), I work under a <b>Senior QA Lead</b> in a
-                        cross-functional team that includes a Project Manager, SCADA Domain Specialists,
-                        Backend and Frontend Developers, and our QA team. My Senior QA Lead designed the automation
-                        framework and reviews all my code through Merge Requests. My day-to-day responsibility is
-                        the actual testing execution.
-                    </p>
-                    <p>
-                        I've worked across <b>AMRUT 2.0</b> — a live Government of India SCADA dashboard monitoring
-                        water supply across Indian cities — and an <b>Inventory Management System (IMS)</b>
-                        for a manufacturing organisation. Both are live deployments with real users and real stakes.
-                    </p>
-                    <p>
-                        I write <b>JavaScript</b> in my work automation scripts, and build personal projects in
-                        <b>TypeScript</b> to grow my skills. From mid-project onwards, I've integrated AI tools
-                        (Claude, ChatGPT, GitHub Copilot, Cursor, Windsurf) at specific bounded points in my workflow —
-                        always with sanitized prompts, never sharing real credentials, server data, or government project details.
-                    </p>
+                    <p>I'm a <b>Junior QA Engineer</b> with 2+ years of hands-on experience on two live software projects. At Modern Communication Technology (MCOM), I work under a <b>Senior QA Lead</b> in a cross-functional team that includes a Project Manager, SCADA Domain Specialists, Backend and Frontend Developers, and our QA team. My Senior QA Lead designed the automation framework and reviews all my code through Merge Requests. My day-to-day responsibility is the actual testing execution.</p>
+                    <p>I've worked across <b>AMRUT 2.0</b> — a live Government of India SCADA dashboard monitoring water supply across Indian cities — and an <b>Inventory Management System (IMS)</b> for a manufacturing organisation. Both are live deployments with real users and real stakes.</p>
+                    <p>I write <b>JavaScript</b> in my work automation scripts, and build personal projects in <b>TypeScript</b> to grow my skills. From mid-project onwards, I've integrated AI tools (Claude, ChatGPT, GitHub Copilot, Cursor, Windsurf) at specific bounded points in my workflow — always with sanitized prompts, never sharing real credentials, server data, or government project details.</p>
                     <div class="achips">
                         <span class="ac g">Manual Testing</span>
                         <span class="ac g">STLC · Agile · Scrum</span>
@@ -395,7 +499,7 @@
                 <div class="skc">
                     <div class="skh"><div class="ski b"><i class="fas fa-robot"></i></div><h5>Test Automation</h5></div>
                     <div class="pills">
-                        <span class="pill hi">Playwright (JavaScript)</span><span class="pill hi">Playwright (TypeScript)</span>
+                        <span class="pill hi">Playwright (TypeScript)</span><span class="pill hi">Playwright (JavaScript)</span>
                         <span class="pill hi">Page Object Model</span><span class="pill">Data-Driven Testing</span>
                         <span class="pill">Custom Fixtures</span><span class="pill">Allure Reports</span>
                         <span class="pill">HTML Reports</span><span class="pill">GitHub Actions</span>
@@ -466,7 +570,7 @@
                     <span class="ec-badge">Current Role</span>
                     <div class="eco">Modern Communication Technology (MCOM)</div>
                     <div class="ero">Junior QA Engineer</div>
-                    <div class="edu">June 2024 – Present · Pune, Maharashtra</div>
+                    <div class="edur">June 2024 – Present · Pune, Maharashtra</div>
                 </div>
             </div>
 
@@ -474,26 +578,26 @@
             <ul class="ul">
                 <li class="g">Cross-functional Agile team: <b>Project Manager, SCADA Domain Specialists, Backend &amp; Frontend Developers, Senior QA Lead</b>, and myself as Junior QA</li>
                 <li class="g">Reported to a <b>Senior QA Lead</b> — she designed the automation framework, reviewed all my Playwright scripts via Merge Requests, and mentored me on framework patterns and best practices</li>
-                <li class="g">Participated in full Scrum ceremonies each sprint: <b>planning, daily standups, sprint demos, retrospectives, backlog grooming</b></li>
+                <li class="g">Full Scrum each sprint: <b>sprint planning, daily standups, sprint demos, retrospectives, backlog grooming</b></li>
             </ul>
 
             <div class="esect b">Manual Testing</div>
             <ul class="ul">
                 <li class="b">Primary manual test execution owner for AMRUT 2.0 and IMS — wrote <b>300+ test cases in Excel</b>, executed every sprint, reported all bugs in GitLab with screenshots</li>
                 <li class="b">Covered: functional, regression, smoke, sanity, integration, exploratory, <b>boundary value analysis, equivalence partitioning, role-based access</b> testing</li>
-                <li class="b">Found <b>15+ critical bugs</b> — including negative stock (BVA) that blocked a release, and a security vulnerability in RBAC where restricted users could see control buttons</li>
-                <li class="b">Worked with developer to design a <b>real-time test protocol</b> for SCADA sensor data — inserting known values so assertions were reliable on live-updating dashboards</li>
+                <li class="b">Found <b>15+ critical bugs</b> — including a <b>negative stock bug</b> (BVA at qty = available + 1) that blocked a release, and a <b>security vulnerability</b> where restricted RBAC users could see control buttons</li>
+                <li class="b">Designed a <b>real-time test protocol</b> with the developer for SCADA sensor data — inserting known values so assertions were reliable on live-updating dashboards</li>
                 <li class="b">Used <b>AI tools (Claude, ChatGPT) with sanitized prompts</b> to brainstorm non-obvious edge cases — filtered and validated every suggestion myself before adding to the test suite</li>
-                <li class="b">Full <b>bug reports in GitLab</b>: Title · Steps to Reproduce · Expected · Actual · Environment · Severity + screenshot on every report</li>
+                <li class="b">Every <b>GitLab bug report</b>: Title · Steps to Reproduce · Expected · Actual · Environment · Severity + screenshot</li>
             </ul>
 
             <div class="esect g">Playwright Automation (JavaScript)</div>
             <ul class="ul">
                 <li class="g">Wrote <b>160+ test scripts in JavaScript</b> inside the POM framework designed and taught by Senior QA Lead</li>
                 <li class="g">Covered: login flows, stock management, SCADA dashboard, RBAC, report exports, AJAX cascade dropdowns</li>
-                <li class="g">Followed a strict <b>Merge Request process</b> — branched, tested locally in headed mode, pushed, addressed Senior's review comments before merge</li>
+                <li class="g">Strict <b>Merge Request process</b> — branched, tested locally in headed mode, pushed, addressed Senior's review comments before every merge</li>
                 <li class="g"><b>GitLab CI pipeline</b> runs all tests automatically on every merge — results visible to the whole team</li>
-                <li class="g">Reduced manual regression from 4–5 days per sprint to <b>under 1 day — 70% time saving</b></li>
+                <li class="g">Reduced manual regression from 4–5 days/sprint to <b>under 1 day — 70% time saving</b></li>
             </ul>
 
             <div class="esect v">AI Tools in Workflow</div>
@@ -501,7 +605,7 @@
                 <li class="v"><b>GitHub Copilot</b> — POM class scaffolding and boilerplate; I focus on selector accuracy and logic</li>
                 <li class="v"><b>Cursor AI</b> — debugging flaky SCADA tests; AI-assisted trace analysis for timing issues in sensor polling</li>
                 <li class="v"><b>Windsurf</b> — multi-file JS→TS migrations in personal projects; supervised all AI output</li>
-                <li class="v">~<b>40% faster test authoring</b> on repetitive scaffolding; test strategy and edge case decisions always mine</li>
+                <li class="v"><b>~40% faster test authoring</b> on repetitive scaffolding; test strategy and edge case decisions always mine</li>
             </ul>
 
             <div class="tr">
@@ -515,7 +619,7 @@
         <div class="ec reveal">
             <div class="eco">IT JOBXS</div>
             <div class="ero">Intern Trainee — QA &amp; Testing</div>
-            <div class="edu">October 2023 – May 2024</div>
+            <div class="edur">October 2023 – May 2024</div>
             <ul class="ul" style="margin-top:14px;">
                 <li class="b">Tested security features: <b>bot detection, spam prevention</b>, and user authentication flows</li>
                 <li class="b">Validated <b>Google reCAPTCHA</b> integration end-to-end — security testing of verification flows</li>
@@ -540,13 +644,13 @@
             <div class="pn">
                 <div class="pntag g"><i class="fas fa-vial"></i> Manual Testing</div>
                 <h3>Day-to-Day Execution</h3>
-                <p>Every sprint I received User Stories with Acceptance Criteria from the PM. My job: write test cases in Excel (happy path + negatives + edge cases), execute on staging, report bugs in GitLab, retest fixes, deliver a sprint QA summary to Senior QA Lead.</p>
+                <p>Every sprint: receive User Stories with Acceptance Criteria, write Excel test cases (happy path + negatives + edge cases), execute on staging, report bugs in GitLab, retest fixes, deliver sprint QA summary to Senior QA Lead.</p>
                 <ul class="dl">
-                    <li><b>Requirement chain:</b> Stakeholder → PM → BRD → Sprint User Story → Acceptance Criteria → my Excel test cases</li>
-                    <li><b>AMRUT example:</b> Zone Board Alert — 1 User Story → 8 test cases covering 5 ACs + AI-brainstormed edge cases (simultaneous over-pressure + trip state; zone with zero assigned stations)</li>
+                    <li><b>Requirement chain:</b> Stakeholder → PM → BRD → Sprint User Story → AC → my Excel test cases</li>
+                    <li><b>AMRUT example:</b> Zone Board Alert — 1 User Story → 8 test cases covering 5 ACs + AI-brainstormed edges (simultaneous over-pressure + trip; zero-station zone)</li>
                     <li><b>IMS example:</b> Inward Stock Form — 1 User Story → 11 test cases including AJAX empty-array state (TC_IN_007 — AI-suggested, validated by me)</li>
                     <li><b>Every GitLab bug report:</b> Title · Steps · Expected · Actual · Environment · Severity + screenshot</li>
-                    <li><b>Security bug found:</b> View-Only users could see SCADA control buttons — RBAC testing caught it</li>
+                    <li><b>Security bug found:</b> View-Only users could see SCADA control buttons — RBAC testing</li>
                     <li><b>Data bug found:</b> Negative stock at qty = available + 1 — boundary value analysis</li>
                     <li><b>Agile ceremonies:</b> Planning, standups, demo prep (pass/fail counts, bugs raised vs closed), retrospectives</li>
                 </ul>
@@ -554,14 +658,14 @@
             <div class="pn">
                 <div class="pntag b"><i class="fas fa-code"></i> JS at work · TS for personal growth</div>
                 <h3>Automation Skills</h3>
-                <p>At work I write JavaScript inside the Senior QA Lead's framework. For personal projects I build TypeScript frameworks from scratch — deliberately growing both skill sets.</p>
+                <p>At work I write JavaScript inside the Senior QA Lead's framework. Personal projects are built in TypeScript from scratch — deliberately growing both skill sets.</p>
                 <ul class="dl">
                     <li><b>Work (JavaScript):</b> 160+ scripts, strict MR process — Senior reviewed every line before merge, taught me patterns via code comments</li>
-                    <li><b>Personal (TypeScript):</b> DemoBlaze (typed POM + Allure + GitHub Pages), SauceDemo (cross-browser: Chromium/Firefox/WebKit), ReqRes API (typed client, multi-env config)</li>
-                    <li><b>Hardest work challenge — AJAX cascade:</b> IMS inward form needed <code>waitForResponse</code> to intercept subcategory API call before asserting child dropdown — taught by Senior QA via MR comment</li>
-                    <li><b>SCADA real-time challenge:</b> Live sensor data changed every 15s — designed insert-known-value protocol with developer for stable assertions</li>
-                    <li><b>Flaky test resolution:</b> Playwright trace viewer + Cursor AI to diagnose race condition in sensor polling — fixed to zero failures</li>
-                    <li><b>MR learning loop:</b> Senior's comments ("use waitForResponse here", "move locator to page class", "externalise this to JSON") shaped how I write automation today</li>
+                    <li><b>Personal (TypeScript):</b> DemoBlaze (typed POM + Allure + GitHub Pages), SauceDemo (cross-browser), ReqRes API (typed client, multi-env)</li>
+                    <li><b>Hardest work challenge — AJAX cascade:</b> IMS inward form needed <code>waitForResponse</code> to intercept subcategory API call — taught by Senior via MR comment</li>
+                    <li><b>SCADA real-time challenge:</b> Live sensor data every 15s — designed insert-known-value protocol with developer for stable assertions</li>
+                    <li><b>Flaky test fix:</b> Trace viewer + Cursor AI pinpointed race condition in sensor polling — resolved to zero failures</li>
+                    <li><b>MR learning loop:</b> "Use waitForResponse here", "move locator to page class", "externalise to JSON" — Senior's comments shaped how I write automation today</li>
                 </ul>
             </div>
         </div>
@@ -576,18 +680,20 @@
             <h2 class="sh">AI Tools in My Testing Process</h2>
             <p class="ssub">Used at specific moments — test decisions always mine</p>
         </div>
-        <div class="abox reveal" style="margin-bottom:28px; padding:24px 28px;">
-            <p style="margin:0; font-size:0.92rem;">
+        <div class="abox reveal" style="margin-bottom:30px; padding:22px 28px;">
+            <p style="margin:0; font-size:0.93rem; color:var(--sub);">
                 I use AI at <b>specific, bounded points</b>: scenario brainstorming, code scaffolding, debugging, and refactoring.
                 Reading requirements, deciding what to test, executing, and signing off — always mine.
-                <b>Security rule (strictly followed):</b> No real server IPs, credentials, database values, or government data ever enters any AI tool.
-                All prompts describe logic generically, never actual project details.
+                <b>Security rule (strictly followed):</b> No real server IPs, credentials, database values, or government data ever enters any AI tool. All prompts describe logic generically, never actual project details.
             </p>
         </div>
         <div class="row g-4">
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="aic">
-                    <div class="aich"><div class="aiico b"><i class="fab fa-github"></i></div><div><div class="ain">GitHub Copilot</div><div class="ais">VS Code · Daily</div></div></div>
+                    <div class="aich">
+                        <div class="aiico b"><i class="fab fa-github"></i></div>
+                        <div><div class="ain">GitHub Copilot</div><div class="ais">VS Code · Daily</div></div>
+                    </div>
                     <div class="aib">
                         <p>Inline assistant for test scaffolding — handles boilerplate so I focus on selector accuracy and test logic.</p>
                         <ul class="ail">
@@ -601,9 +707,12 @@
             </div>
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="aic">
-                    <div class="aich"><div class="aiico v">✦</div><div><div class="ain">Cursor AI</div><div class="ais">Debugging &amp; Code Chat</div></div></div>
+                    <div class="aich">
+                        <div class="aiico v">✦</div>
+                        <div><div class="ain">Cursor AI</div><div class="ais">Debugging &amp; Code Chat</div></div>
+                    </div>
                     <div class="aib">
-                        <p>Used for complex debugging sessions — chat-with-codebase helped trace timing-sensitive flaky test failures.</p>
+                        <p>Used for complex debugging — chat-with-codebase helped trace timing-sensitive flaky test failures.</p>
                         <ul class="ail">
                             <li><b>Flaky test root cause</b> — race condition in SCADA sensor polling</li>
                             <li><b>Playwright error decoding</b> — async/timeout messages understood faster</li>
@@ -615,7 +724,10 @@
             </div>
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="aic">
-                    <div class="aich"><div class="aiico g">🌊</div><div><div class="ain">Windsurf</div><div class="ais">Multi-file · Agentic</div></div></div>
+                    <div class="aich">
+                        <div class="aiico g">🌊</div>
+                        <div><div class="ain">Windsurf</div><div class="ais">Multi-file · Agentic</div></div>
+                    </div>
                     <div class="aib">
                         <p>Used for large multi-file operations in personal projects — JS→TS migrations across many files at once.</p>
                         <ul class="ail">
@@ -659,36 +771,72 @@
         <div class="row g-4 mb-5">
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="pc">
-                    <div class="pch"><div class="pico a"><i class="fas fa-broadcast-tower"></i></div><div><h4>AMRUT 2.0 — SCADA Dashboard</h4><div class="ptyp">Govt. of India · Water Infrastructure</div></div></div>
+                    <div class="pch">
+                        <div class="pico a"><i class="fas fa-broadcast-tower"></i></div>
+                        <div>
+                            <h4>AMRUT 2.0 — SCADA Dashboard</h4>
+                            <div class="ptyp">Govt. of India · Water Infrastructure</div>
+                        </div>
+                    </div>
                     <div class="pb">
                         <p><b>About:</b> Real-time monitoring of water supply across Indian cities — 50+ pumping stations, live sensor data every 15–60 seconds, remote pump/valve controls, role-based access for field engineers and officers.</p>
                         <p><b>My work:</b> 8 modules tested manually (150+ test cases). 50+ Playwright JS scripts. Found RBAC security bug and LPCD calculation error on the dashboard.</p>
-                        <p><b>Hardest challenge:</b> Real-time sensor data — designed a test protocol with the developer to insert known values for reliable assertions.</p>
-                        <div class="tw"><span class="pt">Playwright JS</span><span class="pt">POM</span><span class="pt">MS SQL Server</span><span class="pt">RBAC Testing</span><span class="pt v">Cursor AI</span></div>
-                        <div class="br"><span class="pb2 a"><i class="fas fa-landmark"></i> Government of India</span></div>
+                        <p><b>Key challenge:</b> Real-time sensor data — designed a test protocol with the developer to insert known values for reliable assertions.</p>
+                        <div class="tw">
+                            <span class="pt">Playwright JS</span><span class="pt">POM</span>
+                            <span class="pt">MS SQL Server</span><span class="pt">RBAC Testing</span>
+                            <span class="pt v">Cursor AI</span>
+                        </div>
+                        <div class="proj-actions">
+                            <span class="pb2 a"><i class="fas fa-landmark"></i> Government of India</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="pc">
-                    <div class="pch"><div class="pico b"><i class="fas fa-boxes"></i></div><div><h4>Inventory Management System</h4><div class="ptyp">Manufacturing · Internal ERP</div></div></div>
+                    <div class="pch">
+                        <div class="pico b"><i class="fas fa-boxes"></i></div>
+                        <div>
+                            <h4>Inventory Management System</h4>
+                            <div class="ptyp">Manufacturing · Internal ERP</div>
+                        </div>
+                    </div>
                     <div class="pb">
-                        <p><b>About:</b> Internal stock management for a manufacturing organisation — inward from suppliers, outward to departments, shortage detection, 1000+ product categories (3-level hierarchy), PDF/Excel exports.</p>
+                        <p><b>About:</b> Internal stock management — inward from suppliers, outward to departments, shortage detection, 1000+ product categories (3-level hierarchy), PDF/Excel exports.</p>
                         <p><b>My work:</b> 7 modules manually (150+ test cases). 60+ Playwright JS scripts. Critical catch: negative stock from boundary value testing at qty = available + 1 — blocked the release.</p>
-                        <p><b>Hardest challenge:</b> AJAX cascade dropdown needed <code>waitForResponse</code> to intercept API call before asserting child dropdown — learned from Senior QA's MR review.</p>
-                        <div class="tw"><span class="pt">Playwright JS</span><span class="pt">POM</span><span class="pt">MySQL</span><span class="pt">BVA</span><span class="pt v">GitHub Copilot</span></div>
-                        <div class="br"><span class="pb2 g"><i class="fas fa-bug"></i> Critical bug — blocked release</span></div>
+                        <p><b>Key challenge:</b> AJAX cascade dropdown needed <code>waitForResponse</code> to intercept API call — learned from Senior QA's MR review.</p>
+                        <div class="tw">
+                            <span class="pt">Playwright JS</span><span class="pt">POM</span>
+                            <span class="pt">MySQL</span><span class="pt">BVA</span>
+                            <span class="pt v">GitHub Copilot</span>
+                        </div>
+                        <div class="proj-actions">
+                            <span class="pb2 g"><i class="fas fa-bug"></i> Critical bug blocked release</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="pc">
-                    <div class="pch"><div class="pico g"><i class="fas fa-map-marked-alt"></i></div><div><h4>Site Track System</h4><div class="ptyp">Field Operations · Internal Tool</div></div></div>
+                    <div class="pch">
+                        <div class="pico g"><i class="fas fa-map-marked-alt"></i></div>
+                        <div>
+                            <h4>Site Track System</h4>
+                            <div class="ptyp">Field Operations · Internal Tool</div>
+                        </div>
+                    </div>
                     <div class="pb">
                         <p><b>About:</b> Role-based field operations tool — Sites → Tubewells → LCS hierarchy (3 levels), media uploads, audit trails, and compliance workflows for field engineers.</p>
                         <p><b>My work:</b> 60+ manual test cases across CRUD, uploads, and access control. 60+ automated scripts covering the full hierarchy, upload edge cases, and workflow end-to-end.</p>
-                        <div class="tw"><span class="pt">Playwright JS</span><span class="pt">POM</span><span class="pt">CRUD Testing</span><span class="pt">Security Testing</span><span class="pt v">GitHub Copilot</span></div>
-                        <div class="br"><a href="https://github.com/ashakiranjyoti/SITE_TRACK_SYSTEM" class="ghl" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
+                        <div class="tw">
+                            <span class="pt">Playwright JS</span><span class="pt">POM</span>
+                            <span class="pt">CRUD Testing</span><span class="pt">Security Testing</span>
+                            <span class="pt v">GitHub Copilot</span>
+                        </div>
+                        <div class="proj-actions">
+                            <a href="https://github.com/ashakiranjyoti/SITE_TRACK_SYSTEM" class="ghl" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -701,40 +849,80 @@
         <div class="row g-4">
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="pc">
-                    <div class="pch"><div class="pico b"><i class="fas fa-shopping-bag"></i></div><div><h4>DemoBlaze — E2E Framework</h4><div class="ptyp">TypeScript · Allure · GitHub Pages</div></div></div>
+                    <div class="pch">
+                        <div class="pico b"><i class="fas fa-shopping-bag"></i></div>
+                        <div>
+                            <h4>DemoBlaze — E2E Framework</h4>
+                            <div class="ptyp">TypeScript · Allure · GitHub Pages</div>
+                        </div>
+                    </div>
                     <div class="pb">
-                        <p><b>Goal:</b> Practise JS→TS migration — typed POM classes, interfaces, explicit return types. Allure reports with trend history auto-published to GitHub Pages on every push.</p>
+                        <p><b>Goal:</b> Practise JS→TS migration — typed POM classes, interfaces, explicit return types. Allure reports with trend history auto-published to GitHub Pages on every CI push.</p>
                         <p><b>Coverage:</b> Login (multi-role), products, cart, checkout — smoke + regression tagged suites, externalized test data.</p>
-                        <div class="tw"><span class="pt">Playwright TS</span><span class="pt">POM</span><span class="pt">Allure</span><span class="pt">GitHub Actions</span><span class="pt">Smoke + Regression</span></div>
-                        <div class="br"><a href="https://github.com/ashakiranjyoti/demoblaze_playwright_ts" class="ghl" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
+                        <div class="tw">
+                            <span class="pt">Playwright TS</span><span class="pt">POM</span>
+                            <span class="pt">Allure</span><span class="pt">GitHub Actions</span>
+                            <span class="pt">Smoke + Regression</span>
+                        </div>
+                        <div class="proj-actions">
+                            <a href="https://github.com/ashakiranjyoti/demoblaze_playwright_ts" class="ghl" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="https://ashakiranjyoti.github.io/demoblaze_playwright_ts/" class="rhl" target="_blank" rel="noopener"><i class="fas fa-chart-bar"></i> Test Report</a>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="pc">
-                    <div class="pch"><div class="pico a"><i class="fas fa-shopping-cart"></i></div><div><h4>SauceDemo — Cross-Browser TS</h4><div class="ptyp">TypeScript · 3 Browsers · CI/CD</div></div></div>
+                    <div class="pch">
+                        <div class="pico a"><i class="fas fa-shopping-cart"></i></div>
+                        <div>
+                            <h4>SauceDemo — Cross-Browser TS</h4>
+                            <div class="ptyp">TypeScript · 3 Browsers · CI/CD</div>
+                        </div>
+                    </div>
                     <div class="pb">
                         <p><b>Goal:</b> Practise cross-browser setup (Chromium / Firefox / WebKit), typed page objects, externalized test data (users.json, products.json), CI with retries.</p>
                         <p><b>Coverage:</b> Auth, product management, cart, checkout, API smoke test. Screenshot + video on failure.</p>
-                        <div class="tw"><span class="pt">Playwright TS</span><span class="pt">POM</span><span class="pt">Cross-browser</span><span class="pt">GitHub Actions</span><span class="pt">Data-driven</span></div>
-                        <div class="br"><a href="https://github.com/ashakiranjyoti/saucedemo-playwright-ts" class="ghl" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
+                        <div class="tw">
+                            <span class="pt">Playwright TS</span><span class="pt">POM</span>
+                            <span class="pt">Cross-browser</span><span class="pt">GitHub Actions</span>
+                            <span class="pt">Data-driven</span>
+                        </div>
+                        <div class="proj-actions">
+                            <a href="https://github.com/ashakiranjyoti/saucedemo-playwright-ts" class="ghl" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="pc">
-                    <div class="pch"><div class="pico v"><i class="fas fa-plug"></i></div><div><h4>ReqRes REST API Framework</h4><div class="ptyp">TypeScript · Multi-env · API Testing</div></div></div>
+                    <div class="pch">
+                        <div class="pico v"><i class="fas fa-plug"></i></div>
+                        <div>
+                            <h4>ReqRes REST API Framework</h4>
+                            <div class="ptyp">TypeScript · Multi-env · API Testing</div>
+                        </div>
+                    </div>
                     <div class="pb">
                         <p><b>Goal:</b> Build a typed API test framework — typed client, multi-environment config (DEV/QA switchable via env var), reusable typed assertion helpers.</p>
                         <p><b>Coverage:</b> GET (pagination + negatives), POST (create + missing fields), PUT (update + empty body), DELETE (valid + invalid IDs).</p>
-                        <div class="tw"><span class="pt">Playwright Request</span><span class="pt">TypeScript</span><span class="pt">Multi-env</span><span class="pt">Schema Validation</span><span class="pt">GitHub Actions</span></div>
-                        <div class="br"><a href="https://github.com/ashakiranjyoti/REQRES_API-TS" class="ghl" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
+                        <div class="tw">
+                            <span class="pt">Playwright Request</span><span class="pt">TypeScript</span>
+                            <span class="pt">Multi-env</span><span class="pt">Schema Validation</span>
+                            <span class="pt">GitHub Actions</span>
+                        </div>
+                        <div class="proj-actions">
+                            <a href="https://github.com/ashakiranjyoti/REQRES_API-TS" class="ghl" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="text-center mt-5 reveal">
-            <a href="https://github.com/ashakiranjyoti" class="bp" target="_blank"><i class="fab fa-github"></i> All on GitHub</a>
+            <a href="https://github.com/ashakiranjyoti" class="bp" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i> All on GitHub
+            </a>
         </div>
     </div>
 </section>
@@ -774,12 +962,30 @@
         <div class="row justify-content-center reveal">
             <div class="col-lg-7">
                 <div class="ccard">
-                    <div class="crow"><div class="cico"><i class="fas fa-envelope"></i></div><div><div class="clbl">Email</div><div class="cval"><a href="mailto:ashakirandjoti5501@gmail.com">ashakirandjoti5501@gmail.com</a></div></div></div>
-                    <div class="crow"><div class="cico"><i class="fas fa-phone"></i></div><div><div class="clbl">Phone</div><div class="cval"><a href="tel:+919284344460">+91 9284344460</a></div></div></div>
-                    <div class="crow"><div class="cico"><i class="fas fa-map-marker-alt"></i></div><div><div class="clbl">Location</div><div class="cval">Pune, Maharashtra, India</div></div></div>
+                    <div class="crow">
+                        <div class="cico"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <div class="clbl">Email</div>
+                            <div class="cval"><a href="mailto:ashakirandjoti5501@gmail.com">ashakirandjoti5501@gmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="crow">
+                        <div class="cico"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <div class="clbl">Phone</div>
+                            <div class="cval"><a href="tel:+919284344460">+91 9284344460</a></div>
+                        </div>
+                    </div>
+                    <div class="crow">
+                        <div class="cico"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <div class="clbl">Location</div>
+                            <div class="cval">Pune, Maharashtra, India</div>
+                        </div>
+                    </div>
                     <div class="sr">
-                        <a href="https://github.com/ashakiranjyoti" class="soc" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/ashakiran-jyoti-b3489b252/" class="soc" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/ashakiranjyoti" class="soc" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/ashakiran-jyoti-b3489b252/" class="soc" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
                         <a href="mailto:ashakirandjoti5501@gmail.com" class="soc"><i class="fas fa-envelope"></i></a>
                     </div>
                     <div class="ob">
@@ -804,20 +1010,42 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-    }, { threshold: 0.07 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    const toggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
 
+    function openMenu() {
+        menuOpen = true; mobileMenu.classList.add('open');
+        mobileMenu.setAttribute('aria-hidden','false');
+        toggle.setAttribute('aria-expanded','true');
+        toggle.setAttribute('aria-label','Close navigation menu');
+        toggle.innerHTML = '<i class="fas fa-times"></i>';
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+        menuOpen = false; mobileMenu.classList.remove('open');
+        mobileMenu.setAttribute('aria-hidden','true');
+        toggle.setAttribute('aria-expanded','false');
+        toggle.setAttribute('aria-label','Open navigation menu');
+        toggle.innerHTML = '<i class="fas fa-bars"></i>';
+        document.body.style.overflow = '';
+    }
+    toggle.addEventListener('click', () => { menuOpen ? closeMenu() : openMenu(); });
+    document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if(e.key==='Escape' && menuOpen) closeMenu(); });
+
+    const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    const desktopLinks = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
         let cur = '';
-        document.querySelectorAll('section[id]').forEach(s => {
-            if (pageYOffset >= s.offsetTop - 140) cur = s.id;
-        });
-        document.querySelectorAll('.nav-links a').forEach(l => {
-            l.style.color = l.getAttribute('href') === '#' + cur ? 'var(--blue)' : '';
-        });
-    });
+        sections.forEach(s => { if(window.pageYOffset >= s.offsetTop - 140) cur = s.id; });
+        desktopLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
+    }, { passive:true });
 </script>
 </body>
 </html>
