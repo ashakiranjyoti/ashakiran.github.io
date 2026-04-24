@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashakiran Jyoti — QA Engineer · Playwright · Manual Testing</title>
-    <meta name="description" content="Ashakiran Jyoti — QA Engineer with hands-on experience in Manual Testing and Playwright Automation.">
+    <title>Ashakiran Jyoti — QA Automation Engineer · Playwright · Manual Testing</title>
+    <meta name="description" content="Ashakiran Jyoti — QA Automation Engineer with 2+ years experience in Playwright automation and manual testing. AMRUT 2.0 (Govt. of India) and IMS projects.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -22,15 +22,11 @@
             --green:   #3DDBA8;
             --amber:   #FFC947;
             --violet:  #B89CFF;
-            --red:     #FF6B6B;
-
-            /* READABLE TEXT — no more dim/muted blur */
             --text:    #ECEEF8;
-            --sub:     #C4CAE0;   /* secondary text — clearly readable */
-            --hint:    #8B92B3;   /* tertiary — still visible on dark */
-            --faint:   #5A6080;   /* borders, dividers only — NOT text */
+            --sub:     #C4CAE0;
+            --hint:    #8B92B3;
+            --faint:   #5A6080;
         }
-
         *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; }
         body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
@@ -38,113 +34,53 @@
         ::-webkit-scrollbar-track { background:var(--bg); }
         ::-webkit-scrollbar-thumb { background:var(--border2); border-radius:4px; }
 
-        /* ── NAV ── */
-        nav {
-            position:fixed; top:0; left:0; right:0; z-index:200;
-            background:rgba(7,8,14,0.94);
-            backdrop-filter:blur(24px);
-            border-bottom:1px solid var(--border);
-        }
-        .nav-inner {
-            max-width:1160px; margin:0 auto; padding:0 24px;
-            display:flex; align-items:center; justify-content:space-between; height:58px;
-        }
-        .nav-brand { font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--text); text-decoration:none; letter-spacing:0.02em; }
+        nav { position:fixed; top:0; left:0; right:0; z-index:200; background:rgba(7,8,14,0.94); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); }
+        .nav-inner { max-width:1160px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:58px; }
+        .nav-brand { font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--text); text-decoration:none; }
         .nav-brand em { color:var(--green); font-style:normal; }
         .nav-links { display:flex; gap:2px; }
-        .nav-links a {
-            color:var(--hint); text-decoration:none; font-size:0.75rem; font-weight:600;
-            letter-spacing:0.07em; text-transform:uppercase; padding:6px 11px;
-            border-radius:5px; transition:color 0.15s, background 0.15s;
-        }
+        .nav-links a { color:var(--hint); text-decoration:none; font-size:0.75rem; font-weight:600; letter-spacing:0.07em; text-transform:uppercase; padding:6px 11px; border-radius:5px; transition:color 0.15s, background 0.15s; }
         .nav-links a:hover, .nav-links a.active { color:var(--text); background:var(--border); }
-        .nav-toggle {
-            display:none; background:none; border:none; cursor:pointer;
-            padding:6px; color:var(--hint); font-size:1.2rem; transition:color 0.15s;
-        }
+        .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:6px; color:var(--hint); font-size:1.2rem; }
         .nav-toggle:hover { color:var(--text); }
-        .mobile-menu {
-            display:none; position:fixed; top:58px; left:0; right:0; bottom:0;
-            background:rgba(7,8,14,0.98); backdrop-filter:blur(24px); z-index:199;
-            flex-direction:column; align-items:center; justify-content:center; gap:8px;
-            opacity:0; pointer-events:none; transition:opacity 0.25s ease;
-        }
+        .mobile-menu { display:none; position:fixed; top:58px; left:0; right:0; bottom:0; background:rgba(7,8,14,0.98); backdrop-filter:blur(24px); z-index:199; flex-direction:column; align-items:center; justify-content:center; gap:8px; opacity:0; pointer-events:none; transition:opacity 0.25s ease; }
         .mobile-menu.open { pointer-events:all; opacity:1; }
-        .mobile-menu a {
-            color:var(--sub); text-decoration:none; font-size:1.1rem; font-weight:700;
-            letter-spacing:0.06em; text-transform:uppercase; padding:14px 32px;
-            border-radius:8px; width:240px; text-align:center; border:1px solid var(--border);
-            transition:color 0.15s, background 0.15s, border-color 0.15s;
-        }
+        .mobile-menu a { color:var(--sub); text-decoration:none; font-size:1.1rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:14px 32px; border-radius:8px; width:240px; text-align:center; border:1px solid var(--border); }
         .mobile-menu a:hover { color:var(--blue); border-color:var(--blue); background:rgba(107,159,255,0.06); }
-        @media(max-width:860px) {
-            .nav-links { display:none; }
-            .nav-toggle { display:flex; align-items:center; justify-content:center; }
-            .mobile-menu { display:flex; }
-        }
+        @media(max-width:860px) { .nav-links{display:none;} .nav-toggle{display:flex;} .mobile-menu{display:flex;} }
 
-        /* ── LAYOUT ── */
         .wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
 
-        /* ── HERO ── */
         .hero { min-height:100vh; display:flex; align-items:center; padding:120px 0 80px; position:relative; overflow:hidden; }
         .glow1 { position:absolute; top:0; right:-10%; width:700px; height:700px; background:radial-gradient(ellipse,rgba(107,159,255,0.06) 0%,transparent 60%); pointer-events:none; }
         .glow2 { position:absolute; bottom:-10%; left:-8%; width:500px; height:500px; background:radial-gradient(ellipse,rgba(61,219,168,0.04) 0%,transparent 60%); pointer-events:none; }
-
-        .pill-status {
-            display:inline-flex; align-items:center; gap:7px;
-            background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25);
-            color:var(--green); font-family:'JetBrains Mono',monospace;
-            font-size:0.69rem; letter-spacing:0.1em; text-transform:uppercase;
-            padding:5px 14px; border-radius:100px; margin-bottom:28px;
-        }
+        .pill-status { display:inline-flex; align-items:center; gap:7px; background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25); color:var(--green); font-family:'JetBrains Mono',monospace; font-size:0.69rem; letter-spacing:0.1em; text-transform:uppercase; padding:5px 14px; border-radius:100px; margin-bottom:28px; }
         .sdot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:blink 2.2s ease infinite; }
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
-
         .hero h1 { font-size:clamp(2.6rem,5.5vw,4.6rem); font-weight:800; line-height:1.07; letter-spacing:-0.04em; margin-bottom:20px; }
         .hero h1 .hi { display:block; font-size:0.52em; font-weight:400; color:var(--sub); letter-spacing:0; margin-bottom:10px; }
-        .hero h1 .ng {
-            background:linear-gradient(125deg,#ECEEF8 0%,var(--blue) 50%,var(--green) 100%);
-            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-        }
+        .hero h1 .ng { background:linear-gradient(125deg,#ECEEF8 0%,var(--blue) 50%,var(--green) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
         .hero-role { font-size:1.05rem; color:var(--sub); margin-bottom:16px; font-weight:500; }
         .hero-role b { color:var(--blue); font-weight:700; }
         .hero-desc { font-size:0.97rem; color:var(--sub); max-width:580px; line-height:1.9; margin-bottom:30px; }
         .hero-desc b { color:var(--text); font-weight:600; }
-
         .tag-row { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:32px; }
-        .tag {
-            font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--sub);
-            background:var(--card); border:1px solid var(--border2); padding:4px 12px;
-            border-radius:4px; transition:all 0.15s;
-        }
+        .tag { font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--sub); background:var(--card); border:1px solid var(--border2); padding:4px 12px; border-radius:4px; }
         .tag:hover { color:var(--blue); border-color:var(--blue); }
         .tag.g { border-color:rgba(61,219,168,0.35); color:var(--green); background:rgba(61,219,168,0.06); }
         .tag.v { border-color:rgba(184,156,255,0.35); color:var(--violet); background:rgba(184,156,255,0.06); }
-
         .btn-row { display:flex; flex-wrap:wrap; gap:9px; }
-        .bp {
-            background:var(--blue); color:#07080E; padding:10px 22px; border-radius:7px;
-            font-size:0.85rem; font-weight:700; text-decoration:none;
-            display:inline-flex; align-items:center; gap:7px; transition:all 0.18s;
-        }
+        .bp { background:var(--blue); color:#07080E; padding:10px 22px; border-radius:7px; font-size:0.85rem; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:7px; transition:all 0.18s; }
         .bp:hover { background:var(--blue2); color:#fff; transform:translateY(-2px); box-shadow:0 6px 20px rgba(107,159,255,0.28); }
-        .bs {
-            background:transparent; color:var(--sub); padding:10px 22px; border-radius:7px;
-            font-size:0.85rem; font-weight:600; text-decoration:none;
-            display:inline-flex; align-items:center; gap:7px;
-            border:1px solid var(--border2); transition:all 0.18s;
-        }
+        .bs { background:transparent; color:var(--sub); padding:10px 22px; border-radius:7px; font-size:0.85rem; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:7px; border:1px solid var(--border2); transition:all 0.18s; }
         .bs:hover { border-color:var(--blue); color:var(--blue); }
 
-        /* ── METRICS ── */
         .metrics { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 0; }
         .metric { text-align:center; padding:12px; }
         .mn { font-family:'JetBrains Mono',monospace; font-size:2.4rem; font-weight:600; color:var(--blue); line-height:1; margin-bottom:7px; }
         .ml { color:var(--text); font-size:0.86rem; font-weight:600; margin-bottom:5px; }
         .mc { color:var(--sub); font-size:0.78rem; line-height:1.5; }
 
-        /* ── SECTIONS ── */
         .sec { padding:84px 0; }
         .sec-alt { background:var(--surface); }
         .eyebrow { font-family:'JetBrains Mono',monospace; font-size:0.67rem; color:var(--blue); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:10px; }
@@ -154,7 +90,6 @@
         .ssub { color:var(--sub); font-size:0.92rem; }
         .sec-header { margin-bottom:46px; }
 
-        /* ── ABOUT ── */
         .abox { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:40px; }
         .abox p { color:var(--sub); font-size:0.96rem; line-height:1.92; margin-bottom:16px; }
         .abox p b { color:var(--text); font-weight:700; }
@@ -163,8 +98,7 @@
         .ac.g { background:rgba(61,219,168,0.08); border-color:rgba(61,219,168,0.25); color:var(--green); }
         .ac.v { background:rgba(184,156,255,0.08); border-color:rgba(184,156,255,0.25); color:var(--violet); }
 
-        /* ── SKILLS ── */
-        .skc { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:26px; height:100%; transition:border-color 0.2s, transform 0.2s; }
+        .skc { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:26px; height:100%; }
         .skc:hover { border-color:var(--border2); transform:translateY(-3px); }
         .skh { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
         .ski { width:34px; height:34px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:0.85rem; }
@@ -174,12 +108,11 @@
         .ski.v { background:rgba(184,156,255,0.13); color:var(--violet); }
         .skc h5 { font-size:0.9rem; font-weight:700; color:var(--text); }
         .pills { display:flex; flex-wrap:wrap; gap:5px; }
-        .pill { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--sub); background:var(--surface); border:1px solid var(--border); padding:3px 9px; border-radius:4px; transition:all 0.15s; }
+        .pill { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--sub); background:var(--surface); border:1px solid var(--border); padding:3px 9px; border-radius:4px; }
         .pill:hover { color:var(--green); border-color:rgba(61,219,168,0.35); }
         .pill.hi { color:var(--green); border-color:rgba(61,219,168,0.3); background:rgba(61,219,168,0.06); }
         .pill.vi { color:var(--violet); border-color:rgba(184,156,255,0.3); background:rgba(184,156,255,0.06); }
 
-        /* ── EXPERIENCE ── */
         .ec { background:var(--card); border:1px solid var(--border); border-left:3px solid var(--blue); border-radius:13px; padding:36px; margin-bottom:20px; }
         .ec-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25); color:var(--green); font-size:0.69rem; font-weight:700; font-family:'JetBrains Mono',monospace; padding:4px 10px; border-radius:100px; letter-spacing:0.04em; }
         .ec-badge::before { content:''; width:5px; height:5px; background:var(--green); border-radius:50%; animation:blink 2s infinite; }
@@ -187,26 +120,28 @@
         .ero { color:var(--text); font-weight:700; font-size:0.97rem; margin-bottom:3px; }
         .edur { color:var(--hint); font-family:'JetBrains Mono',monospace; font-size:0.74rem; margin-bottom:22px; }
 
-        .esect { font-family:'JetBrains Mono',monospace; font-size: 18px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; margin:22px 0 10px; display:flex; align-items:center; gap:10px; }
-        .esect::after { content:''; flex:1; height:1px; background:var(--border); }
-        .esect.b { color:var(--blue); }
-        .esect.g { color:var(--green); }
-        .esect.v { color:var(--violet); }
-
+        .role-split { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:4px; }
+        @media(max-width:700px){ .role-split{grid-template-columns:1fr;} }
+        .role-col { background:var(--card2); border:1px solid var(--border); border-radius:10px; padding:22px 24px; }
+        .role-col-head { display:flex; align-items:center; gap:9px; margin-bottom:14px; }
+        .role-col-icon { width:30px; height:30px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.8rem; flex-shrink:0; }
+        .role-col-icon.b { background:rgba(107,159,255,0.13); color:var(--blue); }
+        .role-col-icon.g { background:rgba(61,219,168,0.13); color:var(--green); }
+        .role-col-title { font-size:0.8rem; font-weight:700; color:var(--text); font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase; }
         .ul { list-style:none; padding:0; }
-        .ul li { color:var(--sub); font-size:0.9rem; padding:5px 0 5px 18px; position:relative; line-height:1.7; }
-        .ul li::before { content:'›'; position:absolute; left:0; font-size:1rem; top:4px; color:var(--hint); }
-        .ul li.g::before { color:var(--green); }
-        .ul li.b::before { color:var(--blue); }
-        .ul li.v::before { color:var(--violet); }
+        .ul li { color:var(--sub); font-size:0.88rem; padding:4px 0 4px 16px; position:relative; line-height:1.65; }
+        .ul li::before { content:'›'; position:absolute; left:0; font-size:1rem; top:3px; color:var(--hint); }
         .ul li b { color:var(--text); font-weight:700; }
         .ul li code { font-family:'JetBrains Mono',monospace; font-size:0.82em; color:var(--amber); background:rgba(255,201,71,0.1); padding:1px 5px; border-radius:3px; }
+
+        .esect { font-family:'JetBrains Mono',monospace; font-size:0.67rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; margin:22px 0 10px; display:flex; align-items:center; gap:10px; }
+        .esect::after { content:''; flex:1; height:1px; background:var(--border); }
+        .esect.v { color:var(--violet); }
 
         .tr { display:flex; flex-wrap:wrap; gap:5px; margin-top:20px; padding-top:16px; border-top:1px solid var(--border); }
         .tc { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--blue); background:rgba(107,159,255,0.08); border:1px solid rgba(107,159,255,0.18); padding:3px 9px; border-radius:4px; }
         .tc.v { color:var(--violet); background:rgba(184,156,255,0.08); border-color:rgba(184,156,255,0.2); }
 
-        /* ── DUAL PANEL ── */
         .dp { border:1px solid var(--border); border-radius:13px; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; }
         @media(max-width:768px){ .dp{grid-template-columns:1fr;} }
         .pn { padding:36px; }
@@ -221,12 +156,11 @@
         .dl { list-style:none; padding:0; }
         .dl li { color:var(--sub); font-size:0.85rem; padding:8px 0 8px 16px; position:relative; border-bottom:1px solid var(--border); line-height:1.65; }
         .dl li:last-child { border-bottom:none; }
-        .dl li::before { content:'–'; position:absolute; left:0; color:var(--hint); }
+        .dl li::before { content:'›'; position:absolute; left:0; color:var(--hint); }
         .dl li b { color:var(--text); font-weight:700; }
         .dl li code { font-family:'JetBrains Mono',monospace; font-size:0.81em; color:var(--amber); background:rgba(255,201,71,0.1); padding:1px 5px; border-radius:3px; }
 
-        /* ── AI TOOLS ── */
-        .aic { background:var(--card); border:1px solid var(--border); border-radius:13px; overflow:hidden; height:100%; transition:border-color 0.2s, transform 0.2s; }
+        .aic { background:var(--card); border:1px solid var(--border); border-radius:13px; overflow:hidden; height:100%; }
         .aic:hover { border-color:rgba(184,156,255,0.3); transform:translateY(-2px); }
         .aich { padding:18px 22px 15px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; }
         .aiico { width:38px; height:38px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:0.9rem; font-weight:700; }
@@ -240,13 +174,12 @@
         .aib p b { color:var(--text); font-weight:700; }
         .ail { list-style:none; padding:0; margin-bottom:14px; }
         .ail li { color:var(--sub); font-size:0.84rem; padding:3px 0 3px 14px; position:relative; line-height:1.55; }
-        .ail li::before { content:'→'; position:absolute; left:0; font-size:0.68rem; top:5px; color:var(--hint); }
+        .ail li::before { content:'›'; position:absolute; left:0; font-size:0.68rem; top:5px; color:var(--hint); }
         .ail li b { color:var(--text); font-weight:700; }
         .air { display:inline-flex; align-items:center; gap:5px; font-family:'JetBrains Mono',monospace; font-size:0.69rem; font-weight:600; padding:4px 10px; border-radius:4px; }
         .air.b { background:rgba(107,159,255,0.08); border:1px solid rgba(107,159,255,0.2); color:var(--blue); }
         .air.v { background:rgba(184,156,255,0.08); border:1px solid rgba(184,156,255,0.2); color:var(--violet); }
         .air.g { background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.2); color:var(--green); }
-
         .flow { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:24px 28px; margin-top:30px; }
         .flow h5 { font-size:0.88rem; font-weight:700; color:var(--text); margin-bottom:16px; }
         .fr { display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
@@ -254,10 +187,9 @@
         .fn { display:inline-flex; width:17px; height:17px; background:rgba(184,156,255,0.15); border-radius:50%; align-items:center; justify-content:center; font-size:0.58rem; color:var(--violet); font-weight:700; font-family:'JetBrains Mono',monospace; flex-shrink:0; }
         .fa { color:var(--hint); font-size:0.8rem; }
 
-        /* ── PROJECTS ── */
         .pdiv { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
         .pdiv .line { flex:1; height:1px; background:var(--border); }
-        .pc { background:var(--card); border:1px solid var(--border); border-radius:13px; overflow:hidden; height:100%; display:flex; flex-direction:column; transition:transform 0.22s, border-color 0.22s, box-shadow 0.22s; }
+        .pc { background:var(--card); border:1px solid var(--border); border-radius:13px; overflow:hidden; height:100%; display:flex; flex-direction:column; }
         .pc:hover { transform:translateY(-5px); border-color:var(--border2); box-shadow:0 16px 40px rgba(0,0,0,0.35); }
         .pch { padding:20px 22px; border-bottom:1px solid var(--border); display:flex; align-items:flex-start; gap:12px; }
         .pico { width:38px; height:38px; flex-shrink:0; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.95rem; }
@@ -275,15 +207,14 @@
         .pt { font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--hint); background:var(--surface); border:1px solid var(--border); padding:2px 8px; border-radius:3px; }
         .pt.v { color:var(--violet); border-color:rgba(184,156,255,0.22); background:rgba(184,156,255,0.06); }
         .proj-actions { display:flex; flex-wrap:wrap; gap:7px; margin-top:auto; padding-top:13px; }
-        .ghl { display:inline-flex; align-items:center; gap:5px; color:var(--blue); font-size:0.8rem; font-weight:700; text-decoration:none; padding:6px 13px; border:1px solid rgba(107,159,255,0.28); border-radius:6px; transition:all 0.15s; }
+        .ghl { display:inline-flex; align-items:center; gap:5px; color:var(--blue); font-size:0.8rem; font-weight:700; text-decoration:none; padding:6px 13px; border:1px solid rgba(107,159,255,0.28); border-radius:6px; }
         .ghl:hover { color:var(--green); border-color:rgba(61,219,168,0.4); background:rgba(61,219,168,0.06); }
-        .rhl { display:inline-flex; align-items:center; gap:5px; color:var(--violet); font-size:0.8rem; font-weight:700; text-decoration:none; padding:6px 13px; border:1px solid rgba(184,156,255,0.28); border-radius:6px; transition:all 0.15s; }
+        .rhl { display:inline-flex; align-items:center; gap:5px; color:var(--violet); font-size:0.8rem; font-weight:700; text-decoration:none; padding:6px 13px; border:1px solid rgba(184,156,255,0.28); border-radius:6px; }
         .rhl:hover { color:var(--amber); border-color:rgba(255,201,71,0.4); background:rgba(255,201,71,0.06); }
         .pb2 { display:inline-flex; align-items:center; gap:4px; font-size:0.73rem; font-weight:700; padding:3px 10px; border-radius:4px; }
         .pb2.g { background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25); color:var(--green); }
         .pb2.a { background:rgba(255,201,71,0.08); border:1px solid rgba(255,201,71,0.25); color:var(--amber); }
 
-        /* ── EDUCATION ── */
         .educ { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:36px 40px; display:flex; gap:22px; align-items:flex-start; }
         .edico { width:48px; height:48px; flex-shrink:0; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; background:rgba(107,159,255,0.12); border:1px solid rgba(107,159,255,0.22); color:var(--blue); }
         .edd { font-size:1.12rem; font-weight:800; color:var(--text); margin-bottom:3px; }
@@ -292,17 +223,16 @@
         .edm { font-family:'JetBrains Mono',monospace; font-size:0.74rem; color:var(--hint); }
         .edg { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--green); background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25); padding:4px 13px; border-radius:4px; margin-top:12px; font-weight:600; }
 
-        /* ── CONTACT ── */
         .ccard { background:var(--card); border:1px solid var(--border); border-radius:13px; padding:36px; }
         .crow { display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid var(--border); }
         .crow:last-of-type { border-bottom:none; }
         .cico { width:36px; height:36px; border-radius:7px; display:flex; align-items:center; justify-content:center; background:rgba(107,159,255,0.1); border:1px solid rgba(107,159,255,0.2); color:var(--blue); font-size:0.83rem; flex-shrink:0; }
         .clbl { font-family:'JetBrains Mono',monospace; font-size:0.66rem; color:var(--hint); letter-spacing:0.07em; text-transform:uppercase; margin-bottom:2px; }
         .cval { font-size:0.9rem; font-weight:600; color:var(--text); }
-        .cval a { color:var(--text); text-decoration:none; transition:color 0.15s; }
+        .cval a { color:var(--text); text-decoration:none; }
         .cval a:hover { color:var(--blue); }
         .sr { display:flex; gap:8px; margin-top:22px; }
-        .soc { width:42px; height:42px; background:var(--surface); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--sub); text-decoration:none; font-size:0.95rem; transition:all 0.18s; }
+        .soc { width:42px; height:42px; background:var(--surface); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--sub); text-decoration:none; font-size:0.95rem; }
         .soc:hover { border-color:var(--blue); color:var(--blue); transform:translateY(-2px); }
         .ob { background:rgba(61,219,168,0.05); border:1px solid rgba(61,219,168,0.18); border-radius:9px; padding:18px 20px; margin-top:22px; }
         .ob p { color:var(--sub); font-size:0.88rem; line-height:1.8; margin-bottom:12px; }
@@ -310,29 +240,22 @@
         .rtags { display:flex; flex-wrap:wrap; gap:6px; }
         .rt { background:rgba(61,219,168,0.08); border:1px solid rgba(61,219,168,0.25); color:var(--green); font-size:0.8rem; font-weight:700; padding:4px 12px; border-radius:5px; }
 
-        /* ── FOOTER ── */
         footer { background:var(--surface); border-top:1px solid var(--border); padding:24px 0; text-align:center; }
         footer p { font-family:'JetBrains Mono',monospace; font-size:0.73rem; color:var(--hint); }
 
-        /* ── REVEAL ── */
         .reveal { opacity:0; transform:translateY(18px); transition:opacity 0.5s ease, transform 0.5s ease; }
         .reveal.in { opacity:1; transform:translateY(0); }
 
-        /* ── RESPONSIVE ── */
         @media(max-width:768px){
-            .hero h1 { font-size:2.3rem; }
-            .sec { padding:56px 0; }
-            .educ { flex-direction:column; }
-            .btn-row { flex-direction:column; }
-            .abox, .ccard { padding:24px; }
-            .pn { padding:24px; }
+            .hero h1{font-size:2.3rem;} .sec{padding:56px 0;}
+            .educ{flex-direction:column;} .btn-row{flex-direction:column;}
+            .abox,.ccard{padding:24px;} .pn{padding:24px;}
         }
-        @media(max-width:480px){ .mn { font-size:1.85rem; } }
+        @media(max-width:480px){ .mn{font-size:1.85rem;} }
     </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
         <a href="#home" class="nav-brand">ashakiran<em>.jyoti</em></a>
@@ -345,13 +268,13 @@
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false">
+        <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu">
             <i class="fas fa-bars"></i>
         </button>
     </div>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <a href="#about" class="mobile-link">About</a>
     <a href="#skills" class="mobile-link">Skills</a>
     <a href="#experience" class="mobile-link">Experience</a>
@@ -368,40 +291,35 @@
     <div class="wrap">
         <div class="row">
             <div class="col-lg-9">
-                <div class="pill-status">
-                    <span class="sdot"></span>Open to opportunities
-                </div>
+                <div class="pill-status"><span class="sdot"></span>Open to opportunities</div>
                 <h1>
                     <span class="hi">Hi, I'm</span>
                     <span class="ng">Ashakiran Jyoti</span>
                 </h1>
-                <p class="hero-role"><b>Junior QA Engineer</b> — Manual Testing &amp; Playwright Automation</p>
+                <p class="hero-role"><b>QA Automation Engineer</b> — Playwright · Manual Testing · Agile</p>
                 <p class="hero-desc">
-                    QA Engineer with <b>2+ years of experience</b> on two large-scale software projects —
-                    <b>AMRUT 2.0</b> (Government of India water infrastructure monitoring) and an
-                    <b>Inventory Management System</b> for manufacturing. Worked under a <b>Senior QA Lead</b>
-                    in cross-functional Agile teams. Day-to-day: manual test execution, bug reporting in GitLab,
-                    and writing Playwright scripts in <b>JavaScript</b>. Building TypeScript skills through
-                    personal projects independently.
+                    2+ years of experience building and running test automation on enterprise systems —
+                    <b>AMRUT 2.0</b> (Government of India water infrastructure) and
+                    <b>Inventory Management System (IMS)</b>. I write automation in <b>JavaScript (Playwright)</b> at work
+                    and <b>TypeScript</b> in personal frameworks. Manual and automation go hand-in-hand
+                    in my process — I do both simultaneously on every project.
                 </p>
                 <div class="tag-row">
-                    <span class="tag">Playwright · JS &amp; TS</span>
+                    <span class="tag">Playwright · JS &amp; TS (v1.40+)</span>
                     <span class="tag">Page Object Model</span>
                     <span class="tag">Manual Testing</span>
                     <span class="tag">Agile · Scrum</span>
-                    <span class="tag">STLC</span>
                     <span class="tag">API Testing</span>
-                    <span class="tag">GitLab · CI/CD</span>
+                    <span class="tag">Git</span>
                     <span class="tag g">Govt. of India Project</span>
                     <span class="tag v">AI-Assisted Workflow</span>
                 </div>
                 <div class="btn-row">
                     <a href="#projects" class="bp"><i class="fas fa-folder-open"></i> Projects</a>
-                    <a href="#depth" class="bs"><i class="fas fa-vial"></i> Testing Depth</a>
-                    <a href="https://github.com/ashakiranjyoti" class="bs" target="_blank" rel="noopener">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
+                    <a href="#experience" class="bs"><i class="fas fa-briefcase"></i> Experience</a>
+                    <a href="https://github.com/ashakiranjyoti" class="bs" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
                     <a href="#contact" class="bs"><i class="fas fa-envelope"></i> Contact</a>
+                    <a href="https://github.com/ashakiranjyoti/ashakiranjyoti.github.io/raw/main/Ashakiran_Jyoti_Resume.pdf" class="bs" target="_blank" rel="noopener"><i class="fas fa-download"></i> Resume</a>
                 </div>
             </div>
         </div>
@@ -416,28 +334,28 @@
                 <div class="metric">
                     <div class="mn">300+</div>
                     <div class="ml">Test Cases Written</div>
-                    <div class="mc">Across 3 projects in Excel — manual suites covering all STLC phases</div>
+                    <div class="mc">Across 2 projects — manual suites covering all STLC phases</div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="metric">
                     <div class="mn">160+</div>
-                    <div class="ml">Automated Tests</div>
-                    <div class="mc">Playwright JS scripts — login, RBAC, stock, SCADA, reports</div>
+                    <div class="ml">Automated Scripts</div>
+                    <div class="mc">Playwright JS — login, RBAC, stock, SCADA, API, reports</div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="metric">
                     <div class="mn">15+</div>
-                    <div class="ml">Critical Bugs Found</div>
-                    <div class="mc">Including RBAC security flaw &amp; negative-stock data bug before release</div>
+                    <div class="ml">Critical Bugs Caught</div>
+                    <div class="mc">RBAC security flaw &amp; data integrity bug — both blocked release</div>
                 </div>
             </div>
             <div class="col-6 col-md-3">
                 <div class="metric">
                     <div class="mn">70%</div>
-                    <div class="ml">Regression Time Saved</div>
-                    <div class="mc">Manual regression: 4–5 days/sprint → under 1 day via automation</div>
+                    <div class="ml">Regression Efficiency</div>
+                    <div class="mc">Helped reduce regression testing effort through automation</div>
                 </div>
             </div>
         </div>
@@ -449,23 +367,23 @@
     <div class="wrap">
         <div class="sec-header reveal">
             <div class="eyebrow">// about</div>
-            <h2 class="sh">Who I Am as a QA Engineer</h2>
-            <p class="ssub">Manual testing foundation, automation skills, real projects</p>
+            <h2 class="sh">QA Automation Engineer — Manual + Automation</h2>
+            <!-- <p class="ssub">I don't choose between manual and automation — I do both on every sprint</p> -->
         </div>
         <div class="row justify-content-center reveal">
             <div class="col-lg-10">
                 <div class="abox">
-                    <p>I'm a <b>Junior QA Engineer</b> with 2+ years of hands-on experience on two live software projects. At Modern Communication Technology (MCOM), I work under a <b>Senior QA Lead</b> in a cross-functional team that includes a Project Manager, SCADA Domain Specialists, Backend and Frontend Developers, and our QA team. My Senior QA Lead designed the automation framework and reviews all my code through Merge Requests. My day-to-day responsibility is the actual testing execution.</p>
-                    <p>I've worked across <b>AMRUT 2.0</b> — a live Government of India SCADA dashboard monitoring water supply across Indian cities — and an <b>Inventory Management System (IMS)</b> for a manufacturing organisation. Both are live deployments with real users and real stakes.</p>
-                    <p>I write <b>JavaScript</b> in my work automation scripts, and build personal projects in <b>TypeScript</b> to grow my skills. From mid-project onwards, I've integrated AI tools (Claude, ChatGPT, GitHub Copilot, Cursor, Windsurf) at specific bounded points in my workflow — always with sanitized prompts, never sharing real credentials, server data, or government project details.</p>
+                    <p>I'm a <b>QA Automation Engineer</b> with 2+ years of experience shipping quality on enterprise systems. My work combines manual test case design with Playwright automation — both happening simultaneously, sprint by sprint. I write <b>JavaScript</b> for work automation and <b>TypeScript</b> in personal framework projects to continuously improve my skills.</p>
+                    <p>I've worked on <b>AMRUT 2.0</b> — a Government of India SCADA dashboard for real-time water supply monitoring across Indian cities — and an <b>Inventory Management System (IMS)</b>. I tested 8 modules on AMRUT and 7 on IMS, wrote automation for both, found critical bugs, and helped maintain regression suites.</p>
+                    <p>I integrate <b>AI tools</b> (Claude, ChatGPT, GitHub Copilot, Cursor, Windsurf) at specific points — for edge case brainstorming, scaffolding boilerplate, and debugging flaky tests. Security rule I follow strictly: no real credentials, IPs, or government data ever goes into any AI prompt.</p>
                     <div class="achips">
                         <span class="ac g">Manual Testing</span>
                         <span class="ac g">STLC · Agile · Scrum</span>
-                        <span class="ac g">GitLab Bug Reporting</span>
-                        <span class="ac">Playwright (JS)</span>
+                        <span class="ac g">Bug Tracking</span>
+                        <span class="ac">Playwright · JS &amp; TS · v1.40+</span>
                         <span class="ac">Page Object Model</span>
                         <span class="ac">API Testing</span>
-                        <span class="ac">GitHub Actions CI/CD</span>
+                        <span class="ac">Git</span>
                         <span class="ac v">AI-Assisted Workflow</span>
                     </div>
                 </div>
@@ -480,30 +398,37 @@
         <div class="sec-header reveal">
             <div class="eyebrow">// skills</div>
             <h2 class="sh">Testing &amp; Automation Stack</h2>
-            <p class="ssub">On-the-job tools and independently built skills</p>
+            <p class="ssub">What I use at work and what I'm building independently</p>
         </div>
         <div class="row g-4">
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="skc">
-                    <div class="skh"><div class="ski g"><i class="fas fa-vial"></i></div><h5>Manual Testing</h5></div>
+                    <div class="skh"><div class="ski b"><i class="fas fa-robot"></i></div><h5>Test Automation</h5></div>
                     <div class="pills">
-                        <span class="pill hi">Test Case Design</span><span class="pill hi">Functional Testing</span>
-                        <span class="pill hi">Regression Testing</span><span class="pill">Smoke &amp; Sanity</span>
-                        <span class="pill">Exploratory Testing</span><span class="pill">Boundary Value Analysis</span>
-                        <span class="pill">Equivalence Partitioning</span><span class="pill">Bug Lifecycle</span>
-                        <span class="pill">STLC · Agile · Scrum</span>
+                        <span class="pill hi">Playwright (JavaScript) · v1.40+</span>
+                        <span class="pill hi">Playwright (TypeScript)</span>
+                        <span class="pill hi">Page Object Model</span>
+                        <span class="pill">Data-Driven Testing</span>
+                        <span class="pill">Custom Fixtures</span>
+                        <span class="pill">HTML Reports</span>
+                        <span class="pill">Git</span>
+                        <span class="pill">Cross-Browser Testing</span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="skc">
-                    <div class="skh"><div class="ski b"><i class="fas fa-robot"></i></div><h5>Test Automation</h5></div>
+                    <div class="skh"><div class="ski g"><i class="fas fa-vial"></i></div><h5>Manual Testing</h5></div>
                     <div class="pills">
-                        <span class="pill hi">Playwright (TypeScript)</span><span class="pill hi">Playwright (JavaScript)</span>
-                        <span class="pill hi">Page Object Model</span><span class="pill">Data-Driven Testing</span>
-                        <span class="pill">Custom Fixtures</span><span class="pill">Allure Reports</span>
-                        <span class="pill">HTML Reports</span><span class="pill">GitHub Actions</span>
-                        <span class="pill">Cross-Browser Testing</span>
+                        <span class="pill hi">Test Case Design</span>
+                        <span class="pill hi">Functional Testing</span>
+                        <span class="pill hi">Regression Testing</span>
+                        <span class="pill">Exploratory Testing</span>
+                        <span class="pill">Boundary Value Analysis</span>
+                        <span class="pill">Equivalence Partitioning</span>
+                        <span class="pill">Smoke &amp; Sanity</span>
+                        <span class="pill">Bug Lifecycle · STLC</span>
+                        <span class="pill">Agile · Scrum</span>
                     </div>
                 </div>
             </div>
@@ -511,10 +436,14 @@
                 <div class="skc">
                     <div class="skh"><div class="ski a"><i class="fas fa-flask"></i></div><h5>API Testing</h5></div>
                     <div class="pills">
-                        <span class="pill hi">Playwright Request Context</span><span class="pill">REST APIs</span>
-                        <span class="pill">Postman</span><span class="pill">CRUD Validation</span>
-                        <span class="pill">Auth Testing</span><span class="pill">Schema Validation</span>
-                        <span class="pill">Multi-env Config</span><span class="pill">Negative Testing</span>
+                        <span class="pill hi">Playwright Request Context</span>
+                        <span class="pill">REST APIs</span>
+                        <span class="pill">Postman</span>
+                        <span class="pill">CRUD Validation</span>
+                        <span class="pill">Auth Testing</span>
+                        <span class="pill">Schema Validation</span>
+                        <span class="pill">Multi-env Config</span>
+                        <span class="pill">Negative Testing</span>
                     </div>
                 </div>
             </div>
@@ -522,10 +451,13 @@
                 <div class="skc">
                     <div class="skh"><div class="ski b"><i class="fas fa-clipboard-list"></i></div><h5>QA Concepts</h5></div>
                     <div class="pills">
-                        <span class="pill">Test Planning</span><span class="pill">RBAC Testing</span>
-                        <span class="pill">Security Testing</span><span class="pill">Integration Testing</span>
-                        <span class="pill">Real-time Data Testing</span><span class="pill">UAT</span>
-                        <span class="pill">Merge Request Reviews</span><span class="pill">Sprint QA Summaries</span>
+                        <span class="pill">Test Planning &amp; Strategy</span>
+                        <span class="pill">RBAC Testing</span>
+                        <span class="pill">Security Testing</span>
+                        <span class="pill">Integration Testing</span>
+                        <span class="pill">Real-time Data Testing</span>
+                        <span class="pill">UAT</span>
+                        <span class="pill">Sprint QA Summaries</span>
                     </div>
                 </div>
             </div>
@@ -533,21 +465,28 @@
                 <div class="skc">
                     <div class="skh"><div class="ski g"><i class="fas fa-tools"></i></div><h5>Tools &amp; Platforms</h5></div>
                     <div class="pills">
-                        <span class="pill hi">VS Code</span><span class="pill hi">Git · GitHub · GitLab</span>
-                        <span class="pill">Node.js · npm</span><span class="pill">Playwright Trace Viewer</span>
-                        <span class="pill">MS SQL Server</span><span class="pill">MySQL</span>
-                        <span class="pill">Excel (Test Docs)</span><span class="pill">Allure Report</span>
+                        <span class="pill hi">VS Code</span>
+                        <span class="pill hi">Git · GitHub</span>
+                        <span class="pill">Node.js · npm</span>
+                        <span class="pill">Playwright Trace Viewer</span>
+                        <span class="pill">MS SQL Server</span>
+                        <span class="pill">MySQL</span>
+                        <span class="pill">Excel (Test Docs)</span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="skc">
-                    <div class="skh"><div class="ski v"><i class="fas fa-brain"></i></div><h5>AI Workflow</h5></div>
+                    <div class="skh"><div class="ski v"><i class="fas fa-brain"></i></div><h5>AI in QA Workflow</h5></div>
                     <div class="pills">
-                        <span class="pill vi">GitHub Copilot</span><span class="pill vi">Cursor AI</span>
-                        <span class="pill vi">Windsurf</span><span class="pill vi">Claude · ChatGPT</span>
-                        <span class="pill">Prompt Engineering</span><span class="pill">Edge Case Brainstorming</span>
-                        <span class="pill">Test Scaffolding</span><span class="pill">Sanitized Prompting</span>
+                        <span class="pill vi">GitHub Copilot</span>
+                        <span class="pill vi">Cursor AI</span>
+                        <span class="pill vi">Windsurf</span>
+                        <span class="pill vi">Claude · ChatGPT</span>
+                        <span class="pill">Edge Case Brainstorming</span>
+                        <span class="pill">Test Scaffolding</span>
+                        <span class="pill">Prompt Engineering</span>
+                        <span class="pill">Sanitized Prompting</span>
                     </div>
                 </div>
             </div>
@@ -560,70 +499,73 @@
     <div class="wrap">
         <div class="sec-header reveal">
             <div class="eyebrow">// experience</div>
-            <h2 class="sh">Work History</h2>
-            <p class="ssub">Real teams, real accountability, real learning</p>
+            <h2 class="sh">Work Experience</h2>
+            <p class="ssub">Manual and automation — both, simultaneously, every sprint</p>
         </div>
 
         <div class="ec reveal">
-            <div class="row align-items-start">
-                <div class="col-md-8">
-                    <span class="ec-badge">Current Role</span>
-                    <div class="eco">Modern Communication Technology (MCOM)</div>
-                    <div class="ero">Junior QA Engineer</div>
-                    <div class="edur">June 2024 – Present · Pune, Maharashtra</div>
+            <span class="ec-badge">Current Role</span>
+            <div class="eco">Modern Communication Technology (MCOM)</div>
+            <div class="ero">QA Automation Engineer — IMS &amp; AMRUT 2.0</div>
+            <div class="edur">June 2024 – Present · Pune, Maharashtra</div>
+
+            <div class="role-split">
+                <div class="role-col">
+                    <div class="role-col-head">
+                        <div class="role-col-icon g"><i class="fas fa-vial"></i></div>
+                        <div class="role-col-title">Manual Testing</div>
+                    </div>
+                    <ul class="ul">
+                        <li>Wrote <b>300+ test cases in Excel</b> across AMRUT 2.0 and IMS — happy path, negative, and edge cases per sprint</li>
+                        <li>Executed functional, regression, smoke, BVA, equivalence partitioning, RBAC, and exploratory testing</li>
+                        <li>Found a <b>security bug</b> in RBAC — restricted users could operate SCADA control buttons</li>
+                        <li>Caught a <b>data integrity bug</b> via boundary value testing (quantity = available + 1) — blocked release</li>
+                        <li>Designed a test protocol with the developer to insert known sensor values for <b>real-time SCADA assertions</b></li>
+                        <li>Filed detailed bug reports with Steps, Expected, Actual, Severity, and screenshots</li>
+                        <li>Used <b>AI (Claude, ChatGPT)</b> with sanitized prompts to brainstorm edge cases — validated each before adding</li>
+                        <li>Delivered sprint QA summaries: pass/fail counts, bugs raised vs closed, risk areas</li>
+                    </ul>
+                </div>
+                <div class="role-col">
+                    <div class="role-col-head">
+                        <div class="role-col-icon b"><i class="fas fa-robot"></i></div>
+                        <div class="role-col-title">Playwright Automation (JS)</div>
+                    </div>
+                    <ul class="ul">
+                        <li>Built and maintained <b>160+ Playwright scripts in JavaScript</b> using Page Object Model — covering both IMS and AMRUT 2.0</li>
+                        <li>Automated login flows, stock lifecycle, SCADA dashboard, RBAC, report exports, and AJAX cascade dropdowns</li>
+                        <li>Solved AJAX cascade challenge using <code>waitForResponse</code> — intercepted API call before asserting child dropdown</li>
+                        <li>Diagnosed and fixed <b>flaky SCADA tests</b> — used Playwright trace viewer + Cursor AI to identify race condition</li>
+                        <li>Maintained automation scripts in Git — tracked changes, collaborated with team members</li>
+                        <li>Helped reduce regression testing effort through comprehensive automation coverage</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="esect g">Team &amp; Context</div>
+            <div class="esect v">AI Tools — Where I Used Them</div>
             <ul class="ul">
-                <li class="g">Cross-functional Agile team: <b>Project Manager, SCADA Domain Specialists, Backend &amp; Frontend Developers, Senior QA Lead</b>, and myself as Junior QA</li>
-                <li class="g">Reported to a <b>Senior QA Lead</b> — she designed the automation framework, reviewed all my Playwright scripts via Merge Requests, and mentored me on framework patterns and best practices</li>
-                <li class="g">Full Scrum each sprint: <b>sprint planning, daily standups, sprint demos, retrospectives, backlog grooming</b></li>
-            </ul>
-
-            <div class="esect b">Manual Testing</div>
-            <ul class="ul">
-                <li class="b">Primary manual test execution owner for AMRUT 2.0 and IMS — wrote <b>300+ test cases in Excel</b>, executed every sprint, reported all bugs in GitLab with screenshots</li>
-                <li class="b">Covered: functional, regression, smoke, sanity, integration, exploratory, <b>boundary value analysis, equivalence partitioning, role-based access</b> testing</li>
-                <li class="b">Found <b>15+ critical bugs</b> — including a <b>negative stock bug</b> (BVA at qty = available + 1) that blocked a release, and a <b>security vulnerability</b> where restricted RBAC users could see control buttons</li>
-                <li class="b">Designed a <b>real-time test protocol</b> with the developer for SCADA sensor data — inserting known values so assertions were reliable on live-updating dashboards</li>
-                <li class="b">Used <b>AI tools (Claude, ChatGPT) with sanitized prompts</b> to brainstorm non-obvious edge cases — filtered and validated every suggestion myself before adding to the test suite</li>
-                <li class="b">Every <b>GitLab bug report</b>: Title · Steps to Reproduce · Expected · Actual · Environment · Severity + screenshot</li>
-            </ul>
-
-            <div class="esect g">Playwright Automation (JavaScript)</div>
-            <ul class="ul">
-                <li class="g">Wrote <b>160+ test scripts in JavaScript</b> inside the POM framework designed and taught by Senior QA Lead</li>
-                <li class="g">Covered: login flows, stock management, SCADA dashboard, RBAC, report exports, AJAX cascade dropdowns</li>
-                <li class="g">Strict <b>Merge Request process</b> — branched, tested locally in headed mode, pushed, addressed Senior's review comments before every merge</li>
-                <li class="g"><b>GitLab CI pipeline</b> runs all tests automatically on every merge — results visible to the whole team</li>
-                <li class="g">Reduced manual regression from 4–5 days/sprint to <b>under 1 day — 70% time saving</b></li>
-            </ul>
-
-            <div class="esect v">AI Tools in Workflow</div>
-            <ul class="ul">
-                <li class="v"><b>GitHub Copilot</b> — POM class scaffolding and boilerplate; I focus on selector accuracy and logic</li>
-                <li class="v"><b>Cursor AI</b> — debugging flaky SCADA tests; AI-assisted trace analysis for timing issues in sensor polling</li>
-                <li class="v"><b>Windsurf</b> — multi-file JS→TS migrations in personal projects; supervised all AI output</li>
-                <li class="v"><b>~40% faster test authoring</b> on repetitive scaffolding; test strategy and edge case decisions always mine</li>
+                <li><b>GitHub Copilot</b> — POM class boilerplate and assertion blocks; I validate selectors and logic</li>
+                <li><b>Cursor AI</b> — root cause analysis for flaky SCADA tests; trace-based debugging with AI-assisted explanation</li>
+                <li><b>Windsurf</b> — multi-file JS→TS migrations in personal projects; reviewed every change before accepting</li>
+                <li><b>~40% faster authoring</b> on boilerplate; all test strategy and edge case design decisions are mine</li>
             </ul>
 
             <div class="tr">
                 <span class="tc">Playwright · JS</span><span class="tc">Page Object Model</span>
                 <span class="tc">Manual Testing</span><span class="tc">Agile · Scrum</span>
-                <span class="tc">GitLab CI</span><span class="tc">MS SQL Server</span><span class="tc">MySQL</span>
+                <span class="tc">Git</span><span class="tc">MS SQL Server</span><span class="tc">MySQL</span>
                 <span class="tc v">GitHub Copilot</span><span class="tc v">Cursor AI</span><span class="tc v">Windsurf</span>
             </div>
         </div>
 
         <div class="ec reveal">
             <div class="eco">IT JOBXS</div>
-            <div class="ero">Intern Trainee — QA &amp; Testing</div>
-            <div class="edur">October 2023 – May 2024</div>
+            <div class="ero">Junior QA Engineer</div>
+            <div class="edur">October 2023 – May 2024 · Pune, Maharashtra</div>
             <ul class="ul" style="margin-top:14px;">
-                <li class="b">Tested security features: <b>bot detection, spam prevention</b>, and user authentication flows</li>
-                <li class="b">Validated <b>Google reCAPTCHA</b> integration end-to-end — security testing of verification flows</li>
-                <li class="b">Wrote test cases, executed functional testing, reported defects with developer collaboration</li>
+                <li>Tested <b>bot detection, spam prevention,</b> and user authentication — security-focused functional testing</li>
+                <li>Validated <b>Google reCAPTCHA</b> integration end-to-end across multiple user scenarios</li>
+                <li>Wrote test cases, reported defects, and collaborated with developers on fix verification</li>
             </ul>
             <div class="tr">
                 <span class="tc">Manual Testing</span><span class="tc">Security Testing</span><span class="tc">Functional Testing</span>
@@ -637,35 +579,32 @@
     <div class="wrap">
         <div class="sec-header reveal">
             <div class="eyebrow g">// testing depth</div>
-            <h2 class="sh">Manual Testing + Automation Together</h2>
-            <p class="ssub">How both disciplines worked on the same projects</p>
+            <h2 class="sh">How Manual &amp; Automation Work Together</h2>
+            <p class="ssub">Same sprint, same feature, both happening in parallel</p>
         </div>
         <div class="dp reveal">
             <div class="pn">
-                <div class="pntag g"><i class="fas fa-vial"></i> Manual Testing</div>
-                <h3>Day-to-Day Execution</h3>
-                <p>Every sprint: receive User Stories with Acceptance Criteria, write Excel test cases (happy path + negatives + edge cases), execute on staging, report bugs in GitLab, retest fixes, deliver sprint QA summary to Senior QA Lead.</p>
+                <div class="pntag g"><i class="fas fa-vial"></i> Manual — Sprint Flow</div>
+                <h3>From User Story to Executed Test</h3>
+                <p>Every sprint I receive User Stories with Acceptance Criteria. I break them into test cases (happy path + negatives + edge cases), execute on staging, file bugs, retest fixes, and summarise results.</p>
                 <ul class="dl">
-                    <li><b>Requirement chain:</b> Stakeholder → PM → BRD → Sprint User Story → AC → my Excel test cases</li>
-                    <li><b>AMRUT example:</b> Zone Board Alert — 1 User Story → 8 test cases covering 5 ACs + AI-brainstormed edges (simultaneous over-pressure + trip; zero-station zone)</li>
-                    <li><b>IMS example:</b> Inward Stock Form — 1 User Story → 11 test cases including AJAX empty-array state (TC_IN_007 — AI-suggested, validated by me)</li>
-                    <li><b>Every GitLab bug report:</b> Title · Steps · Expected · Actual · Environment · Severity + screenshot</li>
-                    <li><b>Security bug found:</b> View-Only users could see SCADA control buttons — RBAC testing</li>
-                    <li><b>Data bug found:</b> Negative stock at qty = available + 1 — boundary value analysis</li>
-                    <li><b>Agile ceremonies:</b> Planning, standups, demo prep (pass/fail counts, bugs raised vs closed), retrospectives</li>
+                    <li><b>AMRUT example:</b> Zone Board Alert — 1 US → 8 test cases (5 ACs + AI-brainstormed edges)</li>
+                    <li><b>IMS example:</b> Inward Stock Form — 1 US → 11 test cases including AJAX empty-array state</li>
+                    <li><b>Security catch:</b> View-Only users could trigger SCADA control buttons — RBAC testing</li>
+                    <li><b>Data integrity catch:</b> Invalid stock at quantity = available + 1 — boundary value analysis</li>
+                    <li><b>Bug reports:</b> Title · Steps · Expected · Actual · Environment · Severity + screenshot</li>
                 </ul>
             </div>
             <div class="pn">
-                <div class="pntag b"><i class="fas fa-code"></i> JS at work · TS for personal growth</div>
-                <h3>Automation Skills</h3>
-                <p>At work I write JavaScript inside the Senior QA Lead's framework. Personal projects are built in TypeScript from scratch — deliberately growing both skill sets.</p>
+                <div class="pntag b"><i class="fas fa-code"></i> Automation — Same Sprint</div>
+                <h3>Scripts Written Alongside Manual Tests</h3>
+                <p>Automation isn't a separate phase — I write scripts for the same features I'm testing manually, within the same sprint. Work automation is in JavaScript; personal framework projects are TypeScript.</p>
                 <ul class="dl">
-                    <li><b>Work (JavaScript):</b> 160+ scripts, strict MR process — Senior reviewed every line before merge, taught me patterns via code comments</li>
-                    <li><b>Personal (TypeScript):</b> DemoBlaze (typed POM + Allure + GitHub Pages), SauceDemo (cross-browser), ReqRes API (typed client, multi-env)</li>
-                    <li><b>Hardest work challenge — AJAX cascade:</b> IMS inward form needed <code>waitForResponse</code> to intercept subcategory API call — taught by Senior via MR comment</li>
-                    <li><b>SCADA real-time challenge:</b> Live sensor data every 15s — designed insert-known-value protocol with developer for stable assertions</li>
-                    <li><b>Flaky test fix:</b> Trace viewer + Cursor AI pinpointed race condition in sensor polling — resolved to zero failures</li>
-                    <li><b>MR learning loop:</b> "Use waitForResponse here", "move locator to page class", "externalise to JSON" — Senior's comments shaped how I write automation today</li>
+                    <li><b>AJAX cascade fix:</b> <code>waitForResponse</code> to intercept API call before asserting dropdown</li>
+                    <li><b>Real-time SCADA:</b> Live sensor data every 15s → designed insert-known-value test protocol with developer</li>
+                    <li><b>Flaky test fix:</b> Trace viewer + Cursor AI to identify race condition — resolved to zero failures</li>
+                    <li><b>Personal TS projects:</b> DemoBlaze (Allure + GitHub Pages), SauceDemo (3-browser), ReqRes API</li>
+                    <li><b>Version control:</b> All automation scripts maintained in Git</li>
                 </ul>
             </div>
         </div>
@@ -677,46 +616,38 @@
     <div class="wrap">
         <div class="sec-header reveal">
             <div class="eyebrow v">// ai workflow</div>
-            <h2 class="sh">AI Tools in My Testing Process</h2>
-            <p class="ssub">Used at specific moments — test decisions always mine</p>
+            <h2 class="sh">AI Tools in My QA Process</h2>
+            <p class="ssub">Specific tools, specific moments — decisions always mine</p>
         </div>
         <div class="abox reveal" style="margin-bottom:30px; padding:22px 28px;">
-            <p style="margin:0; font-size:0.93rem; color:var(--sub);">
-                I use AI at <b>specific, bounded points</b>: scenario brainstorming, code scaffolding, debugging, and refactoring.
-                Reading requirements, deciding what to test, executing, and signing off — always mine.
-                <b>Security rule (strictly followed):</b> No real server IPs, credentials, database values, or government data ever enters any AI tool. All prompts describe logic generically, never actual project details.
+            <p style="margin:0; font-size:0.93rem;">
+                I use AI at <b>specific, bounded moments</b> — edge case brainstorming, boilerplate scaffolding, debugging, and refactoring. Test strategy, execution, and sign-off are always mine. <b>Hard rule:</b> no real server IPs, credentials, DB values, or government data goes into any AI tool. All prompts are sanitized generic descriptions.
             </p>
         </div>
         <div class="row g-4">
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="aic">
-                    <div class="aich">
-                        <div class="aiico b"><i class="fab fa-github"></i></div>
-                        <div><div class="ain">GitHub Copilot</div><div class="ais">VS Code · Daily</div></div>
-                    </div>
+                    <div class="aich"><div class="aiico b"><i class="fab fa-github"></i></div><div><div class="ain">GitHub Copilot</div><div class="ais">VS Code · Daily driver</div></div></div>
                     <div class="aib">
-                        <p>Inline assistant for test scaffolding — handles boilerplate so I focus on selector accuracy and test logic.</p>
+                        <p>Handles boilerplate so I focus on selector accuracy, test logic, and edge case coverage.</p>
                         <ul class="ail">
-                            <li><b>POM class scaffolding</b> — locator maps for complex forms generated fast</li>
-                            <li><b>describe / test blocks</b> — structure generated, logic added by me</li>
-                            <li><b>Assertion blocks</b> — bulk field validations drafted, then refined</li>
+                            <li><b>POM class scaffolding</b> — locator maps for complex forms</li>
+                            <li><b>Test structure</b> — describe/test blocks, beforeEach hooks</li>
+                            <li><b>Assertion blocks</b> — bulk field validations drafted, then refined by me</li>
                         </ul>
-                        <span class="air b"><i class="fas fa-bolt"></i> ~40% faster authoring</span>
+                        <span class="air b"><i class="fas fa-bolt"></i> ~40% faster boilerplate</span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="aic">
-                    <div class="aich">
-                        <div class="aiico v">✦</div>
-                        <div><div class="ain">Cursor AI</div><div class="ais">Debugging &amp; Code Chat</div></div>
-                    </div>
+                    <div class="aich"><div class="aiico v">✦</div><div><div class="ain">Cursor AI</div><div class="ais">Debugging · Code chat</div></div></div>
                     <div class="aib">
-                        <p>Used for complex debugging — chat-with-codebase helped trace timing-sensitive flaky test failures.</p>
+                        <p>Used when a test failure needs deep investigation — trace-based debugging with AI-assisted explanation.</p>
                         <ul class="ail">
-                            <li><b>Flaky test root cause</b> — race condition in SCADA sensor polling</li>
-                            <li><b>Playwright error decoding</b> — async/timeout messages understood faster</li>
-                            <li><b>Coverage gap review</b> — AI scans test logic for missed scenarios</li>
+                            <li><b>Flaky SCADA tests</b> — race condition traced and fixed</li>
+                            <li><b>Playwright errors</b> — async/timeout failures decoded faster</li>
+                            <li><b>Coverage gaps</b> — AI scans test logic for missed paths</li>
                         </ul>
                         <span class="air v"><i class="fas fa-bug"></i> Faster root cause analysis</span>
                     </div>
@@ -724,16 +655,13 @@
             </div>
             <div class="col-lg-4 col-md-6 reveal">
                 <div class="aic">
-                    <div class="aich">
-                        <div class="aiico g">🌊</div>
-                        <div><div class="ain">Windsurf</div><div class="ais">Multi-file · Agentic</div></div>
-                    </div>
+                    <div class="aich"><div class="aiico g">🌊</div><div><div class="ain">Windsurf</div><div class="ais">Agentic · Multi-file</div></div></div>
                     <div class="aib">
-                        <p>Used for large multi-file operations in personal projects — JS→TS migrations across many files at once.</p>
+                        <p>Used for large-scope refactoring in personal TypeScript projects — reviews across multiple files.</p>
                         <ul class="ail">
-                            <li><b>JS → TS migration</b> — type annotations added, logic kept intact</li>
-                            <li><b>Interface generation</b> — typed interfaces from JSON test data</li>
-                            <li><b>Import path fixes</b> — multi-file dependency updates at once</li>
+                            <li><b>JS → TS migration</b> — type annotations added, logic intact</li>
+                            <li><b>Interface generation</b> — TS interfaces from JSON test data shapes</li>
+                            <li><b>Import fixes</b> — multi-file path updates in a single session</li>
                         </ul>
                         <span class="air g"><i class="fas fa-code-branch"></i> Multi-file refactoring</span>
                     </div>
@@ -741,15 +669,15 @@
             </div>
         </div>
         <div class="flow reveal">
-            <h5>My AI-Enhanced QA Workflow</h5>
+            <h5>My Workflow — Where AI Plugs In</h5>
             <div class="fr">
-                <div class="fs"><span class="fn">1</span>Read Requirements</div><div class="fa">→</div>
-                <div class="fs"><span class="fn">2</span>Design Test Strategy</div><div class="fa">→</div>
-                <div class="fs"><span class="fn">3</span>AI Edge Case Brainstorm</div><div class="fa">→</div>
-                <div class="fs"><span class="fn">4</span>Write &amp; Execute Tests</div><div class="fa">→</div>
-                <div class="fs"><span class="fn">5</span>Scaffold with Copilot</div><div class="fa">→</div>
-                <div class="fs"><span class="fn">6</span>Debug with Cursor</div><div class="fa">→</div>
-                <div class="fs"><span class="fn">7</span>MR Review &amp; Merge</div>
+                <div class="fs"><span class="fn">1</span>Read User Story</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">2</span>Design Test Cases</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">3</span>AI: Edge Case Brainstorm</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">4</span>Execute Manual Tests</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">5</span>AI: Scaffold Automation</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">6</span>AI: Debug Failures</div><div class="fa">→</div>
+                <div class="fs"><span class="fn">7</span>Commit → Push → Share</div>
             </div>
         </div>
     </div>
@@ -765,7 +693,7 @@
         </div>
 
         <div class="pdiv reveal">
-            <span class="eyebrow g" style="margin:0; white-space:nowrap;">Work Projects — JavaScript</span>
+            <span class="eyebrow g" style="margin:0;white-space:nowrap;">Work Projects — JavaScript</span>
             <div class="line"></div>
         </div>
         <div class="row g-4 mb-5">
@@ -773,19 +701,13 @@
                 <div class="pc">
                     <div class="pch">
                         <div class="pico a"><i class="fas fa-broadcast-tower"></i></div>
-                        <div>
-                            <h4>AMRUT 2.0 — SCADA Dashboard</h4>
-                            <div class="ptyp">Govt. of India · Water Infrastructure</div>
-                        </div>
+                        <div><h4>AMRUT 2.0 — SCADA Dashboard</h4><div class="ptyp">Govt. of India · Water Infrastructure</div></div>
                     </div>
                     <div class="pb">
-                        <p><b>About:</b> Real-time monitoring of water supply across Indian cities — 50+ pumping stations, live sensor data every 15–60 seconds, remote pump/valve controls, role-based access for field engineers and officers.</p>
-                        <p><b>My work:</b> 8 modules tested manually (150+ test cases). 50+ Playwright JS scripts. Found RBAC security bug and LPCD calculation error on the dashboard.</p>
-                        <p><b>Key challenge:</b> Real-time sensor data — designed a test protocol with the developer to insert known values for reliable assertions.</p>
+                        <p><b>8 modules tested</b> on a live Government of India dashboard monitoring 50+ water pumping stations — real sensor data every 15–60s, remote controls, role-based access.</p>
+                        <p>150+ manual test cases · 50+ automated Playwright scripts · Found RBAC security bug · Designed real-time test protocol with developer.</p>
                         <div class="tw">
-                            <span class="pt">Playwright JS</span><span class="pt">POM</span>
-                            <span class="pt">MS SQL Server</span><span class="pt">RBAC Testing</span>
-                            <span class="pt v">Cursor AI</span>
+                            <span class="pt">Playwright JS</span><span class="pt">POM</span><span class="pt">MS SQL Server</span><span class="pt">RBAC Testing</span><span class="pt v">Cursor AI</span>
                         </div>
                         <div class="proj-actions">
                             <span class="pb2 a"><i class="fas fa-landmark"></i> Government of India</span>
@@ -797,19 +719,13 @@
                 <div class="pc">
                     <div class="pch">
                         <div class="pico b"><i class="fas fa-boxes"></i></div>
-                        <div>
-                            <h4>Inventory Management System</h4>
-                            <div class="ptyp">Manufacturing · Internal ERP</div>
-                        </div>
+                        <div><h4>Inventory Management System</h4><div class="ptyp">Internal Enterprise Application</div></div>
                     </div>
                     <div class="pb">
-                        <p><b>About:</b> Internal stock management — inward from suppliers, outward to departments, shortage detection, 1000+ product categories (3-level hierarchy), PDF/Excel exports.</p>
-                        <p><b>My work:</b> 7 modules manually (150+ test cases). 60+ Playwright JS scripts. Critical catch: negative stock from boundary value testing at qty = available + 1 — blocked the release.</p>
-                        <p><b>Key challenge:</b> AJAX cascade dropdown needed <code>waitForResponse</code> to intercept API call — learned from Senior QA's MR review.</p>
+                        <p><b>7 modules tested</b> on an internal IMS — inward/outward stock, shortage detection, 1000+ product categories (3-level hierarchy), PDF/Excel exports.</p>
+                        <p>150+ manual test cases · 60+ automated scripts · Critical data integrity catch blocked release · Solved AJAX cascade with <code>waitForResponse</code>.</p>
                         <div class="tw">
-                            <span class="pt">Playwright JS</span><span class="pt">POM</span>
-                            <span class="pt">MySQL</span><span class="pt">BVA</span>
-                            <span class="pt v">GitHub Copilot</span>
+                            <span class="pt">Playwright JS</span><span class="pt">POM</span><span class="pt">MySQL</span><span class="pt">BVA</span><span class="pt v">GitHub Copilot</span>
                         </div>
                         <div class="proj-actions">
                             <span class="pb2 g"><i class="fas fa-bug"></i> Critical bug blocked release</span>
@@ -821,18 +737,13 @@
                 <div class="pc">
                     <div class="pch">
                         <div class="pico g"><i class="fas fa-map-marked-alt"></i></div>
-                        <div>
-                            <h4>Site Track System</h4>
-                            <div class="ptyp">Field Operations · Internal Tool</div>
-                        </div>
+                        <div><h4>Site Track System</h4><div class="ptyp">Field Operations · Internal Tool</div></div>
                     </div>
                     <div class="pb">
-                        <p><b>About:</b> Role-based field operations tool — Sites → Tubewells → LCS hierarchy (3 levels), media uploads, audit trails, and compliance workflows for field engineers.</p>
-                        <p><b>My work:</b> 60+ manual test cases across CRUD, uploads, and access control. 60+ automated scripts covering the full hierarchy, upload edge cases, and workflow end-to-end.</p>
+                        <p>Role-based field operations — Sites → Tubewells → LCS (3-level hierarchy), media uploads, audit trails, compliance workflows.</p>
+                        <p>60+ manual test cases · 60+ automated scripts covering CRUD across all hierarchy levels, upload edge cases, access control end-to-end.</p>
                         <div class="tw">
-                            <span class="pt">Playwright JS</span><span class="pt">POM</span>
-                            <span class="pt">CRUD Testing</span><span class="pt">Security Testing</span>
-                            <span class="pt v">GitHub Copilot</span>
+                            <span class="pt">Playwright JS</span><span class="pt">POM</span><span class="pt">CRUD Testing</span><span class="pt">Security Testing</span><span class="pt v">GitHub Copilot</span>
                         </div>
                         <div class="proj-actions">
                             <a href="https://github.com/ashakiranjyoti/SITE_TRACK_SYSTEM" class="ghl" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
@@ -843,7 +754,7 @@
         </div>
 
         <div class="pdiv reveal">
-            <span class="eyebrow" style="margin:0; white-space:nowrap;">Personal Frameworks — TypeScript</span>
+            <span class="eyebrow" style="margin:0;white-space:nowrap;">Personal Frameworks — TypeScript</span>
             <div class="line"></div>
         </div>
         <div class="row g-4">
@@ -851,22 +762,17 @@
                 <div class="pc">
                     <div class="pch">
                         <div class="pico b"><i class="fas fa-shopping-bag"></i></div>
-                        <div>
-                            <h4>DemoBlaze — E2E Framework</h4>
-                            <div class="ptyp">TypeScript · Allure · GitHub Pages</div>
-                        </div>
+                        <div><h4>DemoBlaze — E2E TS Framework</h4><div class="ptyp">TypeScript · Allure · GitHub Pages</div></div>
                     </div>
                     <div class="pb">
-                        <p><b>Goal:</b> Practise JS→TS migration — typed POM classes, interfaces, explicit return types. Allure reports with trend history auto-published to GitHub Pages on every CI push.</p>
-                        <p><b>Coverage:</b> Login (multi-role), products, cart, checkout — smoke + regression tagged suites, externalized test data.</p>
+                        <p>JS→TS migration practice — typed POM classes, interfaces, explicit return types. Allure reports auto-published to GitHub Pages on push.</p>
+                        <p>Login (multi-role), products, cart, checkout — smoke + regression tagged suites, externalized test data.</p>
                         <div class="tw">
-                            <span class="pt">Playwright TS</span><span class="pt">POM</span>
-                            <span class="pt">Allure</span><span class="pt">GitHub Actions</span>
-                            <span class="pt">Smoke + Regression</span>
+                            <span class="pt">Playwright TS</span><span class="pt">POM</span><span class="pt">Allure</span><span class="pt">GitHub Actions</span><span class="pt">Tagged Suites</span>
                         </div>
                         <div class="proj-actions">
                             <a href="https://github.com/ashakiranjyoti/demoblaze_playwright_ts" class="ghl" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
-                            <a href="https://ashakiranjyoti.github.io/demoblaze_playwright_ts/" class="rhl" target="_blank" rel="noopener"><i class="fas fa-chart-bar"></i> Test Allure Report</a>
+                            <a href="https://ashakiranjyoti.github.io/demoblaze_playwright_ts/" class="rhl" target="_blank" rel="noopener"><i class="fas fa-chart-bar"></i> Allure Report</a>
                         </div>
                     </div>
                 </div>
@@ -875,22 +781,17 @@
                 <div class="pc">
                     <div class="pch">
                         <div class="pico a"><i class="fas fa-shopping-cart"></i></div>
-                        <div>
-                            <h4>SauceDemo — Cross-Browser TS</h4>
-                            <div class="ptyp">TypeScript · 3 Browsers · CI/CD</div>
-                        </div>
+                        <div><h4>SauceDemo — Cross-Browser TS</h4><div class="ptyp">TypeScript · Chromium · Firefox · WebKit</div></div>
                     </div>
                     <div class="pb">
-                        <p><b>Goal:</b> Practise cross-browser setup (Chromium / Firefox / WebKit), typed page objects, externalized test data (users.json, products.json), CI with retries.</p>
-                        <p><b>Coverage:</b> Auth, product management, cart, checkout, API smoke test. Screenshot + video on failure.</p>
+                        <p>Cross-browser test framework — typed page objects, externalized test data (users.json, products.json), screenshot + video on failure.</p>
+                        <p>Auth, product management, cart, full checkout — runs on all 3 browsers.</p>
                         <div class="tw">
-                            <span class="pt">Playwright TS</span><span class="pt">POM</span>
-                            <span class="pt">Cross-browser</span><span class="pt">GitHub Actions</span>
-                            <span class="pt">Data-driven</span>
+                            <span class="pt">Playwright TS</span><span class="pt">POM</span><span class="pt">Cross-browser</span><span class="pt">GitHub Actions</span><span class="pt">Data-driven</span>
                         </div>
                         <div class="proj-actions">
                             <a href="https://github.com/ashakiranjyoti/saucedemo-playwright-ts" class="ghl" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
-                            <a href="https://ashakiranjyoti.github.io/saucedemo-playwright-ts/" class="rhl" target="_blank" rel="noopener"><i class="fas fa-chart-bar"></i> Test Allure Report</a>
+                            <a href="https://ashakiranjyoti.github.io/saucedemo-playwright-ts/" class="rhl" target="_blank" rel="noopener"><i class="fas fa-chart-bar"></i> Allure Report</a>
                         </div>
                     </div>
                 </div>
@@ -899,28 +800,22 @@
                 <div class="pc">
                     <div class="pch">
                         <div class="pico v"><i class="fas fa-plug"></i></div>
-                        <div>
-                            <h4>ReqRes REST API Framework</h4>
-                            <div class="ptyp">TypeScript · Multi-env · API Testing</div>
-                        </div>
+                        <div><h4>ReqRes REST API Framework</h4><div class="ptyp">TypeScript · Multi-env · API Testing</div></div>
                     </div>
                     <div class="pb">
-                        <p><b>Goal:</b> Build a typed API test framework — typed client, multi-environment config (DEV/QA switchable via env var), reusable typed assertion helpers.</p>
-                        <p><b>Coverage:</b> GET (pagination + negatives), POST (create + missing fields), PUT (update + empty body), DELETE (valid + invalid IDs).</p>
+                        <p>Typed API test framework — typed client layer, DEV/QA environment config via env var, reusable assertion helpers.</p>
+                        <p>Full CRUD coverage + negatives: GET (pagination), POST (create + missing fields), PUT (update), DELETE (valid + invalid IDs).</p>
                         <div class="tw">
-                            <span class="pt">Playwright Request</span><span class="pt">TypeScript</span>
-                            <span class="pt">Multi-env</span><span class="pt">Schema Validation</span>
-                            <span class="pt">GitHub Actions</span>
+                            <span class="pt">Playwright Request</span><span class="pt">TypeScript</span><span class="pt">Multi-env</span><span class="pt">Schema Validation</span><span class="pt">GitHub Actions</span>
                         </div>
                         <div class="proj-actions">
                             <a href="https://github.com/ashakiranjyoti/REQRES_API-TS" class="ghl" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
-                            <a href="https://ashakiranjyoti.github.io/REQRES_API-TS/" class="rhl" target="_blank" rel="noopener"><i class="fas fa-chart-bar"></i> Test Allure Report</a>
+                            <a href="https://ashakiranjyoti.github.io/REQRES_API-TS/" class="rhl" target="_blank" rel="noopener"><i class="fas fa-chart-bar"></i> Allure Report</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="text-center mt-5 reveal">
             <a href="https://github.com/ashakiranjyoti" class="bp" target="_blank" rel="noopener">
                 <i class="fab fa-github"></i> All on GitHub
@@ -959,31 +854,22 @@
         <div class="sec-header reveal">
             <div class="eyebrow">// contact</div>
             <h2 class="sh">Get In Touch</h2>
-            <p class="ssub">Open to QA Engineer &amp; SDET roles</p>
+            <p class="ssub">Open to QA Automation Engineer &amp; SDET roles</p>
         </div>
         <div class="row justify-content-center reveal">
             <div class="col-lg-7">
                 <div class="ccard">
                     <div class="crow">
                         <div class="cico"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <div class="clbl">Email</div>
-                            <div class="cval"><a href="mailto:ashakirandjoti5501@gmail.com">ashakirandjoti5501@gmail.com</a></div>
-                        </div>
+                        <div><div class="clbl">Email</div><div class="cval"><a href="mailto:ashakirandjoti5501@gmail.com">ashakirandjoti5501@gmail.com</a></div></div>
                     </div>
                     <div class="crow">
                         <div class="cico"><i class="fas fa-phone"></i></div>
-                        <div>
-                            <div class="clbl">Phone</div>
-                            <div class="cval"><a href="tel:+919284344460">+91 9284344460</a></div>
-                        </div>
+                        <div><div class="clbl">Phone</div><div class="cval"><a href="tel:+919284344460">+91 9284344460</a></div></div>
                     </div>
                     <div class="crow">
                         <div class="cico"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <div class="clbl">Location</div>
-                            <div class="cval">Pune, Maharashtra, India</div>
-                        </div>
+                        <div><div class="clbl">Location</div><div class="cval">Pune, Maharashtra, India</div></div>
                     </div>
                     <div class="sr">
                         <a href="https://github.com/ashakiranjyoti" class="soc" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
@@ -991,11 +877,11 @@
                         <a href="mailto:ashakirandjoti5501@gmail.com" class="soc"><i class="fas fa-envelope"></i></a>
                     </div>
                     <div class="ob">
-                        <p>Looking for <b>QA Engineer</b> or <b>SDET</b> roles where I can grow — bringing hands-on manual testing experience, Playwright automation (JS + TS), Agile team experience, and an AI-augmented workflow.</p>
+                        <p>Looking for <b>QA Automation Engineer</b> or <b>SDET</b> roles — I bring Playwright automation (JS + TS), hands-on manual testing, Agile experience, and an AI-augmented workflow, all delivered simultaneously on real enterprise projects.</p>
                         <div class="rtags">
-                            <span class="rt">QA Engineer</span>
                             <span class="rt">QA Automation Engineer</span>
                             <span class="rt">SDET</span>
+                            <span class="rt">QA Engineer</span>
                         </div>
                     </div>
                 </div>
@@ -1006,7 +892,7 @@
 
 <footer>
     <div class="wrap">
-        <p>© 2026 Ashakiran Jyoti · Junior QA Engineer · Pune, India</p>
+        <p>© 2025 Ashakiran Jyoti · QA Automation Engineer · Pune, India</p>
     </div>
 </footer>
 
@@ -1015,12 +901,10 @@
     const toggle = document.getElementById('navToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     let menuOpen = false;
-
     function openMenu() {
         menuOpen = true; mobileMenu.classList.add('open');
         mobileMenu.setAttribute('aria-hidden','false');
         toggle.setAttribute('aria-expanded','true');
-        toggle.setAttribute('aria-label','Close navigation menu');
         toggle.innerHTML = '<i class="fas fa-times"></i>';
         document.body.style.overflow = 'hidden';
     }
@@ -1028,7 +912,6 @@
         menuOpen = false; mobileMenu.classList.remove('open');
         mobileMenu.setAttribute('aria-hidden','true');
         toggle.setAttribute('aria-expanded','false');
-        toggle.setAttribute('aria-label','Open navigation menu');
         toggle.innerHTML = '<i class="fas fa-bars"></i>';
         document.body.style.overflow = '';
     }
